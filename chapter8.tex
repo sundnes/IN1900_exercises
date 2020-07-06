@@ -1,0 +1,90 @@
+%\section{Random numbers and simple games}
+
+\begin{Problem}{\textbf{Throw a die}}
+%\addcontentsline{toc}{section}{Exercise 8.1: Throw a die - \texttt{die.py}}
+
+\noindent Compute the probability of getting a $6$ when throwing a die. Write a program
+that throws a die $N$ times and count how many times the die shows $6$, let this
+number be $M$. Then compute the probability of getting a $6$ when throwing a die
+as $M/N$.
+
+Filename: $\texttt{die.py}$
+\end{Problem}
+
+\begin{Problem}{\textbf{Telephone number}}
+%\addcontentsline{toc}{section}{Exercise 8.2:  - \texttt{telephone.py}}
+
+\noindent A Norwegian telephone  number consists of eight digits. We assume that all digits
+from $0$ to $9$ are equally probable in every place of the telephone number.
+Make a program that finds the probability of having a telephone number where the
+digit $1$ appears at least four times.
+
+Filename: $\texttt{telephone.py}$
+\end{Problem}
+
+\begin{Problem}{\textbf{Coin-flip game}}
+%\addcontentsline{toc}{section}{Exercise 8.3: Coin-flip game - \texttt{coin.py}}
+
+\noindent Two persons are playing a simple coin-flip game. They flip a coin in turn,
+and whoever first gets a heads wins the game. Make a program to model $100$ such
+games. Estimate the probability for the first person to flip to win the game.
+
+Filename: $\texttt{coin.py}$
+\end{Problem}
+
+\begin{Problem}{\textbf{Birthday probability}}
+
+\noindent Make a function that generates a string of random integers between 0 and 9.
+Estimate the probability that your birthday is contained in a string of random
+numbers of length 1000. Let the format of the date be on the form \pythoninline{ddmmyy}.
+Print the estimates in \%.
+
+Filename: \texttt{birthday\_prob.py}
+\end{Problem}
+\newpage
+
+\begin{Problem}{\textbf{Approximate $\pi$ by throwing darts}}
+%\addcontentsline{toc}{section}{Exercise 8.4: Approximate $\pi$ by throwing darts - \texttt{approximate\_pi.py}}
+
+\noindent You are throwing darts at a square shaped target with an inscribed circle. Let
+the length of the sides of the square be $2$, which means that the circle has
+radius $1$. Assume that you throw the darts such that the darts gets uniformly
+distributed on the target. Then, the number of darts which hits the target inside
+the circle divided by the total number of darts that hits the target is
+approximately the area of the circle divided by the total area of the target.
+This approximation gets more accurate the more darts you throw.
+\begin{equation*}
+\frac{\mathrm{number\; of\; darts\; inside\; circle}}
+{\mathrm{number\; of\; darts\; that\; hits\; target}}
+\approx \frac{\mathrm{area\; of\; circle}}{\mathrm{area\; of\; target}}
+= \frac{\pi}{4}.
+\end{equation*}
+Thus, $\pi$ can be approximated by
+\begin{equation*}
+\pi \approx 4 \frac{\mathrm{number\; of\; darts\; inside\; circle}}
+{\mathrm{number\; of\; darts\; that\; hits\; target}}.
+\end{equation*}
+Write a program that throws $M$ darts uniformly on the target. Then approximate
+$\pi$. Read $M$ from the command line.
+
+Filename: $\texttt{approximate\_pi.py}$
+\end{Problem}
+
+\begin{Problem}{\textbf{Wheel of fortune}}
+%\addcontentsline{toc}{section}{Exercise 8.5: Wheel of fortune - \texttt{wheel\_of\_fortune.py}}
+
+\noindent At an amusement park they have a wheel of fortune where you can win $2$kg of
+chocolate. You get to choose one number between $1$ and $20$ for $20$NOK. Assume that you
+play on the same number until you win.
+
+\paragraph{a)}
+Write a program that finds the average number of times you have to play before
+you win and check if you earn or loose money, compared to buying 2kg of chocolate in the store.
+
+\paragraph{b)}
+Modify your program so that every time you lose you move one place to the right,
+i.e. you increase $n$ by one. If you are at $n = 20$ you go back to $n = 1$.
+Does this make any difference to the result?
+
+Filename: \texttt{wheel\_of\_fortune.py}
+\end{Problem}

@@ -1,0 +1,166 @@
+\NeedsTeXFormat{LaTeX2e}
+
+
+\ProvidesPackage{style}[2018/02/16 Custom LaTeX style]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{listings}
+
+%% Encoding
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+
+\RequirePackage[backend = biber, style = alphabetic]{biblatex}
+\addbibresource{RefList.bib}
+%% Fonts and typography
+\RequirePackage{lmodern}           % Latin Modern
+\renewcommand{\sfdefault}{phv}     % Helvetica
+\RequirePackage[scaled]{beramono}  % Bera Mono (Bitstream Vera Sans Mono)
+\RequirePackage[final]{microtype}  % Improved typography
+\RequirePackage{enumitem}          % Format lists
+\setlist[itemize]{font = \upshape, before = \leavevmode}
+\setlist[enumerate]{font = \upshape, before = \leavevmode}
+\setlist[description]{font = \bfseries\sffamily, before = \leavevmode}
+\RequirePackage{siunitx}           % Typesetting units
+\RequirePackage{listings}          % Typesetting code
+\lstset
+{
+    basicstyle = \ttfamily,
+    showstringspaces = false,
+    frame = tb
+}
+%\RequirePackage[obeyspaces,
+%                spaces,
+%                hyphens]{url}      % Typesetting URLs
+%\urlstyle{sf}
+
+\RequirePackage[obeyFinal,
+                textsize    = footnotesize,
+                figwidth    = 0.99\linewidth]{todonotes} % Marginal notes
+
+
+
+%% Mathematics
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}   % Extra symbols
+\RequirePackage{amsthm}    % Theorem-like environments
+\RequirePackage{thmtools}  % Theorem-like environments
+\RequirePackage{mathtools} % Fonts and environments for mathematical formuale
+\RequirePackage{tikz-cd}
+%% Miscellanous
+\RequirePackage{standalone}
+\RequirePackage{etoolbox}
+\RequirePackage{booktabs}
+\RequirePackage{graphicx}  % Tool for images
+\RequirePackage{babel}     % Automatic translations
+\RequirePackage{csquotes}  % Quotes
+\RequirePackage{textcomp}  % Extra symbols
+\RequirePackage{listings}  % Typesetting code
+\RequirePackage{todonotes}
+\RequirePackage{sidecap}
+%\RequirePackage{floatrow}
+%% Cross references
+\RequirePackage{varioref}
+\RequirePackage{marginnote}
+%% Cross references
+\RequirePackage{varioref}
+\RequirePackage{hyperref}
+%\RequirePackage[nameinlink, capitalize, noabbrev]{cleveref}
+\RequirePackage{lmodern}
+\RequirePackage{microtype}
+\RequirePackage{verbatim}
+\RequirePackage{mathtools}
+%\RequirePackage{physics}
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
+\RequirePackage{float}
+\RequirePackage{siunitx}
+\RequirePackage{todonotes}
+\RequirePackage{color}
+
+
+\newcommand{\N}{\mathbb{N}}   % Natural numbers
+\newcommand{\Z}{\mathbb{Z}}   % Integers
+\newcommand{\Q}{\mathbb{Q}}   % Rational numbers
+\newcommand{\R}{\mathbb{R}}   % Real numbers
+\newcommand{\C}{\mathbb{C}}   % Complex numbers
+\newcommand{\A}{\mathbb{A}}   % Affine space
+\renewcommand{\P}{\mathbb{P}} % Projective space
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\Om}{\Omega}
+\newcommand{\intt}{\int \!\!\!\! \int}
+\DeclareMathOperator{\ord}{ord}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\U}{\mathcal{U}}
+%% New commands for vectors
+\renewcommand{\a}{\mathfrak{a}}
+\newcommand{\m}{\mathfrak{m}}
+\renewcommand{\b}{\mathbf{b}}
+\renewcommand{\c}{\mathbf{c}}
+\renewcommand{\v}{\mathbf{v}}
+\newcommand{\w}{\mathbf{w}}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\0}{\mathbf{0}}
+\RequirePackage{faktor}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\note}[1]{\marginnote{\textcolor{red}{#1}}}
+\setlength{\headheight}{13pt}
+\newcommand{\laur}{\sum_{j=-\infty}^\infty c_j z^j}
+\newcommand{\laura}{\sum_{j=-\infty}^\infty c_j (z-a)^j}
+\RequirePackage{tikz}
+\newcommand{\dd}{\mathrm{d}}
+\DeclareMathOperator{\Li}{Li}
+\declaretheorem[style = remark,    numbered = no]{remark}
+%\declaretheorem[style = remark,    numbered = yes]{Problem}
+\theoremstyle{definition}
+\newtheorem{Problem}{Problem}[chapter]
+
+\renewcommand{\exp}{\mathrm{e}^}
+
+\definecolor{light_green}{rgb}{0, 0.6, 0}
+\definecolor{light_grey}{rgb}{0.5, 0.5, 0.5}
+\definecolor{magenta}{rgb}{0.7, 0, 0.5}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+\lstdefinestyle{py}{
+    language = python,
+    frame = single,
+    showstringspaces = false,
+    basicstyle = \small\ttfamily,
+    breaklines = true,
+    commentstyle = \color{light_grey},
+    keywordstyle = \color{magenta},
+    stringstyle = \color{light_green},
+}
+
+
+\newcommand\pythonstyle{\lstset{
+    language=python,
+    basicstyle= \ttfamily,
+    otherkeywords={-, =, +, [, ], (, ), \{, \}, :, *, !, \%},
+    keywordstyle= \color{deepblue},
+    emph={self, True, False, as, assert}, 
+    emphstyle= \color{deepblue},
+    emph = {[2]Error, AssertionError, ValueError, IndexError},          
+    emphstyle= [2]\color{deepred}, 
+    stringstyle=\color{deepgreen},
+    commentstyle = \color{light_grey},
+    frame=single,
+    showstringspaces=false   
+}}
+
+
+% Python environment
+\lstnewenvironment{python}[1][] {
+\pythonstyle
+\lstset{#1} } {}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+\endinput

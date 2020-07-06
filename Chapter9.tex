@@ -1,0 +1,129 @@
+%\section{Object oritented programming}
+
+\begin{Problem}{\textbf{Implement Newtons method}} \label{prob91}
+
+\paragraph{a)}
+Make a subclass \pythoninline{Function} of the class \pythoninline{Diff} in problem \ref{prob74}
+that takes a function $f$ as
+an initial variable. It should contain a method such that the following code
+is compatible with your program and prints the value of $f$ at 2.
+\begin{python}
+def f(x):
+    return x**2
+func = Function(f)
+print(f(2))
+\end{python}
+
+\paragraph{b)}
+We would like the class to give estimated values for roots of $f$. That is,
+points such that $f(x)=0$. To do this we implement Newton's formula. It is given
+recursively as
+\begin{equation*}
+    x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)},
+\end{equation*}
+where we give a starting point $x_0$. In some cases(not all) $x_n$ will approach
+a root of $f$. Implement this in a method \pythoninline{approx_root} that takes a
+starting point and a bound $\epsilon<1$ as arguments and approximates $x_n$ such that
+$f(x_n)<\epsilon$.
+
+\emph{Hint: Implement a simple convergence test. Check that $f(x_n)<1$ after $100$ iterations. If
+not terminate the loop and inform the user that there is no convergence for that
+starting point. It is still a possibility for convergence, but unlikely.}
+
+\paragraph{c)}
+Test the program with the function $f(x)=x^2-1$ and starting value 5 with bounds
+$10^{-i}$, for $i=1,2,3,4,5,6$. Print the approximated value for $x$, $f(x)$ and the
+bound in a table format. Try to run the program with starting value 0. What happens,
+can you see why?
+
+Filename: \texttt{newton.py}
+\end{Problem} 
+
+\newpage
+\begin{Problem}{\textbf{Implement Polynomials as a Class}} \label{prob92}
+
+\paragraph{a)}
+Make a class Quadratic that implements second order polynomials. An object of Quadratic should be initialised with a list containing the coefficients. Add a \pythoninline{__call__}-method that evaluates the parabola at a point \pythoninline{x}, and a \pythoninline{__repr__}-method such that you can print your polynomial.
+\\
+Make an object of Quadratic with coefficients $(1, 3, 2)$. Print it and evaluate it at $x=1$, $x=2$ to make sure it works.   
+
+\paragraph{b)}
+Make a subclass Cubic of the class Quadratic that implements third order polynomials. You should make use of inheritance to extend the class Quadratic you made in the previous exercise. Implement a method \pythoninline{derivative} for Cubic. The method should return an object of type Quadratic that corresponds to the derivative.
+\\
+Make an object of Cubic with coefficients $(1, 3, 2, 4)$. Print it and evaluate it at $x=1$, $x=2$. Also call \pythoninline{derivative} and print the result.
+
+Filename: \texttt{polynomial.py}
+\end{Problem} 
+
+\begin{Problem}{\textbf{Vectors}} \label{prob93}
+
+\paragraph{a)}
+
+Make a class Vector2D that implements 2D-vectors(two components). Add \pythoninline{__add__} and \pythoninline{__sub__} methods so you can add and subtract vectors. Remember that vectors add and subtract element-wise, e.i.:
+\begin{equation*}
+    (1,2) + (4,5) = (5,7) 
+\end{equation*}
+
+\paragraph{b)}
+For two vectors $\Vec{a} = (a_1, a_2)$ and $\Vec{b} = (b_1, b_2)$, the dot product is defined as 
+\begin{equation*}
+    \Vec{a} \cdot \Vec{b} = a_1 b_1 + a_2 b_2
+\end{equation*}
+\\
+Implement a method \pythoninline{dot} that calculates the dot product of two vectors.
+\\
+Make two vectors $\Vec{v}=(1,2)$ and $\Vec{w}=(-2,5)$ from Vector2D. Print $\Vec{v}$, $\Vec{w}$, $\Vec{v}+\Vec{w}$, $\Vec{v}-\Vec{w}$ and $\Vec{v}\cdot \Vec{w}$
+
+\paragraph{c)}
+Make a subclass Vector3D of the class Vector2D, where Vector3D is extended with an additional coordinate. Make sure all the methods are updated to work with three coordinates. The dot product for 3D vectors extends as one would expect:
+
+\begin{equation*}
+    \Vec{a} \cdot \Vec{b} = a_1 b_1 + a_2 b_2 + a_3 b_3
+\end{equation*}
+Use inheritance to reuse old code as much as possible(especially for the dot product method).
+\\
+Make two vectors $\Vec{v}=(1,2,4)$ and $\Vec{w}=(-2,5,1)$ from Vector3D. Print $\Vec{v}$, $\Vec{w}$, $\Vec{v}+\Vec{w}$, $\Vec{v}-\Vec{w}$ and $\Vec{v}\cdot \Vec{w}$
+
+\paragraph{d)}
+There is a common vector operation that is defined for 3D vectors, but not for 2D vectors. This is the cross product. It differs from the dot product in that the result is not a number, but a new vector:
+\begin{equation*}
+    \Vec{c} = \Vec{a} \times \Vec{b}
+\end{equation*}
+where $\Vec{c} = (c_1, c_2, c_3)$. The cross product is define as
+\begin{align*}
+    c_1 = a_2 b_3 - a_3 b_2\\
+    c_2 = a_3 b_1 - b_1 a_3\\
+    c_3 = a_1 b_2 - b_2 a_1\\
+\end{align*}
+Implement a method \pythoninline{cross} for Vector3D only that calculates the cross product. \\
+Make two vectors $\Vec{v}=(2,0,0)$, $\Vec{w}=(0,2,0)$ from Vector3D. Print $v\times w$.
+\\
+Filename: \texttt{vector.py}
+\end{Problem}
+
+\begin{Problem}{\textbf{Inheritance}} \label{prob94}
+\\
+In this exercise we will investigate how python handles inheritance by making some intuitive classes. 
+
+\paragraph{a)}
+Begin by making a class \pythoninline{Mammal}. Add a method \pythoninline{info()} that returns a string stating something that is common among all mammals, e.i. "I have hair on my body". Also add a method \pythoninline{identity_mammal()} that prints "I am a mammal".
+
+\paragraph{b)}
+Make a subclass Primate of the class Mammal. Add a method \pythoninline{info()} that returns the same as \pythoninline{info()} for Mammal, in addition to something new specific for Primates. E.i. "I have a large brain". Do not include the string from Mammal by copy-pasting, but use inheritance. Also add a method
+\pythoninline{identity_primate()} equivalent to \pythoninline{identity_mammal()}.
+
+\paragraph{c)}
+Now make two subclasses Human and Ape from Primate. Update \pythoninline{info()} in the same manner for both Human and Ape, and also add their respective identity method.
+
+
+Make an object John of the class Human, and an object Julius of the class Ape. Try calling \pythoninline{info()}, \pythoninline{identity_mammal()},   \pythoninline{identity_primate()},  \pythoninline{identity_human()} and \pythoninline{identity_ape()} for both John and Julius. Does it work as you expect? Some of these calls are meant to cause an error. 
+\paragraph{d)}
+Python is able to check if an object is of a particular class with the function \pythoninline{isinstance}. 
+\pythoninline{isinstance(object_name, class_name)} returns \pythoninline{True} if the object \pythoninline{object_name} is of class \pythoninline{class_name}. An example could be   
+\pythoninline{isinstance(John, Primate)}, which returns \pythoninline{True} if John is of the class Primate.
+
+
+Use \pythoninline{isinstance} to check if John is Mammal, Primate, Human and Ape. Do the same for Julius.
+
+Filename: \texttt{inheritance.py}
+\end{Problem}

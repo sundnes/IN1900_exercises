@@ -1,0 +1,323 @@
+%\section{Introduction to classes}
+
+\begin{Problem}{\textbf{Saving information in a class}} \label{prob71}
+
+\noindent In this problem you can use the program from \ref{prob63}.
+
+\paragraph{a)}
+Create a class \pythoninline{Person} where the constructor takes name, age, and gender as arguments.
+
+\paragraph{b)}
+Add methods to the class for changing a persons name, age, and gender.
+
+\paragraph{c)}
+Add a method \pythoninline{__str__} that returns a string with all the information of that person. Create an instance of the class, using the
+information for 'John' in the table from Problem \ref{prob63}.
+Change the name and gender of John. Print the information of the instance before and after changing.
+
+Filename: \texttt{class\_people.py}
+\end{Problem}
+
+
+\begin{Problem}{\textbf{Right triangle class}}
+\paragraph{a)}
+Make a class \pythoninline{RightTriangle} that represents a right triangle. The constructor \pythoninline{__init__} should take and store two numbers $a$ and $b$. These are the two catheti (shortest sides) that define the right triangle. The constructor should also calculate and store the hypotenuse as a local variable in the class.
+
+Remember that the hypotenuse $c$ relates to the two short sides $a$ and $b$ by the Pythagorean Theorem:
+\begin{equation*}
+    a^2 + b^2 = c^2
+\end{equation*}
+
+\paragraph{b)}
+Make an object \pythoninline{triangle1} of the class  \pythoninline{RightTriangle} with both short sides equal to 1. Make another object \pythoninline{triangle2} with sides equal 3 and 4. Check that your implementation is correct by printing the hypotenuse of both objects. Use the usual \texttt{object.variable} convention to get the hypotenuse. 
+
+\paragraph{c)}
+To make a robust program, we often want to code it such that it prevents being used in ways that does not make sense. In our case, a natural thing to prevent is making a triangle with sides having negative length, since length is strictly positive.
+
+
+Make changes to your class such that \pythoninline{ValueError} is raised if someone tries to make a triangle with sides of negative length.
+To test that your class raises the error correctly, you can test it with the following code:
+
+\begin{python}
+def test_RightTriangle():
+    success = False
+    try:
+        triangle3 = RightTriangle(1,-1)
+    except ValueError:
+        success = True
+    assert success
+\end{python}
+
+\paragraph{d)}
+Add a method \pythoninline{plot_triangle()} to your class which plots the triangle when you call it. The corner where the two shortest sides meet should be in origin. Side $a$ should be along the x-axis, and side b along y. In order to plot, you might want to find out what the coordinates of each corner must be. Also make sure to make the axis equally long so that the triangle looks nice (you can use \pythoninline{plt.axis("equal")}. Call the plotting method on the instance \pythoninline{triangle2} that you created in b).
+
+Filename: $\texttt{right\_triangle.py}$
+\end{Problem}
+
+
+\begin{Problem}{\textbf{Make a function class}}
+
+In this problem you will implement a \pythoninline{class F} which represents the function
+\begin{equation*}
+    f(x; n, m) =  \sin(n x) \cos(m x).
+\end{equation*}
+
+Create the class and let $n$ and $m$ be parameters of the constructor, which must be stored in the class.  
+
+
+Since the class represents a function, it should be a callable class. An instance of a callable class can be called on like a function. The special method for creating a callable class is \pythoninline{__call__(self, args)}. Implement the special method \pythoninline{__call__(self, x)} such that it returns the value of the function evaluated at \pythoninline{x}. 
+
+Create two different instances \pythoninline{u} and \pythoninline{v} of \pythoninline{class F}. Choose values $n$ and $m$ for both the instances. Plot the two instances \pythoninline{u} and \pythoninline{v} evaluated in $x$ against each other on the interval $x \in [0, 2 \pi]$. In other words, plot \pythoninline{u(x_values)} on the $x$-axis and \pythoninline{v(x_values)} on the $y$-axis. Make sure to have enough points on the interval to ensure that the line is smooth.
+
+
+Filename: \texttt{F.py}
+\end{Problem}
+
+\begin{Problem}{\textbf{Extending the \pythoninline{AccountP} class}} \label{prob75}
+
+\noindent Modify the class \pythoninline{AccountP} in the book to include a method \pythoninline{transfer} that transfers an amount between two accounts. The method should take an amount and the account you want to transfer to as arguments. Write a test function that checks that the methods \pythoninline{deposit}, \pythoninline{withdraw}, \pythoninline{transfer} and \pythoninline{get_balance} works properly.
+
+Filename: \texttt{AccountP.py}
+
+\end{Problem}
+
+\newpage
+\begin{Problem}{\textbf{Approximating the square root of two}} \label{prob72}
+
+\noindent The square root of two can be represented by a so called \emph{continued fraction}
+on the following form:
+\begin{align*}
+\sqrt(2)&= 1 + \frac{1}{1+\sqrt(2)} \\
+        &= 1 + \frac{1}{2+\frac{1}{1+\sqrt(2)}} \\
+        &= 1 + \frac{1}{2+\frac{1}{2+\frac{1}{1+\sqrt(2)}}}
+\end{align*}
+In this exercise we will exhibit two possibilities for approximating the number
+$\sqrt(2)$.
+
+\paragraph{a)}
+Make a class \pythoninline{Square} with a method \pythoninline{approx_frac} that takes an integer $n$,
+an initial value and returns the first $n$ fractions as above with initial value $x_0$. This can be done by iterating the
+function
+\begin{equation*}
+    f(x) = 1+\frac{1}{1+x}
+\end{equation*}
+starting at $x_0$. For $n=2$ and $x_0=1$ this gives
+\begin{equation*}
+f(f(x_0)) = 1 + \frac{1}{2+\frac{1}{1+1}}.
+\end{equation*}
+
+\paragraph{b)}
+Another way to approximate the square is by iterating the function $f(x)=\frac{1}{2}\left(x+\frac{2}{x}\right)$.
+Add a method \pythoninline{approx_iter} that takes
+a number $x_0$, an integer $n$, and 
+returns the value of the function at $x_0$ iterated n times. For $n=2$ we would have
+$f(f(x_0))$. From here on we assume for simplicity that $0.1 \leq x_0 \leq 2$.
+
+\paragraph{c)}
+Create a method that returns a nicely formatted table with
+the two approximations and their difference $\epsilon$ along with the exact value for $n=1,2,5,10$.
+Run the program, which approximation is best?
+
+\paragraph{d)}
+To visualize the approximation plot the exact value as a line in the plane
+and the two approximations as points $(n, y_n)$, where $y_n$ is the approximation. Use $n = 1,2,5,10$.
+
+Filename: \texttt{square\_iteration.py}
+\end{Problem}
+
+\begin{Problem}{\textbf{Tangent lines on a quadratic curve}} \label{prob73}
+
+\noindent Consider a quadratic polynomial on the form $f(x)=x^2+bx+c$. At a point $x_0$ the
+tangent line is given by $l(x)=(2x_0+b)x +C$ where $C=f(x_0)-(2x_0+b)x_0$.
+\paragraph{a)}
+Make a class \pythoninline{Quadratic} with a function $f(x)$ (a quadratic polynomial as above) as initial
+argument. Make a method that computes the tangent at a point and returns the function
+$l(x)$.
+
+\emph{Hint: You will need to extract the coefficients $b=f(1)-f(0)-1$ and
+$c=f(0)$.}
+\paragraph{b)}
+Create a method that plots the function along with its tangent at a point.
+\paragraph{c)}
+Make a method that animates the tangent line moving over the curve $f(x)$. Make
+the animation for uniformly distributed x values in the interval $-5 \leq x \leq 5$.
+Test the program with the function $f(x)=x^2$.
+
+Filename: \texttt{quadratic\_tangents.py}
+\end{Problem}
+
+
+\begin{Problem}{\textbf{Numerical approximations for the derivative}} \label{prob74}
+
+\noindent Let $f(x)$ be a function and $f'(x)$ its derivative. There are many ways to
+approximate the derivative, some of which are:
+\begin{align*} 
+    f'(x) &\approx  \frac{f(x+h)-f(x)}{h} \\
+    f'(x) &\approx  \frac{f(x+h)-f(x-h)}{2h} \\
+    f'(x) &\approx  \frac{-f(x+2h)+8f(x+h)-8f(x-h)+f(x-2h)}{12h}
+\end{align*}
+\paragraph{a)}
+Make a class \pythoninline{Diff} with a function $f$ as initial argument and implement
+three methods \pythoninline{diff1}, \pythoninline{diff2}, and \pythoninline{diff3}
+approximating the derivative using the above formulas.
+
+
+\paragraph{b)}
+Create an instance of the class \pythoninline{Diff}, using $f(x) = \sin\left( 2 \pi x \right)$. Visualise the difference in accuracy of the three methods for computing the derivative by comparing the results with the exact function for the derivative, $f'(x) = 2 \pi \cos(2 \pi x)$. Use the four values  $h = 0.9, 0.6, 0.3, 0.1$, and let $x$ be on the interval $x \in [-1, 1]$. 
+
+Filename: \texttt{class\_diff.py}
+\end{Problem}
+
+\begin{Problem}{\textbf{Visualizing functions}}
+
+\noindent For a function $f(x)$ we can plot the graph of the function as points $(x,f(x))$.
+This results in a curve in the plane. Suppose we have a function
+ \begin{equation*}
+ f(x,y)=(u(x,y),v(x,y)).
+ \end{equation*}
+The graph of this function lives in four dimensions and is not easily visualized.
+On way to visualize these functions is to instead of looking at the graph we look
+at how $f$ act on points. For example, how the grid lines in the plane look
+after $f$ is applied.
+
+\paragraph{a)}
+First we consider a specific function $f(x,y)=(x^2-y^2,2xy)$.
+Write a program where you define the function $f$
+and make a figure with $x$ and $y$ axis from -2 to 2 where you plot a number of
+the grid lines in $x$ and $y$ direction in the same plot. You will need around 15 lines
+in each direction. Make a another plot side-by-side in the same figure of all points
+$(x^2-y^2,2xy)$ where $x$ and $y$ are the points in the first plot.
+
+\paragraph{b)}
+To make the construction more flexible, modify your program to be a class \pythoninline{Visualize} taking
+a function $f(x,y)=(u(x,y),v(x,y))$ as initial argument. It should contain
+a method \pythoninline{grid(self, n)} that generates two plots, one of grid lines,
+and one of the image as in a).
+
+\paragraph{c)}
+We used grid lines of the plane to see how the function $f$ behaved. We could have
+used any curves in the plane. Extend the class with a method \pythoninline{circ} that instead of using
+points corresponding to grid lines, uses circles with expanding radii. Let the
+axes go from -5 to 5 and the radii be uniformly distributed between
+0 and 10 (15 circles should be sufficient). Test with the function $f(x,y)=(x^2-y^2+x+1,2xy+y)$.
+The second plot should consist of circular like objects with a self-crossing.
+
+\paragraph{d)}
+Add a method \pythoninline{grid_anim} that shows an animation of the image of the
+functions
+\begin{equation*}
+    f_\epsilon(x,y)=[(1-\epsilon) x + \epsilon u(x,y), (1-\epsilon)y-\epsilon v(x,y) ]
+\end{equation*}
+where $\epsilon$ varies from 0 to 1.
+
+\paragraph{e)}
+Using the functions
+\begin{align*}
+    f(x,y)=(x^2-y^2, 2xy) \quad \text{and} \quad g(x,y)=(x^2-y^2+x+1,2xy+y),
+\end{align*}
+test the \pythoninline{grid} and \pythoninline{grid_anim} methods on $f$, and the \pythoninline{circ} method on $g$. Use 15 gridlines
+and 15 circles.
+\begin{remark}
+For the student familiar with complex numbers, this is exactly how one would
+visualize a complex function $f(z)$. In our case we can use this for any function
+$f(x,y)$, but we usually restrict ourself to look at functions corresponding to
+certain complex functions, namely the differentiable ones.
+\end{remark}
+
+Filename: \texttt{plot\_functions.py}
+\end{Problem}
+
+
+\begin{Problem} {\textbf{A class for coordinates}}
+
+\noindent
+This exercise will focus on how to implement special methods. You will implement the class \pythoninline{Coords}, which represents coordinates in three dimensions. 
+
+\emph{Hint: the class of complex numbers shown in the book is of similar nature to the class you should implement in this problem.}
+
+
+
+\paragraph{a)} Create the class \pythoninline{Coords}. Start by implementing the special methods \pythoninline{__init__(self, args)} and \pythoninline{__str__(self)}.  The constructor should take three parameters, $x$, $y$ and $z$. The representation of the class should be $(x, y, z)$.
+
+The implementation should be such that the code below works.
+\begin{python}
+sqrt3 = sqrt(3)
+close = Coords(1/sqrt3, 1/sqrt3, 1/sqrt3)
+far = Coords(3/sqrt3, 15/sqrt3, 21/sqrt3)
+
+print("The coordinates close are at %s" %close)
+print("The coordinates  far  are at %s" %far)
+\end{python}
+Output:
+\begin{lstlisting}
+The coordinates close are at (0.58, 0.58, 0.58)
+The coordinates  far  are at (1.73, 8.66, 12.12)
+\end{lstlisting}
+
+
+\paragraph{b)} Implement the special methods \pythoninline{__len__(self)} and \pythoninline{__abs__(self)}. The length of coordinates should always be 3, as the coordinates will be in three dimensions. The absolute value should yield the Euclidean norm (or the physical length in space), which is given by
+\begin{equation*}
+    ||(x, y, z)||= \sqrt{x^2 + y^2 + z^2} .
+\end{equation*}
+
+The implementation should be such that the code below works.
+\begin{python}
+print("The class Coords represents coordinates in \
+%d dimensions" %len(close))
+
+print("\nThe distance from the centre to the point \
+close is %.2f" %abs(close))
+print("The distance from the centre to the point  \
+far  is %.2f" %abs(far))
+\end{python}
+Output:
+\begin{lstlisting}
+The class Coords represents coordinates in 3 dimensions
+
+The distance from the centre to the point close is 1.00
+The distance from the centre to the point  far  is 15.00
+\end{lstlisting}
+
+
+\paragraph{c)} Implement the special methods \pythoninline{__add__(self, other)} and \newline  \pythoninline{__sub__(self, other)}. When adding or subtracting two objects of class \pythoninline{Coords}, a new object of class \pythoninline{Coords} should be returned. 
+
+The object returned when adding two coordinates should have the coordinates
+\begin{equation*}
+\begin{split}
+    x_{new} &= x_{self} + x_{other} \\
+    y_{new} &= y_{self} + y_{other} \\
+    z_{new} &= z_{self} + z_{other} ,
+\end{split}
+\end{equation*}
+and similarly should the method for subtracting should return an object of \pythoninline{Coords} with coordinates at
+\begin{equation*}
+\begin{split}
+    x_{new} &= x_{self} - x_{other} \\
+    y_{new} &= y_{self} - y_{other} \\
+    z_{new} &= z_{self} - z_{other} ,
+\end{split}
+\end{equation*}
+
+The implementation should be such that the code below works.
+\begin{python}
+further = close + far
+print("The coordinates further are at %s" %further)
+
+distance = abs(far - close)
+print("\nThe distance from far to close is %.2f" %distance)
+
+centre = further - further
+print("\nThe coordinates at the centre are %s" %centre)
+\end{python}
+Output:
+\begin{lstlisting}
+The coordinates further are at (2.31, 9.24, 12.70)
+
+The distance from far to close is 14.14
+
+The coordinates at the centre are (0.00, 0.00, 0.00)
+\end{lstlisting}
+
+
+Filename: \texttt{Coords.py}
+\end{Problem}

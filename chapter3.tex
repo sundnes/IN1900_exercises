@@ -1,0 +1,211 @@
+%\section{Functions and branching}
+
+\begin{Problem}{\textbf{Implement a function for population growth}}
+
+\noindent Consider again the function
+\begin{equation*}
+N(t, k, B, C) = \frac{B}{1 + C \exp{-kt}}.
+\end{equation*}
+Implement $N$ as a python function \pythoninline{population(t, k, B, C)}
+that returns the number of individuals in a population after a time $t$.
+
+Write out a nicely formatted table of $t$ and $N$ values for the time interval
+$t \in [0, 48]$ using the values from Problem \ref{population_table}.
+
+Filename: \texttt{pop\_func.py}
+\end{Problem}
+
+
+\begin{Problem}{\textbf{Sum of integers}}
+%\addcontentsline{toc}{section}{Exercise 3.2: Sum of integers   - \texttt{sumint.py}}
+
+\noindent We consider the sum $\sum_{i = 1}^n i=1+2+\dots+n$ of positive integers up to $n$.
+It can be shown that the sum is equal to $\frac{n(n+1)}{2}$.
+
+\paragraph{a)}
+Write a function \pythoninline{sumint(n)} that returns the sum of all positive
+integers up to n.
+
+\paragraph{b)}
+Write a function implementing $\frac{n(n+1)}{2}$.
+
+\paragraph{c)}
+Write test functions for both a) and b) testing for specific known values.
+
+Filename: \texttt{sumint.py}
+\end{Problem}
+	
+
+\begin{Problem}{\textbf{Implement the factorial}}
+%\addcontentsline{toc}{section}{Exercise 3.3: Implement the factorial  - \texttt{factorial.py}}
+\paragraph{a)} The factorial can be implemented by a so called recursive function
+call. Use a recursive function call to implement a function \pythoninline{myfactorial(n)} that returns $n!$.
+
+\paragraph{b)} Write a test function where you call the \pythoninline{myfactorial}
+function and check the value of the returned object for one value of $n$ using
+\pythoninline{math.factorial}.
+
+Filename: $\texttt{factorial.py}$
+\end{Problem}
+
+
+\begin{Problem}{\textbf{Half-wave rectifier}} \label{prob34}
+%\addcontentsline{toc}{section}{Exercise 3.4 - Half-wave rectifier - \texttt{half\_wave.py}}
+
+\noindent In a half-wave rectifier the positive part of a signal passes, while the negative
+part is blocked. Thus, for a signal passing through a half-wave rectifier, 
+the negative values are set to zero.
+Let us look at a sine signal that has passed through a half-wave rectifier:
+\begin{equation*}
+f(x) = \begin{cases} 
+      \sin x & \mathrm{if} \sin x > 0 \\
+      0 & \mathrm{if} \sin x \leq 0.
+   \end{cases}
+\end{equation*}
+Implement $f(x)$ as a Python function \pythoninline{f(x)} and make a test function
+for testing the implementation of \pythoninline{f(x)} in both cases.
+
+Filename: \texttt{half\_wave.py}
+\end{Problem}
+
+\begin{Problem}{\textbf{Compute the area of an arbitrary triangle}} \label{triangle}
+An arbitrary triangle can be described by the coordinates of its three vertices: $(x1, y1), (x2, y2), (x3, y3)$, numbered in a counterclockwise direction. The area of the triangle is given by the formula
+\[
+A = \frac{1}{2}|x_2y_3-x_3y_2-x_1y_3 + x_3y_1 + x_1y_2 - x_2y_1 |
+\]
+Write a function \pythoninline{triangle_area(vertices)} that returns 
+the area of a triangle whose vertices are specified by the argument \pythoninline{vertices}, which is a nested list of the vertex coordinates. Make sure your implementation passes the following test function, which also illustrates how the \pythoninline{triangle_area} function works:
+\begin{python}
+def test_triangle_area():
+    """
+    Verify the area of a triangle with vertices 
+    (0,0), (1,0), and (0,2).
+    """
+    v1 = (0,0);  v2 = (1,0);  v3 = (0,2)
+    vertices = [v1, v2, v3]
+    expected = 1
+    computed = triangle_area(vertices)
+    tol = 1E-14
+    success = abs(expected - computed) < tol
+    msg = f"computed area={computed} != {expected}(expected)" 
+    assert success, msg
+\end{python}
+
+Filename: \texttt{triangle\_area.py}
+\end{Problem}
+
+
+\begin{Problem}{\textbf{Primality checker}} \label{prime}
+
+\noindent Recall that a prime number is a number greater than 1 that has exactly 2 divisors.
+Said differently, a number greater than one is a prime if it is divisible by only
+itself and one. A number that is not prime is called composite. Every number $n$
+can be written as a unique product of primes (e.g. $12 = 2\cdot2\cdot 3 $),
+this is called the prime factorization of $n$.
+
+\paragraph{a)}
+Make a function that takes a number $n$, and returns true if it's prime, and false
+if it's not. Use the program to find all prime numbers up to 100.
+
+\emph{Hint: You will only need to check divisibility for numbers up to and
+including $\sqrt(n)$, because any greater divisor will imply that there
+is a divisor less than this.}
+
+\paragraph{b)}
+Make a function that instead finds the prime factorization of the input
+number. It should print ``prime'' and return nothing if the number is prime, and both
+print and return the factorization if it's composite. Find the prime factorization
+of 5525612.
+
+\paragraph{c)}
+Make test functions for the two functions above where you check for small values
+of $n$.
+
+\paragraph{d)}
+Compare the runtime of the two functions with the number 33425626272.
+Is the difference big? If so, why do you think one is faster than the other?
+The following code returns the mean time it takes for your program to run once:
+\begin{python}
+import timeit
+timeit.timeit('your_func(args)', \
+    'from __main__ import your_func',number=1)
+\end{python}
+
+Filename: \texttt{prime.py}
+\end{Problem}
+
+\begin{Problem}{\textbf{Eulers totient function}}
+
+\noindent Two numbers $n$ and $m$ are called relatively prime if they have no common divisors
+except for 1. That is, no number greater than one should divide both numbers with
+no residue.
+
+\paragraph{a)}
+Make a function that takes two numbers and returns true if they're relatively prime
+and false if they're not.
+
+\paragraph{b)}
+Euler's totient function is defined as 
+\begin{equation*}
+\phi(d)= \text{\#\{Numbers less than d which are
+relatively prime to d\}.}
+\end{equation*}
+Implement Eulers totient function and print $\phi(d)$ for $d=10,50,100,200$.
+
+\paragraph{c)}
+Make a test function for both a) and b).
+
+Filename: \texttt{euler.py} 
+\end{Problem}
+
+\begin{Problem}{\textbf{Simple Statistical Functions}}
+
+\noindent In this problem you will implement two statistical functions and test them by comparing the results with statistical functions from the  \pythoninline{numpy} module. We will trust that the functions from the \pythoninline{numpy} module are correct, and will use them as benchmark values in the test functions. When you import the \pythoninline{numpy} module you should follow the convention of renaming it \pythoninline{np}, as shown below.
+\begin{python}
+import numpy as np
+\end{python}
+
+\paragraph{a)} 
+The mean of a set of numbers ${x_1, x_2, x_3, ..., x_N}$ is defined as
+\begin{equation*}
+    \overline{x} = \frac{1}{N} \sum_{i=1}^{N} x_i ,
+\end{equation*}
+where $N$ is the size of the set. 
+Implement a function  \pythoninline{mean(x_list)} that returns the mean value of a list of numbers.
+
+\paragraph{b)} Make a test function \pythoninline{test_mean()} that tests the function from a). Compare the returned value with the result from \pythoninline{numpy.mean}. (Such that  
+
+\noindent
+\pythoninline{expected = np.mean(x_test_values)}).
+
+
+\paragraph{c)} The standard deviation of a set of numbers ${x_1, x_2, x_3, ..., x_N}$ is defined as
+\begin{equation*}
+    s_N = \sqrt{ \frac{1}{N} 
+        \sum_{i=1}^{N} \left(x_i - \overline{x} \right)^2} .
+\end{equation*}
+Implement a function \pythoninline{standard_deviation(x_list)} which returns the standard deviation of a list of numbers. The mean value of the list will be necessary to calculate the relative deviation. Obtain the mean value inside the  \pythoninline{standard_deviation} function by calling the function you made in a).
+
+\paragraph{d)} Make a test function \pythoninline{test_standard_deviation()} that tests the function from c). Compare the returned value with the result from 
+\pythoninline{numpy.std}. (Such that \pythoninline{expected = np.std(x_test_values)}).
+ 
+\paragraph{} You may use the list below as an example for your test functions.
+\begin{python}
+x_test_values = [0.699, 0.703, 0.698, 0.688, 0.701]
+\end{python}
+
+Filename: $\texttt{stat.py}$  
+\end{Problem}
+
+\begin{Problem}{\textbf{Münchhausen Numbers}}
+
+\noindent A Münchhausen number is a number such that the sum of every digit to the power
+of itself equals the original number. E.g. $1^1 = 1$ is a Münchhausen number, and
+ $5^5 + 3^3 + 2^2 = 3156\neq 532$, so 532 is not.
+
+Make a function that checks if a number is Münchhausen. Find a Münchhausen number different from one.
+
+\emph{Hint: There is only one such number different from 1 and also under one million}
+
+Filename: $\texttt{m\_numbers.py}$
+\end{Problem}

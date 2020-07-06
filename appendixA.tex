@@ -1,0 +1,198 @@
+%\section{Sequences and difference equations}
+
+\begin{Problem}{\textbf{Computing Bell numbers}}
+
+\noindent Let $B_0=B_1=1$, the $n$'th \emph{Bell number} is defined recursively as
+\begin{equation*}
+    B_{n+1}=\sum_{k=0}^n \binom{n}{k}B_k.
+\end{equation*}
+Make a function that returns the $n$ first Bell numbers and print the first 10.
+
+Filename: $\texttt{bell.py}$
+\end{Problem}
+
+\begin{Problem}{\textbf{Solve a difference equation numerically}}
+%\addcontentsline{toc}{section}{Exercise A.1: Solve a difference equation numerically  - \texttt{fibonacci.py}}
+
+\noindent We study the difference equation
+\begin{equation*}
+x_n = x_{n-1} + x_{n-2}.
+\end{equation*}
+Write a program that writes out the first $15$ elements of the sequence for $x_0 = x_1 = 1$.
+
+Filename: $\texttt{fibonacci.py}$
+\end{Problem}
+
+
+\begin{Problem}{\textbf{The spreading of a disease}}
+%\addcontentsline{toc}{section}{Exercise A.2: The spreading of a disease  - \texttt{disease.py}}
+
+\noindent We want to study the spreading of a disease. Assume that people recover at a rate such that a ratio $a$ of the people
+that are sick this week will still be sick next week. It takes two weeks from when you
+get infected until you become sick, and a person who is sick will on average infect
+$b$ people each week, who then become sick two weeks later. 
+
+Let $x_n$ be the
+number of sick people in week $n$. The number of sick people is then given by the following difference equation
+\begin{equation*}
+x_n = a x_{n-1} + b x_{n-2} .
+\end{equation*}
+
+\paragraph{a)} 
+Write a function \pythoninline{disease_weeks(a, b, x0, x1, N)} that calculates the number of people that are ill with a given disease (defined by values $a$ and $b$) and returns an array/list containing the number of sick people form the initial week to week $N$. (In other words, the function should return an array or a list with $x_0, x_1, ..., x_N$). 
+
+Let  $x_0 = 100$ , $x_1 = 150$ and $a = 0.25$. Use the function calculate the number of sick
+people in an array up to week $N = 15$ for both $b = 0.5$ and $b = 0.75$. Plot both scenarios in the same plot. Remember to use labels on the curves.
+
+
+\paragraph{b)}
+We do not need to store all the $N + 1$ values. Since $x_n$ only depends on
+$x_{n-1}$ and $x_{n-2}$, these are the only values we need to store. Write a function \pythoninline{disease_week_N(a, b, x0, x1, N)} that does not use any lists or arrays, and returns only the number of sick people in week $N$, $x_N$. Use this function to obtain the number of sick people in week $N = 15$ for both the cases you plotted in a). Print out the results, and remember to include information about which of the two cases you are printing. Verify that the result is the same as obtained using arrays. 
+
+Filename: $\texttt{disease.py}$
+\end{Problem} 
+
+\begin{Problem} \textbf{{Finding $\pi$ with Newton's method}}
+
+\noindent
+It is common knowledge that $\pi \approx 3.14$, but in this exercise you will use Newton's method and knowledge of the sine function to improve an approximation of $\pi$.
+
+Newton's method can be written as a difference equation defined \begin{equation*}
+    x_n = x_{n - 1} - \frac {f(x_{n-1})} {f'(x_{n-1}) } ,
+\end{equation*}
+and is used to find roots of $f(x)$, based on the function $f(x)$, the derivative of the function $f'(x)$ and an initial guess $x_0$.  
+
+Consider the function $f(x) = \sin(x)$. Finding the functions derivative $f'(x)$, should be trivial. This function has infinitely many roots, which we know are located at $x = k \pi$, where $k$ is an integer. This exercise will focus on the root for $k = 1$, and use Newton's method to approximate $\pi$. For Newton's method to converge towards the correct root, the initial condition, $x_0$, needs to be set close to the value of $\pi$.  
+\bigskip
+
+Set $x_0 = 3.14$ and calculate $x_1$ and $x_2$ following Newton's method. Print out $x_0$, $x_1$ and $x_2$, as well as the value of \pythoninline{numpy.pi} with 13 decimals. You should print them in a tidy way such that the values are easy to compare. If Newton's method was used correctly, your values for $\pi$ should improve!
+
+
+Filename: \texttt{finding\_pi.py}
+\end{Problem}
+
+
+\begin{Problem}{\textbf{Find difference equations for computing $\ln x$}}
+%\addcontentsline{toc}{section}{Exercise A.3: Find difference equations for computing $\ln x$  - \texttt{ln\_Taylor\_series\_diffeq.py}}
+  
+\noindent 
+The Taylor expansion of $\ln x$ is
+\begin{equation*}
+\ln x = \sum_{n = 1}^\infty (-1)^{n + 1}\frac{(x - 1)^ n}{n},
+\end{equation*}
+for $x \in (0, 2]$.
+
+We can define the sum as
+\begin{equation*}
+\ln x \approx S(x; n) = \sum_{j = 0}^n (-1)^{j + 1}\frac{(x - 1)^ j}{j},
+\end{equation*}
+so that $S(x, n) = \sum_{j = 1}^n a_j$ and 
+\begin{equation*}
+a_j = -\frac{(j-1)}{j}(x - 1)a_{j-1}.
+\end{equation*}
+Introduce $s_j = S(x, j - 1)$ and $a_j$ as the two sequences to compute. We have
+the initial values $s_1 = 0$ and $a_1 = (x - 1)$.
+
+\paragraph{a)}
+Find the set of difference equations for $s_j$ and $a_j$.
+
+\emph{Hint: You can find an example on how this is done for $e^x$ in
+section A.1.8 in the book.}
+
+\paragraph{b)}
+Implement the system of difference equations in a function
+\pythoninline{ln_Taylor(n, x)} which returns $s_{n + 1}$ and $\lvert a_{n+1}\rvert$.
+The term $\lvert a_{n+1}\rvert$ is the first neglected in the sum and may act as a
+rough estimate of the size of the error in the Taylor polynomial approximation.
+
+\paragraph{c)}
+Verify the implementation by computing the difference equations
+for $n = 3$ by hand and comparing with the output from the \pythoninline{ln_Taylor}
+function. Automate this comparison in a test function.
+
+\paragraph{d)}
+Check that the accuracy of the Taylor polynomial improves as $n$
+increaces and $x$ is close to $1$. What happens when $x > 2$?
+
+Filename: $\texttt{ln\_Taylor\_series\_diffeq.py}$
+\end{Problem}
+
+\begin{Problem}{\textbf{Lotka-Volterra two species model}}
+%\addcontentsline{toc}{section}{Exercise A.4: Lotka-Volterra two species model  - \texttt{Lotka\_Volterra.py}}
+
+\noindent We have previously studied the logistic model for poulation growth. This is a
+model showing the growth of a population in the abscence of preditors. The
+Lotka-Volterra model describes interactions between two species in an ecosystem,
+a predator and a prey. We will in the following take the preys to be rabbits and the
+predators to be foxes. The number of rabbits and foxes in week $n$ is denoted by
+$R_n$ and $F_n$ respectively, and the population is modelled by the equations
+\begin{align*}
+R_{n+1} &= R_n + aR_n - cR_nF_n\\
+F_{n+1} &= F_n + ecR_nF_n - bF_n,
+\end{align*}
+where $a$ is the natural growth rate of rabbits in the absence of predation, $b$ is
+the natural death rate of foxes in the absence of food (rabbits), $c$ is the death
+rate per encounter of rabbits due to predation and $e$ is the efficiency of turning
+predated rabbits into foxes.
+
+Write a program that computes the number of rabbits and foxes up to $n = 500$.
+Use $a = 0.04$, $b = 0.1$, $c = 0.005$ and $e = 0.2$. In the begining we have
+$R_0 = 100$ and $F_0 = 20$. Plot how the number of individuals in the populations
+vary with time.
+
+Filename: \texttt{Lotka\_Volterra.py}
+\end{Problem}
+
+\begin{Problem}
+{\textbf{Difference equations for computing arctan(x)}}
+
+\noindent 
+The purpose of this exercise is to implement difference equations for computing a Taylor polynomial approximation to $\arctan(x)$. For $x \in (-1, 1)$, we have
+$$
+\arctan(x) \approx S(x;n) = \sum_{j=0}^{n}(-1)^j\frac{x^{2j+1}}{2j+1}.
+$$
+To compute $S(x;n)$ efficiently, we can write the sum as $S(x;n)=\sum_{j=0}^{n}a_j$, and derive a relation between two consecutive terms in the series:
+$$
+a_j = -x^2\frac{(2j-1)}{(2j+1)}a_{j-1}.
+$$
+We introduce $s_j=S(x;j-1)$ and $a_j$ as the two sequences to compute. We have $s_0=0$ and $a_0=x$.
+\paragraph{a)}
+Implement the system of difference equations in a function\\ \pythoninline{arctan_Taylor(x,n)}. The function shall not use any lists or arrays. (Since $a_j$ only depends on $a_{j-1}$, and $s_j$ only depends on $s_{j-1}$ and $a_{j-1}$, these are the only values that we need to store.) The function shall return $s_{n+1}$ and $|a_{n+1}|$. The latter is the first neglected term in the sum (since $s_{n+1}=\sum_{j=0}^{n}a_j$) and may act as a rough measure of the size of the error in the Taylor polynomial approximation.  
+\bigskip
+
+The function \pythoninline{arctan_Taylor(x, n)} will give extremely inaccurate approximations to $\arctan(x)$ for $x\not\in (-1, 1)$. To find a good approximation to $\arctan(x)$ for all $x$, we can use the fact that 
+\begin{align*}
+\arctan(x) =& \frac{\pi}{2} - \arctan \left(\frac{1}{x}\right)\\
+\approx& \frac{\pi}{2} - S(x;n),
+\end{align*}
+for values of $x\geq1$.
+\paragraph{b)}
+Implement the following piecewise function as a python function\\ \pythoninline{arctan_Taylor_improved(x, n)}. Your function shall return both the approximation and the measure of the size of the error as in \pythoninline{a)}.
+
+
+\[
+  \arctan(x)\approx \left\{
+     \begin{array}{@{}l@{\thinspace}l}
+      \hspace*{2.7mm} \frac{\pi}{2} - S\left(\frac{1}{x};n\right)  \hspace*{17.5mm}  1 \leq x \\
+        \hspace*{9.5mm}S\left(x;n\right) \hspace*{14.5mm} -1 < x < 1\\
+       -\frac{\pi}{2} - S\left(\frac{1}{x};n\right)  \hspace*{13.5mm} -1 \geq x \\
+     \end{array}
+   \right.
+\]
+\emph{Hint: Call the function \pythoninline{arctan_Taylor} inside the piecewise function.}
+\paragraph{c)}
+Write a test function to verify the approximation from \pythoninline{b)}. Test for $x=[-4, -0.5, 0.7, 10]$ with $n=10$, and with tolerance $=10^{-5}$.
+
+\paragraph{d)}
+Make a table or plot of the approximation from \pythoninline{b)} for various $x$ and $n$ to illustrate that the accuracy improves as $n$ increases.
+
+
+In the table; include the $x$ value and the order $n$, the approximation and the exact value, and the measure of the error.
+
+
+In the plot; calculate for $x\in[-20, 20]$. Include also the exact function for comparison, and remember to label the graphs.
+
+
+
+Filename: \texttt{arctan\_Taylor\_series\_diffeq.py}
+\end{Problem}

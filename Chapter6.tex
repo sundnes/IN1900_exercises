@@ -1,0 +1,237 @@
+%\section{Dictionaries and strings}
+
+\begin{Problem}{\textbf{A result on primes ``dictionarized''}} \label{prob61}
+
+\noindent Consider the program from Problem \ref{prob46}. Since the entries correspond to each other,
+working with two seperate lists is cumbersome. We may avoid that using dictionaries.
+Modify the program such that the values are saved in a dictionary instead of a list.
+Let the values of $n$ be keys with values $\pi(n)$.
+
+Filename: \texttt{primes\_dict.py}
+\end{Problem}
+
+\begin{Problem}\textbf{Chemical elements in a dictionary}
+\noindent\\
+Consider the dictionary \pythoninline{elements_10} consisting of the 10 first chemical elements of the periodic table:
+\begin{python}
+elements_10 = {1: '-', 2: 'Helium', 3: 'Lithium', 
+         4: 'Beryllium', 5: 'Boron', 6: 'Carbon', 
+         7: 'Nitrogen', 8: '-',
+         9: 'Fluorine', 10: 'Neon'}
+\end{python}
+\paragraph{a)}
+The chemical elements of number 1 (Hydrogen) and 8 (Oxygen) are missing. Copy \pythoninline{elements_10} into your file, and adjust the dictionary such that the keys 1 and 8 have their correct value. Use the technique as in this example:
+\begin{python}
+dictionary[key] = 'value'
+\end{python}
+\paragraph{b)} 
+Copy the following code into your script, and run the file in your terminal. Find the difference between the two dictionaries that are printed, and explain why they are different from each other.
+\begin{python}
+elements_10_copy = elements_10.copy()
+elements_10_copy.update({11: 'Sodium'})
+print(elements_10)
+print('\n')
+
+elements_11 = elements_10
+elements_11.update({11: 'Sodium'})
+print(elements_10)
+\end{python}
+
+Filename: \texttt{chemical\_elements\_dict.py}
+\end{Problem}
+\newpage
+
+\begin{Problem}{\textbf{Representation of polynomials}} \label{prob62}
+
+\noindent Let $f(x)=\sum_{i=0}^n a_ix^i$ and $g(x)=\sum_{j=0}^mb_mx^m$ be two polynomials.
+Recall that a polynomial can be expressed as a dictionary with keys equal to the
+degree of a term, and the corresponding coefficient as value (so $3x^2+1/2$ is represented
+by the dictionary $\{2: 3, 0: 1/2\}$). 
+
+You will be asked to implement three functions in this exercise. Check that each of your functions work as expected by creating two different polynomials represented as dictionaries, call your functions and print the returned values.
+
+\paragraph{a)}
+Create a function that takes two dictionaries (corresponding to two polynomials
+$f$ and $g$) as arguments and returns a dictionary corresponding to the sum of the two.
+
+\paragraph{b)}
+Create a function as above that returns the dictionary corresponding two the
+product of two polynomials.
+
+\emph{Hint: $fg=\sum_{k=0}^{n+m} c_kx^k$ where $c_k=\sum_{i+j=k}a_ib_j$}
+
+\paragraph{c)}
+Add a function that evaluates a polynomial dictionary at a point. 
+
+Filename: \texttt{poly\_dict.py}
+\end{Problem}
+
+\begin{Problem} \textbf{Use string operations to create a pretty dictionary}
+
+\noindent
+The file \texttt{atm\_moon.txt} contains information about the composition of elements in the lunar atmosphere during nighttime. \cite{moon} The values are given in particles per cubic centimetre.
+
+
+Write a function that reads the file, and returns a dictionary with the name of the element as keys and particle density as value. Transform all characters to their upper case equivalent. Strip off leading and trailing whitespaces in each of the string keys. Remove all the commas that marks every three digits, and then convert these values to float numbers.
+
+For example, considering the information \pythoninline{' Neon 20 - 40,000 '} extracted from the file,
+the value of the key \pythoninline{'NEON 20'} should look like this:
+\begin{python}
+'NEON 20': 40000
+\end{python}
+
+Filename: \texttt{atm\_moon.py}
+\end{Problem}
+
+\begin{Problem}{\textbf{Interpret output from a program}}
+
+\noindent The program \texttt{approx\_derivative\_sine.py} calculates an approximation to the derivative of $\sin\left(\frac{\pi}{3} \right)$ by the expression
+\begin{equation*}
+    \frac{\partial f}{\partial x} \approx \frac{f(x + \Delta x ) - f(x)}{\Delta x} ,
+\end{equation*}
+for decreasing values of $\Delta x$. Direct the output of the program to a file (by \texttt{python approx\_derivative\_sine.py > filename}). Write a function that reads the file and returns three arrays consisting of numbers corresponding to \pythoninline{delta_x}, \pythoninline{abs_error} and \pythoninline{n}. Plot \pythoninline{delta_x} and \pythoninline{abs_error} versus \pythoninline{n}. Use a logarithmic scale on the $y$ axis. Explain why the absolute error increases after $n=8$, i.e. after \pythoninline{delta_x} = $10^{-8}$.
+
+
+\emph{Hint: The function \pythoninline{semilogy} is an alternative to \pythoninline{plot} and gives logarithmic scale on the $y$ axis.}
+
+Filename: \texttt{plot\_round\_off\_error.py}
+\end{Problem}
+
+\newpage
+\begin{Problem}{\textbf{Saving information in a nested dictionary}}\label{prob63}
+
+\noindent The file below contains information about various people. The first column is
+the name, the second is the age, and the third is the gender.
+\begin{lstlisting}
+John, 55, Male
+Toney, 23, Male
+Karin, 42, Female
+Cathie, 29, Female
+Rosalba, 12, Female
+Nina, 50, Female
+Burton, 16, Male
+Joey, 90, Male
+\end{lstlisting}
+\paragraph{a)}
+Create a function that reads the file and returns the information in a nested
+dictionary. For example the key 'John' has the dictionary
+\{'Age': 55, 'Gender': 'Male'\} as value.
+When reading the file, the name should read "John", not "John, ".
+\paragraph{b)}
+Create a function that takes as an argument a nested dictionary as above,
+a person name, and optional arguments: a
+number (age), and a string (gender) which returns the same dictionary with the new
+age and gender. Note that neither should be changed if no age or gender is given.
+\paragraph{c)}
+Extend the function with the possibility to change the name of a person. One should
+not be allowed to change a name to one that is taken (Can you think of a way
+to allow this without overwriting another person?).
+Read the file above and change the gender and name of John. Iterate the dictionary
+and print the new information in a table format.
+\begin{remark}
+The nested dictionary here is a prototype of what is known as a class, and the
+functions from b) is a prototype for what will be known as methods in that
+class.
+\end{remark}
+
+Filename: \texttt{people\_dict.py}
+\end{Problem}
+
+\begin{Problem}{\textbf{Finding the frequency of words in a text}} \label{prob64}
+
+\paragraph{a)}
+Write a function that reads the file \emph{RandomWords.dat} and finds the frequency
+of words of length $n$. Save the information in a dictionary with the length
+as keys and the number of words of that length as values.  You may assume that
+all words are separated by spaces and that only punctuation marks appear in the
+text.
+
+\emph{Hint: For your program to be compatible with words of any length, it might
+be helpful to use defaultdict imported from collections. See page 339 in the book.
+Use the function dict() on such an object to convert it to an ordinary dictionary}
+\paragraph{b)}
+Write a test function that generates a file of words and checks that the function
+returns the correct values.
+
+Filename: \texttt{word\_length.py}
+\end{Problem}
+\newpage 
+
+\begin{Problem}{\textbf{The Euler's polyhedron formula}}
+\noindent 
+\\Let V, E, and F be the number of vertices, edges and faces in any polyhedron, respectively. Then, Euler's polyhedron formula tells us that
+$$
+V-E+F=2.
+$$
+In this exercise we shall check that the formula works for some given polyhedrons in a file with this setup:
+\begin{lstlisting}
+Polyhedron: cube
+vertices: 8 edges: 12 faces: 6
+
+Polyhedron: pyramid
+vertices: 5 edges: 8 faces: 5
+
+...
+\end{lstlisting}
+
+\paragraph{a)}
+Write a function that can read such a file, and returns a dictionary with the type of the polyhedron as a key, and a dictionary containing vertices, edges and faces as a value. The function shall strip of leading and trailing whitespaces in all strings. For example, the value of the key \pythoninline{'cube'} in the dictionary should look like this:
+\begin{python}
+'cube': {'vertices': 8, 'edges': 12, 'faces': 6}
+\end{python}
+Note that you must convert the string numbers to integers, as for example $8$, not '$8$'. Be aware of the fact that the value of each polyhedron in the dictionary is again a dictionary. Print the (nested) dictionary that is returned when reading the file \texttt{polyhedrons.dat}.
+\paragraph{b)}
+Write a test function \pythoninline{test_polyhedron_formula()} that checks that Euler's polyhedron formula works for the polyhedrons given in \texttt{polyhedrons.dat}.\\
+\noindent
+\emph{Hint: Repeated indexing works for nested dictionaries as for nested lists. Below is an example of how to access the value of the key \pythoninline{'vertices'} inside the value of the key \pythoninline{'cube'}.}
+\begin{python}
+cube_vertices = polyhedrons_dict['cube']['vertices']
+\end{python}
+
+Filename: \texttt{polyhedron\_formula.py}
+
+\end{Problem}
+\newpage
+
+\begin{Problem}{\textbf{Compute digital roots}}
+
+\noindent Given a number, say 5282, we can compute the sum of the digits. In this case
+$5+2+8+2=17$, and doing this again gives $1+7=8$. The one digit number we get by
+doing this is called the digital root of the number.
+
+\paragraph{a)}
+Make a function that calculates the digital root of a number. 
+
+\emph{Hint: Convert the number to a string in order to work with it.}
+
+\paragraph{b)}
+Plot the digital root of numbers up to 500 with the digital root on the $x$-axis and
+the frequency of digital roots on the $y$-axis. Use \pythoninline{plt.scatter(x,y)} for the plot.
+
+Filename: \texttt{dig\_root.py}
+\end{Problem}
+
+
+
+\begin{Problem}{\textbf{Timezone converter}}
+
+\noindent In the file \texttt{timezones.dat} you will find places and their timezone in
+GMT format.
+
+\paragraph{a)}
+Make a function that reads the file and saves the information in a dictionary.
+
+\paragraph{b)}
+Create a function that takes local Norwegian time (GMT +1) in the string format
+'ddmmyy-hhmm', a place, and returns the local time at that place. Your program
+should display a message to the user if a place that is not saved in the
+dictionary is used. Do the following conversions:
+\begin{itemize}
+    \item March 21st 2018 05.34 in Vancouver
+    \item December 31th 2017 20.03 in Sydney
+    \item January 1st 2018 00.15 in London
+\end{itemize}
+
+Filename: \texttt{timezones.py}
+\end{Problem} 
+

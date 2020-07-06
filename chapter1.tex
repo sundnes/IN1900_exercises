@@ -1,0 +1,99 @@
+%\section{Computing with formulas}
+
+\begin{Problem}{\textbf{Throw a ball}} \label{prob11}
+%\addcontentsline{toc}{section}{Exercise 1.1: Throw a ball - \texttt{ball.py}}
+
+\noindent When throwing a ball in the air, the position of the ball can be calculated using the acceleration of the ball.  When neglecting air resistance, the acceleration will be the negative of the gravitational constant, $-g$. The height of the ball relative to its starting
+point is
+\begin{equation*}
+y(t) = v_0t - \frac{1}{2}gt^2,
+\end{equation*}
+where $v_0$ is the initial velocity of the ball and $t$ is the time after the throw.
+The ball reaches its maximum height at time
+\begin{equation*}
+t_{\text{max}} = \frac{v_0}{g}.
+\end{equation*}
+
+Write a program computing the maximum height of the ball, that is $y(t_{\text{max}})$,
+when $v_0 = 8.2\mathrm{m/s}$ and $g = 9.81\mathrm{m/s^2}$. Print the result.
+
+Filename: $\texttt{ball.py}$
+\end{Problem}
+
+	
+\begin{Problem}{\textbf{Population growth}}\label{prob12}
+%\addcontentsline{toc}{section}{Exercise 1.2: Population growth - \texttt{population.py}}
+
+\noindent The growth of a population can often be described by a logistic function
+\begin{equation*}
+N(t) = \frac{B}{1 + C \exp{-kt}},
+\end{equation*}
+where $B$ is the carrying capacity of the species in the environment, i.e., the
+maximum size of the population that the environment can sustain indefinitely.
+The constant $k$ tells us something about how fast the population grows, while $C$ is given
+by the initial conditions. Let us consider a bacterial colony where we take the carrying
+capacity to be $B = 50 000$ and $k = 0.2\mathrm{h^{-1}}$. If the population is
+$5000$ at $t = 0$, find $C$ and write a code that finds the number of bacteria
+in the colony after $24$ hours. 
+
+Filename: $\texttt{population.py}$	
+\end{Problem}
+
+\newpage
+\begin{Problem}{\textbf{Solve the quadratic equation}}\label{prob13}
+%\addcontentsline{toc}{section}{Exercise 1.3: Solve the quadratic equation  - \texttt{find\_roots.py}}
+
+\noindent Given a quadratic equation
+\begin{equation*}
+ax^2 +bx + c = 0,
+\end{equation*}
+the two roots are
+\begin{equation*}
+x_1 = \frac{-b + \sqrt{b^2 - 4ac}}{2a}, \quad x_2 = \frac{-b - \sqrt{b^2 - 4ac}}{2a}.
+\end{equation*}
+
+Make a program evaluating the roots of 
+\begin{equation*}
+6x^2 - 5x + 1 = 0.
+\end{equation*}
+Print out both roots with two decimals.
+
+Filename: $\texttt{find\_roots.py}$
+\end{Problem}
+
+\begin{Problem}{\textbf{Forces in the hydrogen atom}}\label{prob14}
+%\addcontentsline{toc}{section}{Exercise 1.4: Forces in the hydrogen atom - \texttt{hydrogen.py}}
+
+\noindent There are two kinds of forces acting between the proton and the electron in the
+hydrogen atom; Coulomb force and gravitational force. The Coulomb force can be
+expressed as
+\begin{equation*}
+F_C = k_e \frac{e^2}{r^2},
+\end{equation*}
+where $k_e$ is Coulomb's constant, $e$ is the elementary charge, and $r$ is the
+distance between the proton and the electron. 
+
+The gravitational force can be expressed as
+\begin{equation*}
+F_G = G\frac{m_pm_e}{r^2},
+\end{equation*}
+where $G$ is the gravitational constant, $m_p$ is the mass of the proton, $m_e$
+is the mass of the electron, and $r$ is the distance between the particles.
+
+We can use these expressions for $F_C$ and $F_G$ to illustrate the difference in
+strength of these two forces, i.e., the electromagnetic force and gravitational force.
+Use the values 
+$k_e = 9.0\cdot 10^9 \ \mathrm{Nm^2C^{-2}}$,
+$e = 1.6\cdot 10^{-19} \ \mathrm{C}$, $G = 6.7\cdot 10^{-11} \ \mathrm{Nkg^{-2}m^2}$,
+$m_p = 1.7\cdot 10^{-27} \ \mathrm{kg}$ and $m_e = 9.1 \cdot 10^{-31} \ \mathrm{kg}$.You can take the distance between the proton and electron to be approximately
+the Bohr radius $r = a_0 = 5.3\cdot 10^{-11} \ \mathrm{m}$.
+
+Make a program that computes both the Coulomb force and the gravitational force
+between the proton and the electron. Write out the forces in scientific notation
+with one decimal in units of Newton $(\mathrm{N = kg m/s^2})$. Also print the
+ratio between the two forces. 
+
+Filename: $\texttt{hydrogen.py}$
+\end{Problem}
+
+

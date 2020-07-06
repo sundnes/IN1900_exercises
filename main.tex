@@ -1,0 +1,60 @@
+% Setup:
+%
+% \begin{Problem}{\textbf{ NAME OF PROBLEM }} \label{filename}
+% PROBLEM TEXT
+%
+% \emph{Hint: HINT}
+%
+% Filename: $\texttt{FILENAME.py}$
+% \end{Problem}
+\documentclass[a4paper, english]{report}
+
+
+\usepackage{style}
+\usepackage{ifikompendiumforside}
+
+%\input{ifikompendium}
+
+
+\title{Exercises for IN1900}
+\author{Cecilie Glittum, Simen Moe, Ella Wolff Kristensen, \newline Kristian Wold og Eirill Strand Hauge}
+
+\begin{document}
+\ififorside
+
+%\maketitle
+%\newpage
+
+\chapter*{Preface}
+\input{preface}
+
+\chapter{Computing with Formulas}
+\input{chapter1}
+\chapter{Loops and Lists}
+\input{chapter2}
+\chapter{Functions and Branching }
+\input{chapter3}
+\chapter{User Input and Error Handling}
+\input{Chapter4}
+\chapter{Array Computing and Curve Plotting}
+\input{chapter5}
+\chapter{Dictionaries and Strings}
+\input{Chapter6}
+\chapter{Introduction to Classes}
+\input{Chapter7}
+\chapter{Random Numbers and Simple Games}
+\input{chapter8}
+\chapter{Object-Oriented Programming}
+\input{Chapter9}
+
+\appendix
+\chapter{Sequences and Difference Equations}
+\input{appendixA}
+
+\addtocounter{chapter}{3}
+\chapter{Programming of Differential Equations}
+\input{appendixE}
+
+
+\printbibliography
+\end{document}

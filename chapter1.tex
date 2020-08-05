@@ -20,8 +20,18 @@ when $v_0 = 8.2\mathrm{m/s}$ and $g = 9.81\mathrm{m/s^2}$. Print the result.
 Filename: $\texttt{ball.py}$
 \end{Problem}
 
-	
-\begin{Problem}{\textbf{Population growth}}\label{prob12}
+\begin{Problem}{\textbf{Growth of a bank deposit}}\label{prob12}
+Let $r$ be a bank’s interest rate in percent per year. An initial amount $P$ will then grow to
+$$
+A = P(1+r/100)^n
+$$
+after $n$ years. Write a  program that computes how much money 1000 euros have
+grown to after three years with 5 percent interest rate, and prints the amount in the terminal.
+
+Filename: $\texttt{interest\_rate.py}$
+\end{Problem}
+
+\begin{Problem}{\textbf{Population growth}}\label{prob13}
 %\addcontentsline{toc}{section}{Exercise 1.2: Population growth - \texttt{population.py}}
 
 \noindent The growth of a population can often be described by a logistic function
@@ -31,12 +41,16 @@ N(t) = \frac{B}{1 + C \exp{-kt}},
 where $B$ is the carrying capacity of the species in the environment, i.e., the
 maximum size of the population that the environment can sustain indefinitely.
 The constant $k$ tells us something about how fast the population grows, while $C$ is given
-by the initial conditions. Let us consider a bacterial colony where we take the carrying
-capacity to be $B = 50 000$ and $k = 0.2\mathrm{h^{-1}}$. If the population is
-$5000$ at $t = 0$, find $C$ and write a code that finds the number of bacteria
-in the colony after $24$ hours. 
+by the initial conditions. Let us consider a bacterial colony where the carrying
+capacity is $B = 50 000$, and $k = 0.2\mathrm{h^{-1}}$. The population is
+$5000$ at $t = 0$. Use the initial condition to determine $C$
+and write a program that finds the number of bacteria in the colony after $24$ hours.
 
-Filename: $\texttt{population.py}$	
+Hint: To find $C$ you insert $t=0$ in the expression above, and solve the resulting
+equation for $C$. This gives a formula for calculating $C$ as a function of $N$ and
+$B$, and this formula can be used directly in your program.
+
+Filename: $\texttt{population.py}$
 \end{Problem}
 
 \newpage
@@ -52,7 +66,7 @@ the two roots are
 x_1 = \frac{-b + \sqrt{b^2 - 4ac}}{2a}, \quad x_2 = \frac{-b - \sqrt{b^2 - 4ac}}{2a}.
 \end{equation*}
 
-Make a program evaluating the roots of 
+Make a program evaluating the roots of
 \begin{equation*}
 6x^2 - 5x + 1 = 0.
 \end{equation*}
@@ -61,7 +75,7 @@ Print out both roots with two decimals.
 Filename: $\texttt{find\_roots.py}$
 \end{Problem}
 
-\begin{Problem}{\textbf{Forces in the hydrogen atom}}\label{prob14}
+\begin{Problem}{\textbf{Forces in the hydrogen atom}}\label{prob15}
 %\addcontentsline{toc}{section}{Exercise 1.4: Forces in the hydrogen atom - \texttt{hydrogen.py}}
 
 \noindent There are two kinds of forces acting between the proton and the electron in the
@@ -71,7 +85,7 @@ expressed as
 F_C = k_e \frac{e^2}{r^2},
 \end{equation*}
 where $k_e$ is Coulomb's constant, $e$ is the elementary charge, and $r$ is the
-distance between the proton and the electron. 
+distance between the proton and the electron.
 
 The gravitational force can be expressed as
 \begin{equation*}
@@ -82,7 +96,7 @@ is the mass of the electron, and $r$ is the distance between the particles.
 
 We can use these expressions for $F_C$ and $F_G$ to illustrate the difference in
 strength of these two forces, i.e., the electromagnetic force and gravitational force.
-Use the values 
+Use the values
 $k_e = 9.0\cdot 10^9 \ \mathrm{Nm^2C^{-2}}$,
 $e = 1.6\cdot 10^{-19} \ \mathrm{C}$, $G = 6.7\cdot 10^{-11} \ \mathrm{Nkg^{-2}m^2}$,
 $m_p = 1.7\cdot 10^{-27} \ \mathrm{kg}$ and $m_e = 9.1 \cdot 10^{-31} \ \mathrm{kg}$.You can take the distance between the proton and electron to be approximately
@@ -91,9 +105,7 @@ the Bohr radius $r = a_0 = 5.3\cdot 10^{-11} \ \mathrm{m}$.
 Make a program that computes both the Coulomb force and the gravitational force
 between the proton and the electron. Write out the forces in scientific notation
 with one decimal in units of Newton $(\mathrm{N = kg m/s^2})$. Also print the
-ratio between the two forces. 
+ratio between the two forces.
 
 Filename: $\texttt{hydrogen.py}$
 \end{Problem}
-
-

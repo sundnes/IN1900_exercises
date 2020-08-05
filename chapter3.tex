@@ -9,8 +9,8 @@ N(t, k, B, C) = \frac{B}{1 + C \exp{-kt}}.
 Implement $N$ as a python function \pythoninline{population(t, k, B, C)}
 that returns the number of individuals in a population after a time $t$.
 
-Write out a nicely formatted table of $t$ and $N$ values for the time interval
-$t \in [0, 48]$ using the values from Problem \ref{population_table}.
+Use a \py{for} loop to write out a nicely formatted table of $t$ and $N$ values
+for the time interval $t \in [0, 48]$ using the parameter values from Problem \ref{population_table}.
 
 Filename: \texttt{pop\_func.py}
 \end{Problem}
@@ -34,7 +34,7 @@ Write test functions for both a) and b) testing for specific known values.
 
 Filename: \texttt{sumint.py}
 \end{Problem}
-	
+
 
 \begin{Problem}{\textbf{Implement the factorial}}
 %\addcontentsline{toc}{section}{Exercise 3.3: Implement the factorial  - \texttt{factorial.py}}
@@ -48,52 +48,55 @@ function and check the value of the returned object for one value of $n$ using
 Filename: $\texttt{factorial.py}$
 \end{Problem}
 
-
-\begin{Problem}{\textbf{Half-wave rectifier}} \label{prob34}
-%\addcontentsline{toc}{section}{Exercise 3.4 - Half-wave rectifier - \texttt{half\_wave.py}}
-
-\noindent In a half-wave rectifier the positive part of a signal passes, while the negative
-part is blocked. Thus, for a signal passing through a half-wave rectifier, 
-the negative values are set to zero.
-Let us look at a sine signal that has passed through a half-wave rectifier:
-\begin{equation*}
-f(x) = \begin{cases} 
-      \sin x & \mathrm{if} \sin x > 0 \\
-      0 & \mathrm{if} \sin x \leq 0.
-   \end{cases}
-\end{equation*}
-Implement $f(x)$ as a Python function \pythoninline{f(x)} and make a test function
-for testing the implementation of \pythoninline{f(x)} in both cases.
-
-Filename: \texttt{half\_wave.py}
-\end{Problem}
-
 \begin{Problem}{\textbf{Compute the area of an arbitrary triangle}} \label{triangle}
 An arbitrary triangle can be described by the coordinates of its three vertices: $(x1, y1), (x2, y2), (x3, y3)$, numbered in a counterclockwise direction. The area of the triangle is given by the formula
 \[
 A = \frac{1}{2}|x_2y_3-x_3y_2-x_1y_3 + x_3y_1 + x_1y_2 - x_2y_1 |
 \]
-Write a function \pythoninline{triangle_area(vertices)} that returns 
-the area of a triangle whose vertices are specified by the argument \pythoninline{vertices}, which is a nested list of the vertex coordinates. Make sure your implementation passes the following test function, which also illustrates how the \pythoninline{triangle_area} function works:
+Write a function \pythoninline{triangle_area(vertices)} that returns
+the area of a triangle whose vertices are specified by the argument \pythoninline{vertices},
+which is a nested list of the vertex coordinates. Copy and paste the following
+test function into your code, and call the test function to verify that
+your \pythoninline{triangle_area} function works:
 \begin{python}
 def test_triangle_area():
     """
-    Verify the area of a triangle with vertices 
+    Verify the area of a triangle with vertices
     (0,0), (1,0), and (0,2).
     """
-    v1 = (0,0);  v2 = (1,0);  v3 = (0,2)
+    v1 = [0,0];  v2 = [1,0];  v3 = [0,2]
     vertices = [v1, v2, v3]
     expected = 1
     computed = triangle_area(vertices)
     tol = 1E-14
     success = abs(expected - computed) < tol
-    msg = f"computed area={computed} != {expected}(expected)" 
+    msg = f"computed area={computed} != {expected}(expected)"
     assert success, msg
 \end{python}
 
 Filename: \texttt{triangle\_area.py}
 \end{Problem}
 
+
+\begin{Problem}{\textbf{Half-wave rectifier}} \label{prob34}
+%\addcontentsline{toc}{section}{Exercise 3.4 - Half-wave rectifier - \texttt{half\_wave.py}}
+
+\noindent In a half-wave rectifier the positive part of a signal passes, while the negative
+part is blocked. Thus, for a signal passing through a half-wave rectifier,
+the negative values are set to zero.
+A sine signal that has passed through a half-wave rectifier will look as follows:
+\begin{equation*}
+f(x) = \begin{cases}
+      \sin x & \mathrm{if} \sin x > 0 \\
+      0 & \mathrm{if} \sin x \leq 0.
+   \end{cases}
+\end{equation*}
+Implement $f(x)$ as a Python function \pythoninline{f(x)} and make a test function
+for testing the implementation of \pythoninline{f(x)}. The test function should test
+for at least two values of $x$, one that gives $\sin x <0$ and one where $\sin x >0$.
+
+Filename: \texttt{half\_wave.py}
+\end{Problem}
 
 \begin{Problem}{\textbf{Primality checker}} \label{prime}
 
@@ -145,7 +148,7 @@ Make a function that takes two numbers and returns true if they're relatively pr
 and false if they're not.
 
 \paragraph{b)}
-Euler's totient function is defined as 
+Euler's totient function is defined as
 \begin{equation*}
 \phi(d)= \text{\#\{Numbers less than d which are
 relatively prime to d\}.}
@@ -155,7 +158,7 @@ Implement Eulers totient function and print $\phi(d)$ for $d=10,50,100,200$.
 \paragraph{c)}
 Make a test function for both a) and b).
 
-Filename: \texttt{euler.py} 
+Filename: \texttt{euler.py}
 \end{Problem}
 
 \begin{Problem}{\textbf{Simple Statistical Functions}}
@@ -165,15 +168,15 @@ Filename: \texttt{euler.py}
 import numpy as np
 \end{python}
 
-\paragraph{a)} 
+\paragraph{a)}
 The mean of a set of numbers ${x_1, x_2, x_3, ..., x_N}$ is defined as
 \begin{equation*}
     \overline{x} = \frac{1}{N} \sum_{i=1}^{N} x_i ,
 \end{equation*}
-where $N$ is the size of the set. 
+where $N$ is the size of the set.
 Implement a function  \pythoninline{mean(x_list)} that returns the mean value of a list of numbers.
 
-\paragraph{b)} Make a test function \pythoninline{test_mean()} that tests the function from a). Compare the returned value with the result from \pythoninline{numpy.mean}. (Such that  
+\paragraph{b)} Make a test function \pythoninline{test_mean()} that tests the function from a). Compare the returned value with the result from \pythoninline{numpy.mean}. (Such that
 
 \noindent
 \pythoninline{expected = np.mean(x_test_values)}).
@@ -181,20 +184,20 @@ Implement a function  \pythoninline{mean(x_list)} that returns the mean value of
 
 \paragraph{c)} The standard deviation of a set of numbers ${x_1, x_2, x_3, ..., x_N}$ is defined as
 \begin{equation*}
-    s_N = \sqrt{ \frac{1}{N} 
+    s_N = \sqrt{ \frac{1}{N}
         \sum_{i=1}^{N} \left(x_i - \overline{x} \right)^2} .
 \end{equation*}
 Implement a function \pythoninline{standard_deviation(x_list)} which returns the standard deviation of a list of numbers. The mean value of the list will be necessary to calculate the relative deviation. Obtain the mean value inside the  \pythoninline{standard_deviation} function by calling the function you made in a).
 
-\paragraph{d)} Make a test function \pythoninline{test_standard_deviation()} that tests the function from c). Compare the returned value with the result from 
+\paragraph{d)} Make a test function \pythoninline{test_standard_deviation()} that tests the function from c). Compare the returned value with the result from
 \pythoninline{numpy.std}. (Such that \pythoninline{expected = np.std(x_test_values)}).
- 
+
 \paragraph{} You may use the list below as an example for your test functions.
 \begin{python}
 x_test_values = [0.699, 0.703, 0.698, 0.688, 0.701]
 \end{python}
 
-Filename: $\texttt{stat.py}$  
+Filename: $\texttt{stat.py}$
 \end{Problem}
 
 \begin{Problem}{\textbf{Münchhausen Numbers}}

@@ -24,20 +24,20 @@ Filename: $\texttt{mult\_table.py}$
 \begin{Problem}{\textbf{Stirling's approximation}}\label{prob23}
 %\addcontentsline{toc}{section}{Exercise 2.3: Stirling's approximation - \texttt{stirling.py}}
 
-\noindent Stirling's approximation can be written $\ln (x!) \approx x\ln x - x$. This is a 
+\noindent Stirling's approximation can be written $\ln (x!) \approx x\ln x - x$. This is a
 good approximation for large $x$. Write out a nicely formatted table of integer
 $x$ values, the actual value of $\ln (x!)$, and Stirling's approximation to $\ln (x!)$.
 
 Filename: $\texttt{stirling.py}$
 \end{Problem}
-	
-	
-\begin{Problem}{\textbf{Errors in summation}}\label{prob24}
+
+
+\begin{Problem}{\textbf{Errors in summation}}\label{sum_for}
 %\addcontentsline{toc}{section}{Exercise 2.4: Errors in summation  - \texttt{sum\_for.py}}
 
 \noindent The following code is supposed to compute the sum $s = \sum_{k = 1}^{M}\frac{1}{(2k)^2}$, for $M=3$.
 \begin{python}
-s = 0 
+s = 0
 M = 3
 
 for i in range(M):
@@ -47,22 +47,34 @@ print(s)
 \end{python}
 The program has three errors and therefore does not work. Find the three errors and write a correct program. Put comments in your program to indicate what the mistakes were.
 
-\emph{Hint:} There are two basic ways to find errors in a program:
+There are two basic ways to find errors in a program:
 \begin{enumerate}
-    \item read the program carefully and think about the consequences of each statement,
-    \item print out inter mediate results and compare with hand calculations.
+    \item Read the program carefully line by line, and think about the consequences of each statement. Look for inconsistencies in the form of variables being used before
+		they are defined, and perform the calculations in the statements by hand to see how variables change their value.
+    \item Run the program and check for errors. In a Python program there may be errors of two different types. The first is an error that Python itself will
+		notice, and make the program stop with an error message. The message will indicate which line the error occurs, and alghough the error messages may be a little
+		cryptic these errors are usually quite easy to find and correct. The second type are errors where the program seems to run and complete normally, but the
+		result is not what we want. These errors are often harder to find, and a good method to find them is often to add \pythoninline{print} statements in the
+		code to write intermediate values of variables to the screen, and compare these values with hand calculations.
 \end{enumerate}
-1. 
-First, try method 1 and find as many errors as you can. Thereafter, try method 2 for M D 3 and compare the evolution of s with your own hand calculations.
-
-Lastly, write a similar code evaluating the same sum using a \pythoninline{while}
-loop. Check that the two loops compute the same answer.
+Try the first method first (\emph{code inspection}) and find as many errors as you can. Thereafter, try the second method, by for instance
+adding a print statement inside the for-loop to print the value of \pythoninline{k} and \pythoninline{s}.
 
 Filename: $\texttt{sum\_for.py}$
 \end{Problem}
-\newpage	
-	
-\begin{Problem}{\textbf{Binomial coefficient}}\label{prob25}
+
+
+\begin{Problem}{\textbf{Sum as a \pythoninline{while} loop}}\label{sum_while}
+%\addcontentsline{toc}{section}{Exercise 2.4: Errors in summation  - \texttt{sum\_for.py}}
+Write the (corrected) \pythoninline{for} loop from the previous exercise as a
+a \pythoninline{while} loop. Check that the two loops compute the same answer.
+
+Filename: $\texttt{sum\_while.py}$
+\end{Problem}
+
+\newpage
+
+\begin{Problem}{\textbf{Binomial coefficient}}\label{prob26}
 %\addcontentsline{toc}{section}{Exercise 2.5: Binomial coefficient - \texttt{binomial.py}}
 
 \noindent The binomial coefficient is indexed by two integers $n$ and $k$ and is written
@@ -82,38 +94,42 @@ and check that the results are correct.
 \emph{Hint: The $\prod$ sign is a product sign. Thus
 $\prod_{j = 1}^{n - k}\frac{k + j}{j} = \frac{k + 1}{1}\frac{k + 2}{2}
 \dots\frac{k + (n - k)}{(n - k)}$. When checking the result you will need
-\pythoninline{math.factorial}.} 
+\pythoninline{math.factorial}.}
 
 Filename: $\texttt{binomial.py}$
-\end{Problem}	
-	
-	
-	
+\end{Problem}
+
+
+
 
 \begin{Problem}{\textbf{Table showing population growth}} \label{population_table}
 
-\noindent Consider again the bacterial colony from Problem \ref{prob12}. Let us study the number
+\noindent Consider again the bacterial colony from Problem \ref{prob12}. We now want to
+study how the population grows with time, by calculating the number
 of individuals for $n + 1$ uniformly spaced $t$ values throughout the interval
-$[0, 48]$. Set $n = 12$. First store the $t$ and $N$ values in two lists \pythoninline{t}
-and \pythoninline{N}. Thereafter, write out a nicely formatted table of $t$ and $N$
-values by traversing the two lists with a (separate)  \pythoninline{for} loop. 
+$[0, 48]$. Set $n = 12$ and write a \py{for} loop which computes and stores
+$t$ and $N$ values in two lists \pythoninline{t} and \pythoninline{N}. Thereafter,
+traverse the two lists with a separate \pythoninline{for} loop and
+write out a nicely formatted table of $t$ and $N$
+values.
 
-Filename: \texttt{population\_table.py}	
-\end{Problem}	
-	
+Filename: \texttt{population\_table.py}
+\end{Problem}
+
 \begin{Problem}{\textbf{Nested list}}\label{population_table2}
 
 \paragraph{a)} Compute two lists of $t$ and $N$ values as explained in Problem
 \ref{population_table}. Store the two lists in a new nested list \pythoninline{tN1} such that
 \pythoninline{tN1[0]} is the list containing $t$-values and \pythoninline{tN[1]} correspond to the list containing $N$-values. Write out a table
 with $t$ and $N$ values in two columns by looping over the data in the \pythoninline{tN1}
-list. Each $t$ and $N$ value should be written in the table as integers. 
+list. Each $t$ and $N$ value should be written in the table as integers.
 
-\paragraph{b)} Make a nested list \pythoninline{tN2} where \pythoninline{tN2[i]} contains the $i$-th element of both the $t$-list and the $N$-list. Loop over the \pythoninline{tN2} list and write out the $t$ and $N$
-values in the table as integers. 
+\paragraph{b)} Make a nested list \pythoninline{tN2} where \pythoninline{tN2[i]}
+contains the $i$-th element of both the $t$-list and the $N$-list. Loop over the \pythoninline{tN2} list and write out the $t$ and $N$
+values in the table as integers. The ouput should look exactly as in exercise
+\textbf{a)}, although the underlying structure of the lists is different.
 
-
-Filename: $\texttt{population\_table2.py}$	
+Filename: $\texttt{population\_table2.py}$
 \end{Problem}
 
 \begin{Problem}{\textbf{Calculate Cesaro mean}}
@@ -136,21 +152,24 @@ Filename: $\texttt{cesaro\_mean.py}$
     C_n=\frac{1}{n+1}\binom{2n}{n}=\frac{(2n)!}{(n+1)!n!}
 \end{equation*}
 is called a \emph{Catalan number}. Compute and print the first 10 Catalan numbers.
-    
+
 Filename: $\texttt{catalan.py}$
 \end{Problem}
 
 \begin{Problem}{\textbf{Molar Mass of Alkanes}}
 
 \noindent
-Alkanes are saturated hydrocarbons with the chemical formula $\mathrm{C_nH_{2n+2}}$. If there are $n$ Carbon atoms in the alkane, there will be $m = 2n+2$ Hydrogen atoms. The molar mass of the hydrocarbon is $M_{\mathrm{C_n H_{m}}} = n M_{\mathrm{C}} + m M_{\mathrm{H}} $, where $M_C$ is the molar mass of Carbon and $M_H$ is the molar mass of Hydrogen. 
+Alkanes are saturated hydrocarbons with the chemical formula $\mathrm{C_nH_{2n+2}}$. If there are $n$ Carbon atoms in the alkane, there will be $m = 2n+2$ Hydrogen atoms. The molar mass of the hydrocarbon is $M_{\mathrm{C_n H_{m}}} = n M_{\mathrm{C}} + m M_{\mathrm{H}} $, where $M_C$ is the molar mass of Carbon and $M_H$ is the molar mass of Hydrogen.
 
 Use a \pythoninline{for}-loop or a \pythoninline{while}-loop to compute and print out the molar mass of the alkanes with two through nine Carbon atoms ($n \in [2, 9]$). The output should specify the chemical formula of the alkane as well as the molar mass. An example on how the formatted output should look like for $n = 2$ is given below.
 \begin{lstlisting}
 M(C2H6) =  30.069 g/mol
 \end{lstlisting}
 You can set the molar masses of the atoms to be $M_{\mathrm{C}} = 12.011 \ \mathrm{g/mol}$ and $M_{\mathrm{H}}  = 1.0079 \ \mathrm{g/mol}$
-    
+
+Hint: An output of a chemical formula like the one above can be constructed using a formatted string (f-string). If we have \py{n=2} and
+\py{m=2*n+2}, the first part of the output above is given by the f-string \py{f'M(C{n:d}H{6:d} = ...'}.
+
 Filename: $\texttt{alkane.py}$
 \end{Problem}
 
@@ -158,16 +177,16 @@ Filename: $\texttt{alkane.py}$
 \begin{Problem}{\textbf{Matrix elements}}
 
 \begin{center}
-\emph{This exercise involves no programming. \newline The answers should be written in a text file called $\texttt{matrix.txt}$}    
+\emph{This exercise involves no programming. \newline The answers should be written in a text file called $\texttt{matrix.txt}$}
 \end{center}
 
-\noindent Consider a two dimensional $3 \times 3$ matrix 
+\noindent Consider a two dimensional $3 \times 3$ matrix
 
 \begin{equation*}
-   A = \begin{pmatrix} 
+   A = \begin{pmatrix}
         a_{1 1} & a_{1 2} & a_{1 3} \\
         a_{2 1} & a_{2 2} & a_{2 3} \\
-        a_{3 1} & a_{3 2} & a_{3 3} 
+        a_{3 1} & a_{3 2} & a_{3 3}
     \end{pmatrix} .
 \end{equation*}
 
@@ -179,6 +198,6 @@ When $A$ is represented as a list of rows. This means that \pythoninline{A} cont
 \paragraph{b)}
 When $A$ is represented as a list of columns. This means that each element in \pythoninline{A} contains a list with the elements of a column in $A$.
 
-    
+
 Filename: $\texttt{matrix.txt}$
 \end{Problem}

@@ -7,8 +7,8 @@ $ax^2+bx+c=0$ given by
 \begin{equation*}
     x_{\pm}=\frac{-b\pm\sqrt{b^2-4ac}}{2a}.
 \end{equation*}
-Write a program that asks the user for values ( \pythoninline{a = }, \pythoninline{b = } and \pythoninline{c = } ) to get values for $a$, $b$, and $c$ through the users
-keyboard. Use \pythoninline{input} (or \pythoninline{raw_input} if you are using Python 2). Print the solutions.
+Write a program that asks the user to input values for $a$, $b$, and $c$, using \pythoninline{input}
+(or \pythoninline{raw_input} if you are using Python 2). Compute the corresponding solutions and print them.
 
 Filename: \texttt{quadratic\_roots\_input.py}
 \end{Problem}
@@ -24,18 +24,19 @@ Filename: \texttt{quadratic\_roots\_cml.py}
 \begin{Problem}{\textbf{Quadratic with exceptions}}
 
 \noindent Extend the program from \ref{quadratic_roots_cml} with exception handling such that missing command line arguments are
-detected. In the \pythoninline{except IndexError} block, use \pythoninline{input} (or \pythoninline{raw_input} if you are using Python 2) to ask
-the user for missing input data.
+detected. In the \pythoninline{except IndexError} block, instead of exiting the program you should
+use \pythoninline{input} to ask the user for the missing input data.
 
 Filename: \texttt{quadratic\_roots\_error.py}
 \end{Problem}
 
 \begin{Problem}{\textbf{Quadratic with raising Error}} \label{prob43} \
-\begin{center}
-\emph{In this exercise, use the \pythoninline{sqrt} function imported from \pythoninline{math}.}    
-\end{center}
-Consider the program from Problem \ref{quadratic_roots_input}. Not all inputs yield real solutions.  Modify the program such that it raises \pythoninline{ValueError} if the values for $a$, $b$ and $c$ yield complex roots. (That is if $b^2 - 4ac < 0$). Provide a suitable \pythoninline{Error}-message. Test that your program prints out real roots and that it raises \pythoninline{ValueError} when the roots are complex.
-(An example of values that provide complex roots could be $a=1$, $b=1$, $c=1$, while $a=1$, $b=0$, $c=-1$ provide real roots).
+Consider the program from Problem \ref{quadratic_roots_input}. Not all inputs yield real solutions.
+Modify the program such that it raises a \pythoninline{ValueError} if the input values for $a$, $b$ and $c$
+yield complex roots. (That is if $b^2 - 4ac < 0$). Provide a suitable error  message. Run your program with different
+values of the coefficients to verify that it prints out real roots and that a \pythoninline{ValueError} is raised
+when the roots are complex. An example of values that provide complex roots could be $a=1$, $b=1$, $c=1$,
+while $a=1$, $b=0$, $c=-1$ will give real roots.
 
 Filename: \texttt{quadratic\_roots\_error2.py}
 \end{Problem}
@@ -86,11 +87,11 @@ at 0.9 and 1 respectively.
 Filename: \texttt{harmonic\_table.py}
 \end{Problem}
 
-\begin{Problem}{\textbf{Read isotope file}} 
+\begin{Problem}{\textbf{Read isotope file}}
 
-\noindent 
-Isotopes of a chemical element in its ground state have the same number of protons but differ in the number of neutrons. The weight of isotopes of the same chemical element will therefore be different. 
- 
+\noindent
+Isotopes of a chemical element in its ground state have the same number of protons but differ in the number of neutrons. The weight of isotopes of the same chemical element will therefore be different.
+
 The molar mass, $M$, of a chemical element, can be calculated by summing over all its isotopes $ M =  \sum_{i} m_i w_i $, where $m_i$ is the weight of the $i$-th isotope and $w_i$ the corresponding natural abundance.
 
 The file \texttt{Oxygen.txt}, which is given below, contains the information on Oxygen's isotopes ($\mathrm{^{16}O}$, $\mathrm{^{17}O}$ and $\mathrm{^{18}O}$).
@@ -99,9 +100,9 @@ Isotope    weight [g/mol]    Natural abundance
 (16)O          15.99491         0.99759
 (17)O          16.99913         0.00037
 (18)O          17.99916         0.00204
-\end{lstlisting} 
+\end{lstlisting}
 
-Write a script in Python to read the file \texttt{Oxygen.txt} and extract the weights and the natural abundance of all the isotopes of Oxygen. Use these to calculate the molar mass of Oxygen. Print out the result with four decimals and provide the correct units. 
+Write a script in Python to read the file \texttt{Oxygen.txt} and extract the weights and the natural abundance of all the isotopes of Oxygen. Use these to calculate the molar mass of Oxygen. Print out the result with four decimals and provide the correct units.
 
 Filename: \texttt{read\_file\_isotopes.py}
 \end{Problem}
@@ -117,7 +118,7 @@ That is, the fraction $p(n)=\pi(n)/\frac{n}{\log(n)}$ tends to 1 as $n\to \infty
 The following table contains the exact values of $\pi(n)$ for some values of $n$.
 \begin{lstlisting}
 n: 10**20 10**4 10**2 10**1 10**12 10**4 10**6 10**15
-pi(n): 2220819602560918840 1229 25 4 37607912018 168 
+pi(n): 2220819602560918840 1229 25 4 37607912018 168
        78498 29844570422669
 \end{lstlisting}
 \paragraph{a)}
@@ -141,7 +142,7 @@ There are better approximations to $\pi(n)$, for example the function
     \Li(n)=\int_2^n \frac{1}{\log(t)} dt
 \end{equation*}
 Approximate the integral for different values of $n$ and modify the program to
-write these into a third column. 
+write these into a third column.
 
 \emph{Hint: Implement an algorithm for approximating the integral (e.g. the trapezoidal
 rule) and compute the difference as before.}
@@ -178,7 +179,7 @@ Filename: \texttt{base\_conversion.py}
 
 
 
-\begin{Problem}{\textbf{Read temperatures from two files}} 
+\begin{Problem}{\textbf{Read temperatures from two files}}
 
 \noindent
 We consider data sets from the Norwegian Meteorological Institute, containing daily mean temperatures of any month of any year at Blindern (Oslo).\cite{temp} Each file looks typically like this:
@@ -193,9 +194,9 @@ The observations are given chronologically, and the temperatures are given in de
 \paragraph{a)}
 Write a function \pythoninline{extract_data(filename)} that reads any such file and returns a list of the temperatures from the given month.
 \paragraph{b)}
-In the two files \texttt{temp\_oct\_1945.dat} and \texttt{temp\_oct\_2014.dat} you will find observations of daily mean temperatures in October 1945 and October 2014, respectively. Store the temperatures in two lists \pythoninline{oct_1945} and \pythoninline{oct_2014}. Calculate the average, maximum and minimum value of the temperatures of both months, and print the results. You may use the \pythoninline{numpy.mean()}, \pythoninline{numpy.max()} and \pythoninline{numpy.min()} methods. 
+In the two files \texttt{temp\_oct\_1945.dat} and \texttt{temp\_oct\_2014.dat} you will find observations of daily mean temperatures in October 1945 and October 2014, respectively. Store the temperatures in two lists \pythoninline{oct_1945} and \pythoninline{oct_2014}. Calculate the average, maximum and minimum value of the temperatures of both months, and print the results. You may use the \pythoninline{numpy.mean()}, \pythoninline{numpy.max()} and \pythoninline{numpy.min()} methods.
 \paragraph{c)}
-Write a function \pythoninline{write_formatting()} that takes at least \pythoninline{filename}, \pythoninline{list1} and \pythoninline{list2} as parameters, and creates a new file with two nicely formatted columns containing the temperatures of the given months (you can assume that the months have equal lengths). 
+Write a function \pythoninline{write_formatting()} that takes at least \pythoninline{filename}, \pythoninline{list1} and \pythoninline{list2} as parameters, and creates a new file with two nicely formatted columns containing the temperatures of the given months (you can assume that the months have equal lengths).
 Finally, call the function such that the file \texttt{temp\_formatted.txt} is created, using the lists \pythoninline{oct_1945} and \pythoninline{oct_2014}.
 \\
 Filenames: \texttt{temp\_read\_write.py}, \texttt{temp\_formatted.txt}

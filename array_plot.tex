@@ -7,10 +7,11 @@
 \begin{equation*}
 f(x) = \ln(x).
 \end{equation*}
-We want to fill two arrays \pythoninline{x} and \pythoninline{y} with $x$ and $f(x)$ values,
+We want to fill two arrays \pythoninline{x} and \pythoninline{y} with the values of $x$ and $f(x)$,
 respectively. Use $101$ uniformly spaced $x$ values in the interval $[1, 10]$.
-Create empty \pythoninline{x} and \pythoninline{y} arrays and compute each element in
-\pythoninline{x} and \pythoninline{y} with a \pythoninline{for} loop. 
+First create arrays \pythoninline{x} and \pythoninline{y} with the correct length, containing
+all zeros. Then compute and fill in each element in
+\pythoninline{x} and \pythoninline{y} with a \pythoninline{for} loop.
 
 Filename: \texttt{fill\_log\_arrays\_loop.py}
 \end{Problem}
@@ -20,7 +21,8 @@ Filename: \texttt{fill\_log\_arrays\_loop.py}
 
 \noindent Vectorize the code in Problem \ref{prob51} by creating the $x$ values using the
 \pythoninline{linspace} function from the \pythoninline{numpy} package and evaluating
-$f(x)$ with an array argument. Since the calculation should be vectorized, you may not use any form of loop.
+$f(x)$ with an array argument. Since the calculation should be vectorized, you should not
+use any form of loop in the code.
 
 Filename: \texttt{fill\_log\_arrays\_vectorized.py}
 \end{Problem}
@@ -45,7 +47,7 @@ Filename: \texttt{population\_plot.py}
 \begin{Problem}{\textbf{Oscillating spring}}
 
 \noindent A rock of mass $m$ is hung from a spring, and pulled down a length $A$. When
-released, the rock will oscillate up and down with a 
+released, the rock will oscillate up and down with a
 vertical position given by
 \[
 y(t) = A e^{-\gamma t}\cos\left(\sqrt{\frac{k}{m}}t\right),
@@ -55,16 +57,17 @@ Here, $y$ is the vertical position of the rock, $k$ is the spring
 constant, and $\gamma$ is a friction coefficient representing
 air resistance. Set $k = 4$ kg s$^{-2}$ and $\gamma = 0.15$ s$^{-1}$,
 $m = 9$ kg, and $A = 0.3$ m.
-\paragraph{a)} Create arrays \pythoninline{t_array} and 
-\pythoninline{y_array} of size 101, both initially filled with zeros. 
+\paragraph{a)} Create arrays \pythoninline{t_array} and
+\pythoninline{y_array} of size 101, both initially filled with zeros.
 Use a \pythoninline{for} loop to fill them with time values in the range from 0 to 25 seconds, and the
 corresponding $y(t)$ values.
-\paragraph{b)} Vectorize your program by using the NumPy's \pythoninline{linspace} 
+\paragraph{b)} Vectorize your program by using the NumPy's \pythoninline{linspace}
 function to generate the \pythoninline{t_array}, and
 send it into a function \pythoninline{y(t)} to generate the \pythoninline{y_array}. Your program should now be free of
 for loops.
-paragraph{c)}
-Plot the position of the rock against time in the given time interval. Use the arrays from both exercise a) and b), and confirm that they give the same result. Put the correct units on both axes. 
+\paragraph{c)} Plot the position of the rock against time in the given time
+interval. Use the arrays from both exercise a) and b), and confirm that they
+give the same result. Put the correct units on both axes.
 
 Filename: \texttt{oscillating\_spring.py}
 \end{Problem}
@@ -114,20 +117,20 @@ and
 \end{equation*}
 for $k = 0, 1, ..., n-1$.
 
-\paragraph{a)} 
-Write a function that takes the angle $\theta$, the radius $r$ and the degree $n$ of the roots as parameters. The function should calculate and return  all of the $n$'th roots of a complex number $r e^{i \theta}$, as two lists or arrays corresponding to the real part $x = x_0, x_1, ..., x_{n-1}$ and the complex part $y =y_0, y_1, ..., y_{n-1}$ of the roots. An example of a function call on the function you will write is given below. 
+\paragraph{a)}
+Write a function that takes the angle $\theta$, the radius $r$ and the degree $n$ of the roots as parameters. The function should calculate and return  all of the $n$'th roots of a complex number $r e^{i \theta}$, as two lists or arrays corresponding to the real part $x = x_0, x_1, ..., x_{n-1}$ and the complex part $y =y_0, y_1, ..., y_{n-1}$ of the roots. An example of a function call on the function you will write is given below.
 \begin{python}
 x, y = roots(r, theta, n)
 \end{python}
 
-\paragraph{b)} 
+\paragraph{b)}
 Consider the complex number $z = 10^{-4}e^{i 2 \pi}$. Use the function from a) to get all the roots of order $n = 6$, $n = 12$ and $n = 24$. Plot the roots as points, and plot all the three orders of roots in the same plot. Label the different orders of roots. And example of code for plotting the roots of order $n = 6$ is given below.
 \begin{python}
 plt.plot(x_n_6, y_n_6, "o", label="n = 6")
 \end{python}
 Filename: \texttt{roots.py}
 \end{Problem}
-\newpage
+
 
 \begin{Problem}{\textbf{Fermi-Dirac distribution}} \label{prob55}
 %\addcontentsline{toc}{section}{Exercise 5.5: Fermi-Dirac distribution - \texttt{Fermi\_Dirac.py}}
@@ -159,7 +162,7 @@ to label your axes and include a legend to show the value of the temperature.
 \emph{Hint: A suitable resolution can be $1 000$ intervals ($1 001$ points) along
 the $E$ axis,  $60$ intervals ($61$ points) in temperature, and $6$ frames per
 second in the animated GIF file. Use the recipe in Section 5.3.4 and remember to
-remove the family of old plot files in the beginning of the program.} 
+remove the family of old plot files in the beginning of the program.}
 
 Filename: \texttt{Fermi\_Dirac\_movie.py}
 \end{Problem}
@@ -171,13 +174,13 @@ Filename: \texttt{Fermi\_Dirac\_movie.py}
    f(x)=\begin{cases}
        ke^{-\frac{1}{1-x^2}} & -1 < x < 1 \\
        0 & otherwise.
-   \end{cases} 
+   \end{cases}
 \end{equation*}
 
 \paragraph{a)}
 Plot the function with $k=1$ on the interval $-2 \leq x \leq 2$ by implementing
 a vectorized version in your program.
-    
+
 \paragraph{b)}
 Animate the function on the same interval as above when $k$ decreases from
 1 to 0.
@@ -264,24 +267,24 @@ Filename: \texttt{approx\_abs.py}
 
 \begin{Problem}{\textbf{Plotting graphs}}
 
-\noindent A graph is a collection of lines and points in the plane 
+\noindent A graph is a collection of lines and points in the plane
 such that each line connects two points. In this exercise we will create functions for
-plotting graphs on a set of points. 
+plotting graphs on a set of points.
 
 \paragraph{a)}
 Make a function \pythoninline{plot_line(p1,p2)} that takes two points as input arguments
 and plots the line between them. The two input arguments should be lists or tuples specifying
-$x$- and $y$-coordinates, i.e. \pythoninline{p1 = (x1,y1)}. Demonstrate that the function works by plotting a vertical and a horizontal line. 
+$x$- and $y$-coordinates, i.e. \pythoninline{p1 = (x1,y1)}. Demonstrate that the function works by plotting a vertical and a horizontal line.
 
 \paragraph{b)}
 A complete graph is a graph such that any two points has a line that connects them. Make a function that takes a list of points and plots the complete graph on those points. To verify that the
-function works, first choose the four corners of the square ($(0,0),(1,0),(0,1),(1,1)$) 
+function works, first choose the four corners of the square ($(0,0),(1,0),(0,1),(1,1)$)
 and then the points $(1,0), (\alpha,\alpha), (0,1), (-\alpha,\alpha),
-(-1,0), (-\alpha,-\alpha),(0,-1), (\alpha,-\alpha)$, with $\alpha=\sqrt{2}/2$. The resulting 
+(-1,0), (-\alpha,-\alpha),(0,-1), (\alpha,-\alpha)$, with $\alpha=\sqrt{2}/2$. The resulting
 complete graphs should look like the ones in Figure \ref{fig:graphs}.
 
-Hint: Modify the \pythoninline{plot_line} function from 5.14 a) so that it only calls 
-\pythoninline{plot()} but not \pythoninline{show()}. The complete graph can then be drawn by 
+Hint: Modify the \pythoninline{plot_line} function from 5.14 a) so that it only calls
+\pythoninline{plot()} but not \pythoninline{show()}. The complete graph can then be drawn by
 looping over the points and calling \pythoninline{plot_line} for each pair, and finally calling
 \pythoninline{show()} after the loop.
 
@@ -343,7 +346,7 @@ at 0 and increasing.
 Animate the cycloid as a function of $\theta$ starting at 0, ending at 15. Draw
 a point at the end of the cycloid that varies with the animation.
 
-\emph{Hint: A point can be added through a new plot using for example} 
+\emph{Hint: A point can be added through a new plot using for example}
 \newline
 \pythoninline{point, = axes.plot([],[],'o')}
 
@@ -356,11 +359,10 @@ time $\theta$, the circle is given as $s(\theta)=(R\cdot\theta + \cos\theta, R +
 Filename: \texttt{cycloid.py}
 \end{Problem}
 
-\newpage
 \begin{Problem}{\textbf{Calibration curve}}
 
 \noindent
-A tool in chemical analysis for measuring the concentration of a substance in a sample (e.g. blood or urine), is making a calibration curve. Solutions with known concentrations of a substance (standard solutions) are measured. The X-axis is the concentrations of the standard solutions, and the Y-axis is for the measured intensity of these solutions. The concentration of the substance in the sample can then be determined using an equation that best describes the calibration curve. This equation is determined using linear regression. 
+A tool in chemical analysis for measuring the concentration of a substance in a sample (e.g. blood or urine), is making a calibration curve. Solutions with known concentrations of a substance (standard solutions) are measured. The X-axis is the concentrations of the standard solutions, and the Y-axis is for the measured intensity of these solutions. The concentration of the substance in the sample can then be determined using an equation that best describes the calibration curve. This equation is determined using linear regression.
 
 In Python, you can use the \pythoninline{numpy} module to obtain a linear regression. How to do this will be shown.
 
@@ -376,14 +378,14 @@ conc_curve = np.linspace(0, 60, 100)
 signal_curve = fit(conc_curve)
 \end{python}
 
-\paragraph{a)} 
-Plot the calibration curve as a line, and plot the intensities of the calibration solutions as points on top of the calibration curve. 
+\paragraph{a)}
+Plot the calibration curve as a line, and plot the intensities of the calibration solutions as points on top of the calibration curve.
 
 \paragraph{}
 \noindent
 The function created in the code above, \pythoninline{fit(x)}, is now a linear function on the form $f(x) = a x + b = y$, where $x$ corresponds to the concentration and $y$ will correspond to the intensity of the signal at the given concentration.
 
-\paragraph{b)} 
+\paragraph{b)}
 Determine $a$ and $b$ by using \pythoninline{fit(x)} and use these to implement an inverse function of $f(x)$ such that $g(y) = x$. Use your function to calculate the concentration of three different samples of the same unknown compound. The intensities of the compound of the samples are given below.
 \begin{python}
 I_unknown = np.array([19.9, 20.1, 19.8])

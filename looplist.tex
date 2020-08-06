@@ -174,6 +174,31 @@ Filename: $\texttt{alkane.py}$
 \end{Problem}
 
 
+\begin{Problem}{\textbf{Simulate a program by hand}}\label{interest_rate_loop}
+
+\noindent Consider the following program for computing with interest rates:
+\begin{python}
+initial_amount = 100
+r = 5.5 # interest rate
+amount = initial_amount
+years = 0
+while amount <= 1.5*initial_amount:
+    amount = amount + r/100*amount
+    years = years + 1
+print(years)
+\end{python}
+
+\paragraph{a)} Use a calculator or an interactive Python shell and work through the
+program calculations by hand. Write down the value of \py{amount} and \py{years}
+in each pass of the loop.
+\paragraph{b)} Change the program to make use of the operator \py{+=} wherever possible.
+\paragraph{c)} Explain with words what type of mathematical problem that is solved by this
+program.
+
+Filename: $\texttt{interest\_rate\_loop.py}$
+\end{Problem}
+
+
 \begin{Problem}{\textbf{Matrix elements}}
 
 \begin{center}

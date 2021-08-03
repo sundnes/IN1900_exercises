@@ -1,4 +1,45 @@
 %\section{Programming of differential equations}
+The exercises of this chapter are about programming of solvers for ordinary differential
+equations, corresponding to Appendix E in the book by Langtangen.
+
+
+\begin{Problem}{\textbf{Solve a simple ODE with function-based code}}\label{simple_ode_func}
+
+\noindent
+This exercise aims to solve the ODE problem $u - 5u' = 0, u(0) = 0.1$, for $t \in [0,20]$.
+\paragraph{a)} Identify the mathematical function $f(u,t)$ in the generic ODE form $u' = f(u,t)$.
+\paragraph{b)} Implement the $f(u,t)$ function in a Python function.
+\paragraph{c)} Use the \pythoninline{ForwardEuler} function from Section 2.1 of the
+lecture notes \emph{Solving Ordinary Differential Equations in Python} to compute a numerical solu-
+tion of the ODE problem. Use a time step $\Delta t = 5$.
+\paragraph{d)} Plot the numerical solution and the exact solution $u(t) = 0.1e^{0.2t}$.
+\paragraph{f)} Perform simulations for smaller $\Delta t$ values and demonstrate visually that the
+numerical solution approaches the exact solution.
+
+Filename: \texttt{simple\_ODE\_func.py}
+\end{Problem}
+
+\begin{Problem}{\textbf{Solve a simple ODE with class-based code}}\label{simple_ode_class}
+
+\noindent
+Solve the same ODE problem as in Exercise \ref{simple_ode_func}, but use the
+\pythoninline{ForwardEuler} class described in Section 2.2 of the lecture
+notes \emph{Solving Ordinary Differential Equations in Python}.
+Implement the right-hand side function $f$ as a class too.
+
+Filename: \texttt{simple\_ODE\_class.py}
+\end{Problem}
+
+\begin{Problem}{\textbf{Solve a simple ODE with the ODEsolver hierarchy}}
+
+\noindent
+Solve the same ODE problem as in Exercise \ref{simple_ode_func}, but use the
+\pythoninline{ForwardEuler} class in the \pythoninline{ODESolver} hierarchy
+from Section 2.4 of the lecture notes.
+
+Filename: \texttt{simple\_ODE\_class\_ODESolver.py}
+\end{Problem}
+
 
 \begin{Problem}{\textbf{Decrease the length of the time steps}}
 %\addcontentsline{toc}{section}{Exercise E.2: Decrease the length of the time steps - \texttt{decrease\_dt.py}}
@@ -7,106 +48,144 @@
 \begin{equation*}
 \frac{dx}{dt} = \frac{\cos (6t)}{1 + t + x}.
 \end{equation*}
-Use Forward Euler to solve this differential equation numerically. You should solve it on the interval $t \in [0, 10]$ for $n = \{20, 30, 35, 40, 50, 100, 1 000, 10 000\}$. Plot all the solutions in the same plot. 
+Use Forward Euler to solve this differential equation numerically. You should solve it on the interval $t \in [0, 10]$, with initial condition $x(0) = 0$, and for number of time steps $n = \{20, 30, 35, 40, 50, 100, 1 000, 10 000\}$. Plot all the solutions in the same plot.
 
 Filename: $\texttt{decrease\_dt.py}$
 \end{Problem}
 
-\begin{Problem}{\textbf{Implement Euler's midpoint method}}
+\begin{Problem}{\textbf{Implement the explicit midpoint method}}\label{Midpoint}
 %\addcontentsline{toc}{section}{Exercise E.3: Implement Euler's midpoint method - \texttt{Midpoint.py}}
 
-\noindent Make a subclass \pythoninline{Midpoint} in the \pythoninline{ODESolver} hierarchy from Section E.3 for solving ordinary differential equations with Euler's midpoint method. This method computes
+\noindent Implement a subclass \pythoninline{Midpoint} in the \pythoninline{ODESolver} hierarchy
+from Section 2.4 of the lecture notes \emph{Solving Ordinary Differential Equations in Python}. The class
+should implement the explicit midpoint method described in Section 2.3 in the lecture notes, defined
+by
 \begin{align*}
-u_{k + 1/2} &= u_{k} + \Delta tf(u_k, t_k)/2,\\
-u_{k + 1} &= u_k + \Delta tf(u_{k + 1/2}, t_k + dt/2).
+k_1 & = f(u_n, t_n), \\
+k_2 & = f(u_n+\frac{\Delta t}{2} k_1, t_n+\frac{\Delta t}{2}), \\
+u_{n+1} &= u_n + \Delta t\, k_2 .
 \end{align*}
-Test your implementation by solving $y' = f(y, x) = \cos(x)-x\sin(x)$ and plot the numerical solutions obtained from both Euler's midpoint method and Forward Euler together with the analytical solution. Use $20$ time steps on the interval $x \in [-5, 5]$, and $y_0=-5\cos(-5)$.
+Test your implementation by solving $u' = f(u, t) = \cos(t)-t\sin(t), u(0) = 0$
+and plot the numerical solutions obtained from both the explicit midpoint
+method and Forward Euler together with the analytical solution
+$u(t) = t\cos(t)$. Use $20$ time steps on the interval $t \in [0, 4\pi]$.
 
 Filename: $\texttt{Midpoint.py}$
 \end{Problem}
 
-\begin{Problem}{\textbf{Implement Heun's method; function}}
+\begin{Problem}{\textbf{Implement Heun's method as a function}}\label{heuns_method_func}
 \paragraph{a)}
 \noindent
-Implement Heun's method specified in formula (E.36-E.37) on page 779 in the book. Use a plain function \pythoninline{heuns_method} of the type shown in Sect. E.1.3. Construct a test problem where you know the analytical solution. 
-Implement a test function \pythoninline{test_heuns_against_hand_calculations()} where you compare your own hand calculated results for $u_0$, $u_1$ and $u_2$ with those in the program.
+Heun's method is defined by
+\begin{align*}
+k_1 & = f(u_n, t_n), \\
+k_2 & = f(u_n+\Delta t k_1, t_n+\Delta t), \\
+u_{n+1} &= u_n + \Delta t\, (k_1/2 + k_2/2).
+\end{align*}
+
+Implement Heun's method using a plain function \pythoninline{heuns_method}
+of the same type as the \pythoninline{ForwardEuler} function from Section 2.1
+in the lecture notes \emph{Solving Ordinary Differential Equations in Python}.
+Construct a test problem where you know the analytical solution.
 
 \paragraph{b)}
-Plot the difference between the numerical and analytical solution of your test problem. You should demonstrate that the numerical solution approaches the exact solution as $\Delta t$ decreases.
+Implement a test function \pythoninline{test_heuns_against_hand_calculations()}
+where you compare your own hand calculated results with those returned from the
+function. Compare the solution at one or two time steps.
+
+\paragraph{c)}
+Plot the difference between the numerical and analytical solution of your test
+problem. You should demonstrate that the numerical solution approaches
+the exact solution as $\Delta t$ decreases.
 
 Filename: \texttt{heuns\_method\_func.py}
 \end{Problem}
 
 
-\begin{Problem}{\textbf{Solve an ODE until constant solution}}\\
+\begin{Problem}{\textbf{Solve an ODE describing cooling of coffee}}\\
 \noindent
 Newton's law of cooling,
 \begin{equation*}
-  \frac{dT}{dt} = -h(T-T_s)  
+  \frac{dT}{dt} = -h(T-T_s)
 \end{equation*}
 
-can be used to see how the temperature T of an object changes because of heat exchange with the surroundings, which have a temperature $T_s$. The parameter $h$, with unit $s^{-1}$ is an experimental constant (heat transfer coefficient) telling how efficient the heat exchange with the surroundings is. In this exercise we shall model the cooling of freshly brewed coffee. First we must find a measure of $h$. Supposed we have measured T at $t_0=0$ and $t_1$. We can use a rough Forward Euler approximation of $\frac{dT}{dt}$ with one time step of length $t_1$,
+can be used to see how the temperature T of an object changes because of heat
+exchange with the surroundings, which have a temperature $T_s$. The
+parameter $h$, with unit $s^{-1}$ is an experimentally determined constant
+(heat transfer coefficient) describing how efficient the heat exchange with
+the surroundings is. In this exercise we shall model the cooling of freshly
+brewed coffee. First we must find a measure of $h$. Suppose we have measured
+$T$ at $t_0=0$ and $t_1$. We can then use a Forward Euler approximation
+of $\frac{dT}{dt}$ with one time step of length $t_1$,
 \begin{equation*}
-   \frac{T(t_1)-T(0)}{t_1} = -h(T(0)-T_s) 
+   \frac{T(t_1)-T(0)}{t_1} = -h(T(0)-T_s)
 \end{equation*}
 to make the estimate
 \begin{equation*}
-   h = \frac{T(t_1)-T(0)}{t_1(T_s-T(0))}. 
+   h = \frac{T(t_1)-T(0)}{t_1(T_s-T(0))}.
 \end{equation*}
 
-\paragraph{a)} 
-Make a \pythoninline{class Problem} containing the parameters $h$ and $T_s$ as data attributes. Let these parameters be set in the constructor. Implement the right-hand side of the ODE in a \pythoninline{__call__(self, T, t)} method. We will use a class from the \pythoninline{ODESolver} hierarchy to solve the ODE, so you shall also include the \pythoninline{terminate} function as a method in class \pythoninline{Problem} (reading the first part of Sect. E.3.6 may be useful). \newline
-Create a stand-alone function \pythoninline{estimate_h(t1, Ts, T0, T1)} to estimate the $h$ parameter based on the initial temperature and one data point $(t_1, T(t_1))$. You can use this function to estimate a value for $h$ prior to calling the constructor in the \pythoninline{Problem} class.
+\paragraph{a)}
+Make a \pythoninline{class Cooling} containing the
+parameters $h$ and $T_s$ as data attributes. Let these parameters
+be set in the constructor. Implement the right-hand side of the
+ODE in a \pythoninline{__call__(self, T, t)} method. We will use a
+class from the \pythoninline{ODESolver} described in Section 2.4 of the
+lecture notes to solve the ODE.
+
+Create a stand-alone function \pythoninline{estimate_h(t1, Ts, T0, T1)} to
+estimate the $h$ parameter based on the initial temperature and one data
+point $(t_1, T(t_1))$. You can use this function to estimate a value
+for $h$ prior to calling the constructor in the \pythoninline{Cooling} class.
 
 \paragraph{b)}
-Implement a test function \pythoninline{test_Problem()} for testing that class \pythoninline{Problem} works. It is up to you to define how to test the class.
+Implement a test function \pythoninline{test_Cooling()} for testing
+that class \pythoninline{Cooling} works. The test function should verify that the
+\pythoninline{__call__} method returns the correct results for given values
+of the arguments \pythoninline{T} and \pythoninline{t}.
 
-\paragraph{c)} The temperature of freshly brewed coffee is $95^{\circ}$ C at $t_0=0$ (when it is poured into your cup), and $92^{\circ}$ C after 15 seconds, in a room with temperature $T_s$.   
+\paragraph{c)} The temperature of freshly brewed coffee
+is $95^{\circ}$ C at $t_0=0$ (when it is poured into your cup),
+and $92^{\circ}$ C after 15 seconds, in a room with temperature $T_s$.
 
-
-For each $T_s = [20, 25]$, solve the ODE numerically by a method of your choice from the \pythoninline{ODESolver} hierarchy. Remember to send both the array of t-values and \pythoninline{<instance>.terminate} as parameters when calling the \pythoninline{solve} method (because \pythoninline{terminate=None} by default). Plot your two $T$-arrays of different solutions in the same plot. If the \pythoninline{terminate} method works all right, your graphs should be cut when close enough to the asymptotic values $T_s$ of room temperature.
+Solve the ODE numerically by a method of your choice from the \pythoninline{ODESolver}
+hierarchy, for $T_s = 20$ and $T_s = 25$. Plot the two solutions in the same plot.
+The time interval where you solve the equations should be chosen long enough
+for the solutions to be "almost flat" and close to the respective room temperature.
 
 Filename: \texttt{coffee.py}
 \end{Problem}
 \newpage
 
 \begin{Problem}{\textbf{Compare numerical methods for solving ODEs}}
-\paragraph{a)}Make two subclasses \pythoninline{Heun} and \pythoninline{RungeKutta2} in the \pythoninline{ODESolver} hierarchy from Section E.3 in the book for solving ordinary differential equations with Heun's method and the 2nd-order Runge-Kutta method.  
-
-Heun's method has the formula
-\begin{equation*}
-    u_{k+1} = u_k + \frac{1}{2}\Delta t f(u_k,t_k) + \frac{1}{2}\Delta t f(u_*, t_{k+1}), 
-\end{equation*}
-where  $\Delta t = t_{k+1} - t_k$ is the time step and    
-\begin{equation*}
-     u_* = u_k + \Delta t f(u_k, t_k) .
-\end{equation*}
-The 2nd-order Runge-Kutta method has the formula
-\begin{align*}
-    u_{k+1} = u_k + K_2,
-\end{align*}
-where
-\begin{align*}
-    K_2 =& \Delta t f(u_k + \frac{1}{2}K_1, t_k + \frac{1}{2}\Delta t) \\
-     K_1 =& \Delta t f(u_k,t_k) ,
-\end{align*}
-where $\Delta t = t_{k+1} - t_k$.
+\paragraph{a)}Make two subclasses
+\pythoninline{Midpoint} and \pythoninline{Heun} in the
+\pythoninline{ODESolver} hierarchy described in Section 2.4 of the lecture notes
+\emph{Solving Ordinarty Differential Equations in Python}. The classes should
+implement the explicit midpoint method, defined in Problem \ref{Midpoint}, and Heun's method,
+defined in Problem \ref{heuns_method_func}, respectively.
 
 \paragraph{b)}
-Test your implementation in the main block of your program, using $y'(x) = x\cos(x)-\sin(x)$. You shall evaluate $y(x)$ using Heun's method, 2nd-order Runge-Kutta method, 4th-order Runge-Kutta method and the analytic solution. 
+Test your implementation in the main block of your program, by solving the
+ODE $u'(t) = t\cos(t)-\sin(t), u(0) = 2$. Compute the numerical solution using
+Heun's method, the explicit midpoint method, and the 4th order Runge-Kutta method
+from the \pythoninline{ODESolver} hierarchy.
 
+Make one plot for each method, where the numerical method is compared to the
+analytical solution $y(t) = t\sin(t)+2\cos(t)$. You should solve and plot on
+the interval $t \in [0, 8\pi]$ using $n$ number of points on the interval,
+for $n = \{20,25,50,150\}$. To create multiple plots you can either
+use the \pythoninline{plt.subplot} function (assuming \pythoninline{mathplotlib.pyplot}
+is imported as \pythoninline{plt}) to get multiple plots in the same window, or
+you can use \pythoninline{plt.figure(1)}, \pythoninline{plt.figure(2)}, etc.,
+to open multiple plot windows.
 
-Make one subplot for each method, and one subplot for the analytical solution. You should solve and plot on the interval $t \in [-17, 17]$ using $n$ number of points on the interval, for $n = \{20, 25,50,150\}$. 
-
-The analytical solution is $y(x) = x\sin(x)+2\cos(x)$, from which you can find the initial condition of the numerical methods, $y_0 = y(-17)$. 
-
-Remember to label the subplots with both the names of the methods and the different values of $n$.
-
+Remember to label/title each plot and to include a legend with the different values of $n$.
 
 Filename: \texttt{compare\_methods.py}
 \end{Problem}
 
-\begin{Problem}{\textbf{Solving a system of ODEs; motions of a spring}} 
+\begin{Problem}{\textbf{Solving a system of ODEs; motions of a spring}}
 
 
 The \pythoninline{ODESolver} hierarchy is adapted to cope with both scalar ODEs and systems of ODEs. In this exercise we will solve a system of ODEs using \pythoninline{ODESolver}.
@@ -122,16 +201,16 @@ If you want to read the mathematical reasoning concerning this physical phenomen
 \paragraph{a)}
 Consider the following $2^{nd}$ order ODE
 \begin{equation*}
-u'' + \frac{q}{m}u' + \frac{k}{m}u = 0, 
+u'' + \frac{q}{m}u' + \frac{k}{m}u = 0,
 \end{equation*}
-which describes the motion of the spring. The initial condition is 
+which describes the motion of the spring. The initial condition is
 \begin{equation*}
 u_0 = \left(1, \ \ -\frac{q}{2m}+\sqrt{\frac{k}{m}-\left(\frac{q}{2m}\right)^2 }\right).
 \end{equation*}
 The parameter $k$ is a constant factor that describes the stiffness of the spring. The parameter $q$ describes the friction, for example air resistance. When $q=0$ there is no friction. In this entire exercise we will consider the case where $m=1$ and $k=2$.
 
 
-Rewrite the equation to a system of ODEs by hand. 
+Rewrite the equation to a system of ODEs by hand.
 Then create a class \pythoninline{ProblemSpring} that takes the parameters $m$, $k$, and $q$ as instance attributes in the constructor. The vector $u_0$ should also be defined in the constructor, as it depends on $m$, $k$ and $q$. Create a special method \pythoninline{__call__(self, u, t)} that returns the vector $\left[\frac{d}{dt}u(t), \frac{d}{dt}u'(t) \right]$ that you calculated by hand.
 
 
@@ -162,14 +241,14 @@ Write a method \pythoninline{plot(self)} which plots the exact solution of $u(t)
 \paragraph{e)}
 In the main block, create two problem instances of \pythoninline{ProblemSpring} that represents the two cases where $q=0$ and $q=0.3\sqrt{km}$, respectively.
 
-Also, create a solver instance of \pythoninline{SolverSpring} for each of the two problem instances you just created. Let $T=30$ and $n=1000$.  
+Also, create a solver instance of \pythoninline{SolverSpring} for each of the two problem instances you just created. Let $T=30$ and $n=1000$.
 
 Call the \pythoninline{solve} and the \pythoninline{plot} methods for both of your solver instances.
 
 \paragraph{f)}
 You will now create two test functions to ensure your implementation of the problem class and solver class is correct.
 
-Make one test function where you compare the computed solution with the analytical solution of $u(t)$ for some given parameters, and let the test pass if the maximum error is less than some given tolerance.  
+Make one test function where you compare the computed solution with the analytical solution of $u(t)$ for some given parameters, and let the test pass if the maximum error is less than some given tolerance.
 
 Make another test function where you compare the computed derivative $u'(t)$ with the exact $u'(t)$ for the case where $m=1$, $k=2$ and $q=0$. In this case the analytical solution is
 \begin{equation*}
@@ -183,7 +262,7 @@ Filename: \pythoninline{spring_diffeq.py}
 \begin{Problem}{\textbf{Modelling war between nations}}
 
 \noindent We consider the interaction between two nations C1 and C2 and
-a system of equations for modelling a conflict between these \cite[p.396]{braun}.
+a system of equations for modelling a conflict between these.  %\cite[p.396]{braun}.
 Assuming that each nation is determined  to defend itself against a possible attack,
 let $x(t)$ and $y(t)$ denote the armaments of
 the first and second nation respectively. The change $x'(t)$ depends on the armaments of
@@ -250,7 +329,7 @@ Filename: $\texttt{C\_model\_class.py}$
 \paragraph{c)}
 Let us consider the parameter values $k=l=0.9$, $\alpha=\beta=0.2$, and $g=h=0$.
 One can argue that these give rough estimates for the arms race between 1909 to 1914
-between the alliances of France and Russia, and Germany and Austria-Hungary \cite{braun}.
+between the alliances of France and Russia, and Germany and Austria-Hungary. %\cite{braun}.
 Assuming stability prior to this and negligible armies, we assume $x_0\approx0$ and $y_0\approx0$
 (This does not mean that neither nation had armies, but that they were much smaller
 prior to the arms race).
@@ -318,7 +397,8 @@ for the remaining. The reinforcements is therefore given as
     \end{cases}
 \end{equation*}
 It can be shown that good estimates for the parameter values are $\alpha=0.0544$
-and $\beta = 0.0106$ \cite{braun}. The exact values on a day to day basis is
+and $\beta = 0.0106$. %\cite{braun}.
+The exact values on a day to day basis is
 given in the file $\texttt{Casualties.dat}$. Plot
 the modeled American army vs the exact numbers, and $y(t)$ vs $x(t)$.
 Both plots should have the x-axis corresponding to the first $T = 36$ days.
@@ -341,7 +421,7 @@ America met a large guerrilla army?
 Filename: $\texttt{guerrilla.py}$
 \end{Problem}
 
-\begin{Problem}{\textbf{Simulate the spreading of a disease}}\label{bjorgvin}  
+\begin{Problem}{\textbf{Simulate the spreading of a disease}}\label{bjorgvin}
 
 \noindent
 In this exercise we will model epidemiological diseases by implementing the SIRD model. Suppose we have four categories of people: susceptible (S) who are healthy but may contract the disease, infected (I) who have developed the disease and can infect the susceptible population, recovered (R) who have recovered from the disease and become immune, and the deceased (D) who did not survive the disease. Let $S(t)$, $I(t)$, $R(t)$ and $D(t)$ be the number of people in category S, I, R and D, respectively at time $t$. We have that $S(t) + I(t) + R(t) + D(t) = N$, where $N$ is the size of the initial population. For simplicity, we will assume that the populations otherwise remains constant.
@@ -354,21 +434,21 @@ During a time interval $\Delta t$ starting at time $t$, the fraction of the susc
 \end{equation*}
 Divide by $\Delta t$ and let $\Delta \rightarrow 0$ to get the differential equation:
 \begin{equation} \label{eq:1}
-S'(t)=-\alpha S(t) I(t). 
+S'(t)=-\alpha S(t) I(t).
 \end{equation}
 
 Per time unit a fraction $\beta$ of the infected will recover from the disease, and  a fraction $\gamma$ of the infected will die as a result of the disease. In a time $\Delta t$, $\beta I(t) \Delta t$ people of the infected population will recover and move from the I to the R category, and $\gamma I(t) \Delta t$ dies and move from the I to the D category. In the same time interval, $\alpha S(t)I(t)\Delta t$ from the S category will be infected and moved to the I category. The accounting for the I category therefore becomes
 \begin{equation*}
-I(t+\Delta t) = I(t) + \alpha S (t) I(t) \Delta t - \beta I(t)\Delta t - \gamma I(t) \Delta t,   
+I(t+\Delta t) = I(t) + \alpha S (t) I(t) \Delta t - \beta I(t)\Delta t - \gamma I(t) \Delta t,
 \end{equation*}
 which in the limit $\Delta t \rightarrow 0$ becomes the differential equation
 \begin{equation} \label{eq:2}
-I'(t) = \alpha S(t) I(t) - \beta I(t) - \gamma I(t) . 
+I'(t) = \alpha S(t) I(t) - \beta I(t) - \gamma I(t) .
 \end{equation}
 
 The R category gets contributions from the I category:
 \begin{equation*}
-   R(t + \Delta t) = R(t) + \beta I(t) \Delta t, 
+   R(t + \Delta t) = R(t) + \beta I(t) \Delta t,
 \end{equation*}
 and the corresponding ODE for $R$ reads
 \begin{equation} \label{eq:4}
@@ -377,7 +457,7 @@ R'(t) = \beta I(t).
 
 Finally, the D category gets contributions from the I category as well:
 \begin{equation*}
-  D(t + \Delta t) = D(t) + \gamma I(t) \Delta t,  
+  D(t + \Delta t) = D(t) + \gamma I(t) \Delta t,
 \end{equation*}
 and the corresponding ODE for $D$ reads
 \begin{equation} \label{eq:5}
@@ -389,10 +469,11 @@ The system (E.2)-(E.5) is what we will call a SIRD model.
 \paragraph{a)}
 Make three separate functions: (i) \pythoninline{SIRD(u,t)} which defines the right hand side of the ODE system of the SIRD model. The parameters $\alpha, \beta, \gamma$ can be defined as local variables inside the function. (ii) A function \pythoninline{solve_SIRD} for solving the system of differential equations in the SIRD model by a numerical method of your choice from the \pythoninline{ODESolver}. (iii) A function \pythoninline{plot_SIRD(u,t)} for visualising $S(t)$, $I(t)$, $R(t)$ and $D(t)$ in the same plot. Make sure to use labels in the plot.
 
-\paragraph{}  
-We will use the functions from a) to study the spreading of one of the most devastating pandemics in human history, the Black Death. The Black Death, also called the Plague, was evidently spread to Norway in 1349 after a ship from England arrived in Bjørgvin (today Bergen), carrying the disease. 
+\paragraph{}
+We will use the functions from a) to study the spreading of one of the most devastating pandemics in human history, the Black Death. The Black Death, also called the Plague, was evidently spread to Norway in 1349 after a ship from England arrived in Bjørgvin (today Bergen), carrying the disease.
 
-There lived approximately 7000 people in Bjørgvin in 1349. \cite{berg} Let's say the ship crew consisted of 30 men, which were all infected with the Plague. For simplicity we only consider human-to-human transmission of the disease (we do not consider the rats and fleas). We are interested in how the disease developed in Bjørgvin the first 8 weeks after the ship arrived. 
+There lived approximately 7000 people in Bjørgvin in 1349. %\cite{berg}
+Let's say the ship crew consisted of 30 men, which were all infected with the Plague. For simplicity we only consider human-to-human transmission of the disease (we do not consider the rats and fleas). We are interested in how the disease developed in Bjørgvin the first 8 weeks after the ship arrived.
 
 We assume that the Plague was $90 \%$ deadly and that death usually occurred four days after being infected.
 
@@ -400,11 +481,11 @@ We assume that the Plague was $90 \%$ deadly and that death usually occurred fou
 Adding the equations shows that $S'(t) + I'(t) + R'(t) + D'(t) = 0$, which means that $S(t) + I(t) + R(t) + D(t)$ must be constant. Perform a test at each time step by checking that $S(t) + I(t) + R(t) + D(t)$ equals $S(0)+I(0)+R(0)+D(0)$ within some small tolerance. Since \pythoninline{ODESolver} is used to solve the ODE system, the test should be implemented as a user-specified \pythoninline{terminate(u, t, k)} function that is called by the \pythoninline{solve} function at every time step. The \pythoninline{terminate} function should simply print an error message and return \pythoninline{True} for if $S+I+R+D$ is not constant.
 
 \paragraph{c)}
-Visualise first how the disease develops when $\alpha = 6.5 \cdot 10 ^{-5}$ and  print out the number of deceased after 63 days. 
+Visualise first how the disease develops when $\alpha = 6.5 \cdot 10 ^{-5}$ and  print out the number of deceased after 63 days.
 
-Certain precautions, like staying inside, will reduce $\alpha$. Try $\alpha = 5.5 \cdot 10 ^{-5}$ and  compare the plot with the plot where $\alpha = 6.5 \cdot 10 ^{-5}$. Comment how the  $\alpha$ influences $S(t)$. 
+Certain precautions, like staying inside, will reduce $\alpha$. Try $\alpha = 5.5 \cdot 10 ^{-5}$ and  compare the plot with the plot where $\alpha = 6.5 \cdot 10 ^{-5}$. Comment how the  $\alpha$ influences $S(t)$.
 
-Use the constants $\beta = 0.1/4$ and $\gamma = 0.9/4$ to describe the Plague in Bjørgvin. The initial conditions would be $S(0) = 7000$, $I(0) = 30$, $R(0) = 0$, $D(0) = 0$, $\Delta t = 1$, and $t \in [0,63]$. Time $t$ here is given in days. 
+Use the constants $\beta = 0.1/4$ and $\gamma = 0.9/4$ to describe the Plague in Bjørgvin. The initial conditions would be $S(0) = 7000$, $I(0) = 30$, $R(0) = 0$, $D(0) = 0$, $\Delta t = 1$, and $t \in [0,63]$. Time $t$ here is given in days.
 
 \emph{As there do not exist any exact data from the condition in Norway during the Black Death, the parameters above are all fictional. However, there is a broad consensus that the disease killed more than half of Norway's population. Read more about the disease here: https://snl.no/svartedauden and https://sml.snl.no/svartedauden.}
 
@@ -420,20 +501,20 @@ Implement the SIRD model from exercise \ref{bjorgvin} in a module called \texttt
 \paragraph{a)}
 Create a class \pythoninline{Region} which has three methods, a constructor, a method \pythoninline{set_SIRD_values(self, u, t)} and a method for plotting the SIRD values \pythoninline{plot(self, x_label)}.
 
-The constructor should take in the name of the region and the initial conditions $S(0)$, $I(0)$, $R(0)$ and  $D(0)$. All five parameters should be stores as attributes in the class. You will also need an attribute \pythoninline{self.population} which is the total population of the region at $t_0$. 
+The constructor should take in the name of the region and the initial conditions $S(0)$, $I(0)$, $R(0)$ and  $D(0)$. All five parameters should be stores as attributes in the class. You will also need an attribute \pythoninline{self.population} which is the total population of the region at $t_0$.
 
-The method \pythoninline{set_SIRD_values(self, u, t)} should take out the SIRD values from \pythoninline{u} and store S, I, R, D and t as attributes of the class. 
+The method \pythoninline{set_SIRD_values(self, u, t)} should take out the SIRD values from \pythoninline{u} and store S, I, R, D and t as attributes of the class.
 
-The method \pythoninline{plot(self, x_label)} should plot S, I, R and D in the same plot. The string for the \pythoninline{plt.xlabel} should be given as a parameter (as the units of time may vary), while the \pythoninline{plt.ylabel} should always be set to e.g "Population". Set the title of the plot to be the name of the region. Specify color and label for all the different SIRD categories (an example could be \newline \pythoninline{plt.plot(self.t, self.S, label='Susceptible', color='Blue')}). Do not include \pythoninline{plt.legend()} or \pythoninline{plt.show()} in the code. This is because we may later want to add labels to the graphs, and because will use this method to plot several subplots. 
+The method \pythoninline{plot(self, x_label)} should plot S, I, R and D in the same plot. The string for the \pythoninline{plt.xlabel} should be given as a parameter (as the units of time may vary), while the \pythoninline{plt.ylabel} should always be set to e.g "Population". Set the title of the plot to be the name of the region. Specify color and label for all the different SIRD categories (an example could be \newline \pythoninline{plt.plot(self.t, self.S, label='Susceptible', color='Blue')}). Do not include \pythoninline{plt.legend()} or \pythoninline{plt.show()} in the code. This is because we may later want to add labels to the graphs, and because will use this method to plot several subplots.
 
-In a main block in the bottom of the file, create an instance of class \pythoninline{Region} called \pythoninline{bjorgvin} using the parameters found in Problem \ref{bjorgvin}. 
+In a main block in the bottom of the file, create an instance of class \pythoninline{Region} called \pythoninline{bjorgvin} using the parameters found in Problem \ref{bjorgvin}.
 
 \paragraph{b)}
  Create the class \pythoninline{ProblemSIRD}.  The constructor should take in the parameters $\alpha$, $\beta$, $\gamma$ and a region, which must be an instance of the class \pythoninline{Region}. The parameter $\alpha$ in the SIRD model can be constant or function of time. The implementation of \pythoninline{ProblemSIRD} should be such that $\alpha$ can be given as either a constant or a Python function. The constructor should therefore look like this:
 \begin{python}
 def __init__(self, region, alpha, beta, gamma):
     if isinstance(alpha, (float, int)): # number?
-        self.alpha = lambda t: alpha    # wrap as function 
+        self.alpha = lambda t: alpha    # wrap as function
     elif callable(alpha):
         self.alpha = alpha
     # Store the other parameters
@@ -446,7 +527,7 @@ Write a method \pythoninline{get_population(self)} which simply returns the valu
 
 Write a method \pythoninline{solution(self, u, t)} which simply calls the method \pythoninline{set_SIRD_values(u, t)} of the class attribute \pythoninline{region}.
 
-Finally, write a special method \pythoninline{__call__(self, u, t)} which represents the right-hand side function of our SIRD system  of ODEs. This method will return a list of the calculated values of $S'(t), I'(t), R'(t)$ and $D'(t)$, in that order. 
+Finally, write a special method \pythoninline{__call__(self, u, t)} which represents the right-hand side function of our SIRD system  of ODEs. This method will return a list of the calculated values of $S'(t), I'(t), R'(t)$ and $D'(t)$, in that order.
 
 
 In the main block, create an instance of class \pythoninline{ProblemSIRD} called \pythoninline{problem} using the parameters found in Problem \ref{bjorgvin} and the \pythoninline{Region bjorgvin}.
@@ -467,7 +548,7 @@ def solve(self, method=RungeKutta4):
     u, t = solver.solve(t, self.terminate)
     # set the values of S, I, R, D, and t via
     # Problem class to the Region class:
-    self.problem.solution(u, t) 
+    self.problem.solution(u, t)
 \end{python}
 
 In the main block, create an instance of class \pythoninline{SolverSIRD} called \pythoninline{solver} using the parameters found in Problem \ref{bjorgvin} and the \pythoninline{ProblemSIRD problem}. Plot the results by calling the \pythoninline{plot(x_label)} method of the \pythoninline{Region bjorgvin}. Label the graphs by calling \pythoninline{plt.legend()} before you call \pythoninline{plt.show()}.
@@ -476,14 +557,14 @@ Filename: \texttt{SIRD.py}
 \end{Problem}
 
 
-\begin{Problem}{\textbf{The SIRD model across regions}} \label{SIRD_interaction}   
+\begin{Problem}{\textbf{The SIRD model across regions}} \label{SIRD_interaction}
 
 \noindent
 The problem class from exercise \ref{SIRD} will only be able to model the spreading of a disease within one region. In this exercise we will improve our program with subclasses of \pythoninline{ProblemSIRD} and \pythoninline{Region} that permits  people in one region to get infected by people from another region. The likelihood of transmission of disease across regions  will depend on the distance between the regions.
 
-We now denote the categories to specify which region they belong, such that e.g.  $S_i (t)$ would be the number of susceptible in the $i$-th region at time $t$. 
+We now denote the categories to specify which region they belong, such that e.g.  $S_i (t)$ would be the number of susceptible in the $i$-th region at time $t$.
 
-Let $S'_i(t)$, $I'_i (t)$, $R'_i(t)$ and $D'_i(t)$ belong to the $i$-th region. In this new, interacting SIRD model the expressions of $R'_i(t)$ and $D'_i(t)$ are unchanged from the SIRD model explained in Problem \ref{bjorgvin}, such that 
+Let $S'_i(t)$, $I'_i (t)$, $R'_i(t)$ and $D'_i(t)$ belong to the $i$-th region. In this new, interacting SIRD model the expressions of $R'_i(t)$ and $D'_i(t)$ are unchanged from the SIRD model explained in Problem \ref{bjorgvin}, such that
 \begin{align*}
     R'_i (t) &= \beta I_i (t) \\
     D'_i (t) &= \gamma I_i (t) .
@@ -491,9 +572,9 @@ Let $S'_i(t)$, $I'_i (t)$, $R'_i(t)$ and $D'_i(t)$ belong to the $i$-th region. 
 
 The expression of  $I'_i (t)$ must consider the possibility of members of the population in the $i$-th region contracting the disease due to contact with another region. The expression of the $i$-th region is given by
 \begin{equation*}
-    S'_i = \sum_{j=1}^{M}-\alpha I_j e^{-d_{ij}}  S_i  ,    
+    S'_i = \sum_{j=1}^{M}-\alpha I_j e^{-d_{ij}}  S_i  ,
 \end{equation*}
-where $M$ is the number of regions and  $d_{ij}$ is the distance between the $i$-th and the $j$-th region. Note that the distance from a region to itself, $d_{ii},$ is always zero, which leaves the expression unchanged from the previous SIRD model. 
+where $M$ is the number of regions and  $d_{ij}$ is the distance between the $i$-th and the $j$-th region. Note that the distance from a region to itself, $d_{ii},$ is always zero, which leaves the expression unchanged from the previous SIRD model.
 
 The derivative for the infected category is then
 \begin{equation*}
@@ -501,7 +582,7 @@ The derivative for the infected category is then
 \end{equation*}
 
 \paragraph{a)}
-Create a subclass of \pythoninline{Region} called \pythoninline{RegionInteraction}. In addition to the parameters in \pythoninline{Region}, the \pythoninline{RegionInteraction} needs two parameters \pythoninline{latitude} ($\phi$)  and \pythoninline{longitude} ($\lambda$). The constructor should store the two values and convert them from degrees to radii, which is done by multiplying by $\frac{\pi}{180^{\circ}}$. Use the super class to store the rest of the parameters as attributes. 
+Create a subclass of \pythoninline{Region} called \pythoninline{RegionInteraction}. In addition to the parameters in \pythoninline{Region}, the \pythoninline{RegionInteraction} needs two parameters \pythoninline{latitude} ($\phi$)  and \pythoninline{longitude} ($\lambda$). The constructor should store the two values and convert them from degrees to radii, which is done by multiplying by $\frac{\pi}{180^{\circ}}$. Use the super class to store the rest of the parameters as attributes.
 
 Create a method \pythoninline{distance(self, other)} which calculates the distance between the \pythoninline{self} region ($i$) and another region ($j$). The distance between two regions is given by the arc length $d$ between the regions:
 \begin{equation*}
@@ -509,26 +590,26 @@ Create a method \pythoninline{distance(self, other)} which calculates the distan
 \end{equation*}
 where the radius of the Earth is $R_{Earth} = 64$ given in units of $10^4 \ \mathrm{m}$ and $\Delta \sigma$ is given by
 \begin{equation*}
-    \Delta \sigma_{i j} = \arccos \big( 
-        \sin \phi_i \sin \phi_j 
+    \Delta \sigma_{i j} = \arccos \big(
+        \sin \phi_i \sin \phi_j
         +  \cos \phi_i \cos \phi_j
-        \cos \left( 
+        \cos \left(
                 |\lambda_i - \lambda_j |
         \right)
     \big)  .
 \end{equation*}
 {\bf Warning:} Roundoff error may cause problems in the $\arccos$ function, since the arguments may become slightly $>1$ when a city is compared with itself, and this makes the function return a
-NaN (Not a Number) value. To avoid this problem, add an if-test inside the distance function to 
+NaN (Not a Number) value. To avoid this problem, add an if-test inside the distance function to
 ensure that the argument to $\arccos$ is between 0 and 1.
 
 \paragraph{b)}
 Create a subclass \pythoninline{ProblemInteraction} of class \pythoninline{ProblemSIRD}. This class should take in a list of regions that must be instances of \pythoninline{RegionInteraction}. In adition to all the same parameters as its super class, the constructor of  \pythoninline{ProblemInteraction} should take in and store \pythoninline{region_name}. Send all other parameters to the constructor in the super class.
 
-The method \pythoninline{get_population(self)} should store the total population of all the regions combined as \pythoninline{self.total_population}. 
+The method \pythoninline{get_population(self)} should store the total population of all the regions combined as \pythoninline{self.total_population}.
 
-The method \pythoninline{set_initial_condition(self)} must create a (not nested) list  \pythoninline{self.initial_condition} with the initial values from all the regions. Loop over all the regions in the list \pythoninline{region} to get the list on the form 
+The method \pythoninline{set_initial_condition(self)} must create a (not nested) list  \pythoninline{self.initial_condition} with the initial values from all the regions. Loop over all the regions in the list \pythoninline{region} to get the list on the form
 \begin{equation*}
-    [ S_1(0), I_1(0), R_1(0), D_1(0), S_2(0), I_2(0), R_2(0), D_2(0), ..., D_M(0) ] . 
+    [ S_1(0), I_1(0), R_1(0), D_1(0), S_2(0), I_2(0), R_2(0), D_2(0), ..., D_M(0) ] .
 \end{equation*}
 
 The special method  \pythoninline{__call__(self, u, t)} should return a list with the derivatives at time $t$, in the same order as the list \pythoninline{self.initial_condition}. Below is a sketch of the implementation could look like:
@@ -564,7 +645,7 @@ def solution(self, u, t):
             part.set_SIRD_values(SIRD, t)
             self.S += ...
 \end{python}
-The attributes \pythoninline{self.S}, \pythoninline{self.I}, \pythoninline{self.R} and \pythoninline{self.D} should be the total values for all the regions combined, i.e., each SIRD-category summed over all regions. 
+The attributes \pythoninline{self.S}, \pythoninline{self.I}, \pythoninline{self.R} and \pythoninline{self.D} should be the total values for all the regions combined, i.e., each SIRD-category summed over all regions.
 
 Create a new method \pythoninline{plot(self, x_label)}. the method should create the same kind of plot as class \pythoninline{Region}'s method \pythoninline{plot(self, x_label)}, as explained in Problem \ref{SIRD}. The method in \pythoninline{ProblemInteraction} should plot the SIRD values for all the regions combined, and the title of the plot should be \pythoninline{self.region_name}.
 
@@ -575,29 +656,29 @@ Filename: \texttt{SIRD\_interaction.py}
 \begin{Problem}{\textbf{Simulate the spreading of the Plague in Norway}}\label{plague}
 
 \noindent
-In this exercise we will use the classes \pythoninline{ProblemInteraction}, \pythoninline{SolverSIRD} and \pythoninline{RegionInteraction} from Problem \ref{SIRD_interaction} to simulate the spread of the Black Death in Norway. 
+In this exercise we will use the classes \pythoninline{ProblemInteraction}, \pythoninline{SolverSIRD} and \pythoninline{RegionInteraction} from Problem \ref{SIRD_interaction} to simulate the spread of the Black Death in Norway.
 
-We assume that the disease first broke out in Bjørgvin in 1349, and that this was the only case of the Plague in  country at that time. We assume that the disease ravaged for two years (104 weeks). 
+We assume that the disease first broke out in Bjørgvin in 1349, and that this was the only case of the Plague in  country at that time. We assume that the disease ravaged for two years (104 weeks).
 
-We divide Norway into five regions: Vestlandet, Sørlandet, Trøndelag, Østafjells and Nord-Norge. We assume that there lived about 370000 people in Norway; 90 000 in Vestlandet, 65 000 in Sørlandet, 80 000 in Østlandet, 70 000 in Trøndelag and 65 000 in Nord-Norge. 
+We divide Norway into five regions: Vestlandet, Sørlandet, Trøndelag, Østafjells and Nord-Norge. We assume that there lived about 370000 people in Norway; 90 000 in Vestlandet, 65 000 in Sørlandet, 80 000 in Østlandet, 70 000 in Trøndelag and 65 000 in Nord-Norge.
 
 The positions of the regions are given by the latitude ang longitude of certain city in each region, which are given in the table below:
 \begin{center}
-\begin{tabular}{ |c|c|c|c| } 
+\begin{tabular}{ |c|c|c|c| }
     \hline
  Region & city & latitude & longitude \\
  \hline
  Vestlandet & Bjørgvin: & 60\textdegree & 5.3\textdegree\\
- Sørlandet & Øyslebø: & 58\textdegree & 7.6\textdegree\\ 
- Østlandet & Brandbu: & 60\textdegree &  11\textdegree\\ 
+ Sørlandet & Øyslebø: & 58\textdegree & 7.6\textdegree\\
+ Østlandet & Brandbu: & 60\textdegree &  11\textdegree\\
  Trøndelag & Steinkjer: & 64\textdegree &  11\textdegree\\
- Nord-Norge & Bardufoss: & 69\textdegree & 19\textdegree\\ 
+ Nord-Norge & Bardufoss: & 69\textdegree & 19\textdegree\\
  \hline
 \end{tabular}
 \end{center}
 
 
-\paragraph{a)} 
+\paragraph{a)}
 Create a function for simulating the Plague in Norway. The function must contain one instance of class \pythoninline{RegionInteraction} for each region. Let $S(0)$ be the population in each region. Except for $I(0)$ = 30 in Vestlandet, let all the other initial conditions be set to zero.
 Create a list of the five  \pythoninline{RegionInteraction} instances.
 
@@ -609,25 +690,25 @@ def plague_Norway(alpha, beta, gamma, num_Weeks, dt):
     # create all five instances of regionInteraction
     # create a list containing all five regions
     # create problem, instance of ProblemInteraction
-    # create solver, instance of SolverSIRD & call method solve 
-    plt.figure(figsize=(.., ..)) # set figsize 
+    # create solver, instance of SolverSIRD & call method solve
+    plt.figure(figsize=(.., ..)) # set figsize
     index = 1
     # for each part in problem's attribute region:
-        plt.subplot(2, 3, index) 
+        plt.subplot(2, 3, index)
         # Call plot method from current part
         index += 1
     plt.subplot(2, 3, index)
     # Call plot method from problem
     plt.legend()
     plt.show()
-    # print the total percentage of deceased after two years 
+    # print the total percentage of deceased after two years
 \end{python}
  \textit{Hint: Write the percent sign twice (\%\%) to get \% in a string.}
 
 Call the function using the parameters $\alpha= 7 \cdot 10^{-6}$, $\beta=0.1/4$ and $\gamma=0.9/4$. The unit of time is weeks. Solve for $104$ weeks and set $\Delta t = 1/7$ such that one time step represent one day.
 
 \paragraph{b)}
-Until now we have assumed that $\alpha$ is constant. $\alpha$ is the parameter which describes the possibility that one susceptible meets an infected during the time interval $\Delta t$ with the result that the infected "successfully" infect the susceptible. In reality, this $\alpha$ may probably not be constant. In times of bad weather, more people would stay at home and $\alpha$ would be lower. Other factors could also decrease alpha, like better hygiene and wearing masks over a certain period of time. On the other hand; factors like nice weather, festivities and other reasons for people to gather would increase $\alpha$. 
+Until now we have assumed that $\alpha$ is constant. $\alpha$ is the parameter which describes the possibility that one susceptible meets an infected during the time interval $\Delta t$ with the result that the infected "successfully" infect the susceptible. In reality, this $\alpha$ may probably not be constant. In times of bad weather, more people would stay at home and $\alpha$ would be lower. Other factors could also decrease alpha, like better hygiene and wearing masks over a certain period of time. On the other hand; factors like nice weather, festivities and other reasons for people to gather would increase $\alpha$.
 As the Plague ravaged in Norway so long ago it is hard to reproduce an accurate approximation of $\alpha$. Let us therefore assume that the weather and other factors made $\alpha$ look like this piecewise function:
 \[
   \alpha(t) = \left\{
@@ -648,7 +729,7 @@ You may notice that by this model, the Plague barely reached Nord-Norge at all. 
 
 In the Norwegian legends, Pesta was the literal personification of the Plague. Pesta was depicted as an old woman who wandered the countryside, carrying either a rake or a broom. Legend has it that if she passed by your home while carrying a rake,  someone in the household would be infected by the plague while the rest would be spared. However, if she was carrying a broom then there were not much hope for anyone.
 
-Implement a function \pythoninline{pesta(t)} where you generate a random number between 0 and 20. You can use the \pythoninline{randint} function imported from the \pythoninline{random} module like this: 
+Implement a function \pythoninline{pesta(t)} where you generate a random number between 0 and 20. You can use the \pythoninline{randint} function imported from the \pythoninline{random} module like this:
 \begin{python}
 from random import randint
 number = randint(0,20)
@@ -657,7 +738,7 @@ If the generated number is 13, Pesta is at your door carrying a broom. The funct
 If the generated number is 4, then Pesta has brought her rake. The function should return five times the value of \pythoninline{alpha(t)}.
 Otherwise, Pesta is not around today, and your function should return 0.4 times the value of \pythoninline{alpha(t)}.
 
-Call \pythoninline{plague_Norway} using the \pythoninline{pesta(t)} function for the parameter $\alpha$. Keep the rest of the values from part a). In which region was Pesta most present? 
+Call \pythoninline{plague_Norway} using the \pythoninline{pesta(t)} function for the parameter $\alpha$. Keep the rest of the values from part a). In which region was Pesta most present?
 
 Filename: \texttt{plague.py}
 

@@ -1,18 +1,25 @@
 %\section{Introduction to classes}
+Thhe topic of this chapter is programming with classes and objects. These topics
+are important foundations for object-oriented programming (OOP), which is introduced later.
+The topics of the exercises are covered in Chapter 8 in the book by Sundnes and
+Chapter 7 in the book by Langtangen.
+
 
 \begin{Problem}{\textbf{Saving information in a class}} \label{prob71}
 
-\noindent In this problem you can use the program from \ref{prob63}.
+\noindent In this problem you will create a class that holds the same type of
+information as the dictionary in Problem \ref{people_dict}.
 
 \paragraph{a)}
-Create a class \pythoninline{Person} where the constructor takes name, age, and gender as arguments.
+Create a class \pythoninline{Person} where the constructor takes name, age, and gender as arguments, and stores
+them as attributes.
 
 \paragraph{b)}
 Add methods to the class for changing a persons name, age, and gender.
 
 \paragraph{c)}
 Add a method \pythoninline{__str__} that returns a string with all the information of that person. Create an instance of the class, using the
-information for 'John' in the table from Problem \ref{prob63}.
+information for 'John' in the table from Problem \ref{people_dict}.
 Change the name and gender of John. Print the information of the instance before and after changing.
 
 Filename: \texttt{class\_people.py}
@@ -21,7 +28,8 @@ Filename: \texttt{class\_people.py}
 
 \begin{Problem}{\textbf{Right triangle class}}
 \paragraph{a)}
-Make a class \pythoninline{RightTriangle} that represents a right triangle. The constructor \pythoninline{__init__} should take and store two numbers $a$ and $b$. These are the two catheti (shortest sides) that define the right triangle. The constructor should also calculate and store the hypotenuse as a local variable in the class.
+Make a class \pythoninline{RightTriangle} that represents a right triangle. The constructor \pythoninline{__init__} should take two numbers $a$ and $b$ as arguments and store them as
+attributes. These are the lengths of the two legs (shortest sides) that define the right triangle. The constructor should also calculate and store the hypotenuse as a local variable in the class.
 
 Remember that the hypotenuse $c$ relates to the two short sides $a$ and $b$ by the Pythagorean Theorem:
 \begin{equation*}
@@ -29,13 +37,15 @@ Remember that the hypotenuse $c$ relates to the two short sides $a$ and $b$ by t
 \end{equation*}
 
 \paragraph{b)}
-Make an object \pythoninline{triangle1} of the class  \pythoninline{RightTriangle} with both short sides equal to 1. Make another object \pythoninline{triangle2} with sides equal 3 and 4. Check that your implementation is correct by printing the hypotenuse of both objects. Use the usual \texttt{object.variable} convention to get the hypotenuse. 
+Make an object \pythoninline{triangle1} of the class  \pythoninline{RightTriangle} with both short sides equal to 1. Make another object \pythoninline{triangle2} with sides equal 3 and 4. Check that your implementation is correct by printing the hypotenuse of both objects. Use the usual \texttt{object.variable} convention to get the hypotenuse.
 
 \paragraph{c)}
-To make a robust program, we often want to code it such that it prevents being used in ways that does not make sense. In our case, a natural thing to prevent is making a triangle with sides having negative length, since length is strictly positive.
+To make a robust program, we often want to code it such that it prevents
+being used in ways that does not make sense. In our case, a natural thing
+to prevent is making a triangle with sides having negative length, since length is strictly positive.
 
-
-Make changes to your class such that \pythoninline{ValueError} is raised if someone tries to make a triangle with sides of negative length.
+Make changes to the class' constructor such that a \pythoninline{ValueError} is
+raised if someone tries to make a triangle with sides of negative length.
 To test that your class raises the error correctly, you can test it with the following code:
 
 \begin{python}
@@ -49,23 +59,31 @@ def test_RightTriangle():
 \end{python}
 
 \paragraph{d)}
-Add a method \pythoninline{plot_triangle()} to your class which plots the triangle when you call it. The corner where the two shortest sides meet should be in origin. Side $a$ should be along the x-axis, and side b along y. In order to plot, you might want to find out what the coordinates of each corner must be. Also make sure to make the axis equally long so that the triangle looks nice (you can use \pythoninline{plt.axis("equal")}. Call the plotting method on the instance \pythoninline{triangle2} that you created in b).
+Add a method \pythoninline{plot_triangle()} to your class which plots the triangle
+when you call it. The corner where the two shortest sides meet should be in origin.
+Side $a$ should be along the x-axis, and side b along y. In order to plot, you
+might want to find out what the coordinates of each corner must be. You can use
+\pythoninline{plt.axis("equal")} to make the axes of the plot of equal length so
+that the triangle gets the right shape. Call the plotting method on the
+instance \pythoninline{triangle2} that you created in b).
 
 Filename: $\texttt{right\_triangle.py}$
 \end{Problem}
 
 
 \begin{Problem}{\textbf{Make a function class}}
-
 In this problem you will implement a \pythoninline{class F} which represents the function
 \begin{equation*}
     f(x; n, m) =  \sin(n x) \cos(m x).
 \end{equation*}
+Create the class and let $n$ and $m$ be parameters of the constructor, which must
+be stored as class attributes.
 
-Create the class and let $n$ and $m$ be parameters of the constructor, which must be stored in the class.  
-
-
-Since the class represents a function, it should be a callable class. An instance of a callable class can be called on like a function. The special method for creating a callable class is \pythoninline{__call__(self, args)}. Implement the special method \pythoninline{__call__(self, x)} such that it returns the value of the function evaluated at \pythoninline{x}. 
+Since the class represents a function, it should be a callable class. An instance
+of a callable class can be called on like a function. The special method for
+creating a callable class is \pythoninline{__call__(self, args)}. Implement the
+special method \pythoninline{__call__(self, x)} such that it returns the value
+of the function evaluated at \pythoninline{x}.
 
 Create two different instances \pythoninline{u} and \pythoninline{v} of \pythoninline{class F}. Choose values $n$ and $m$ for both the instances. Plot the two instances \pythoninline{u} and \pythoninline{v} evaluated in $x$ against each other on the interval $x \in [0, 2 \pi]$. In other words, plot \pythoninline{u(x_values)} on the $x$-axis and \pythoninline{v(x_values)} on the $y$-axis. Make sure to have enough points on the interval to ensure that the line is smooth.
 
@@ -73,11 +91,11 @@ Create two different instances \pythoninline{u} and \pythoninline{v} of \pythoni
 Filename: \texttt{F.py}
 \end{Problem}
 
-\begin{Problem}{\textbf{Extending the \pythoninline{AccountP} class}} \label{prob75}
+\begin{Problem}{\textbf{Extending the \pythoninline{BankAccountP} class}} \label{prob75}
 
-\noindent Modify the class \pythoninline{AccountP} in the book to include a method \pythoninline{transfer} that transfers an amount between two accounts. The method should take an amount and the account you want to transfer to as arguments. Write a test function that checks that the methods \pythoninline{deposit}, \pythoninline{withdraw}, \pythoninline{transfer} and \pythoninline{get_balance} works properly.
+\noindent Modify the class \pythoninline{BankAccountP} in the book to include a method \pythoninline{transfer} that transfers an amount between two accounts. The method should take an amount and the account you want to transfer to as arguments. Write a test function that checks that the methods \pythoninline{deposit}, \pythoninline{withdraw}, \pythoninline{transfer} and \pythoninline{get_balance} works properly.
 
-Filename: \texttt{AccountP.py}
+Filename: \texttt{BankAccountP.py}
 
 \end{Problem}
 
@@ -109,7 +127,7 @@ f(f(x_0)) = 1 + \frac{1}{2+\frac{1}{1+1}}.
 \paragraph{b)}
 Another way to approximate the square is by iterating the function $f(x)=\frac{1}{2}\left(x+\frac{2}{x}\right)$.
 Add a method \pythoninline{approx_iter} that takes
-a number $x_0$, an integer $n$, and 
+a number $x_0$, an integer $n$, and
 returns the value of the function at $x_0$ iterated n times. For $n=2$ we would have
 $f(f(x_0))$. From here on we assume for simplicity that $0.1 \leq x_0 \leq 2$.
 
@@ -147,23 +165,28 @@ Filename: \texttt{quadratic\_tangents.py}
 \end{Problem}
 
 
-\begin{Problem}{\textbf{Numerical approximations for the derivative}} \label{prob74}
+\begin{Problem}{\textbf{Numerical approximations of the derivative}} \label{prob74}
 
 \noindent Let $f(x)$ be a function and $f'(x)$ its derivative. There are many ways to
-approximate the derivative, some of which are:
-\begin{align*} 
-    f'(x) &\approx  \frac{f(x+h)-f(x)}{h} \\
-    f'(x) &\approx  \frac{f(x+h)-f(x-h)}{2h} \\
-    f'(x) &\approx  \frac{-f(x+2h)+8f(x+h)-8f(x-h)+f(x-2h)}{12h}
+approximate the derivative, for instance:
+\begin{align*}
+    f'(x) &\approx  \frac{f(x+h)-f(x)}{h}, \\
+    f'(x) &\approx  \frac{f(x+h)-f(x-h)}{2h}, \\
+    f'(x) &\approx  \frac{-f(x+2h)+8f(x+h)-8f(x-h)+f(x-2h)}{12h} .
 \end{align*}
 \paragraph{a)}
-Make a class \pythoninline{Diff} with a function $f$ as initial argument and implement
-three methods \pythoninline{diff1}, \pythoninline{diff2}, and \pythoninline{diff3}
-approximating the derivative using the above formulas.
-
+Make a class \pythoninline{Diff} with a constructor that takes a function $f$
+as argument, and three methods \pythoninline{diff1}, \pythoninline{diff2},
+and \pythoninline{diff3} that approximate the derivative using the above formulas.
 
 \paragraph{b)}
-Create an instance of the class \pythoninline{Diff}, using $f(x) = \sin\left( 2 \pi x \right)$. Visualise the difference in accuracy of the three methods for computing the derivative by comparing the results with the exact function for the derivative, $f'(x) = 2 \pi \cos(2 \pi x)$. Use the four values  $h = 0.9, 0.6, 0.3, 0.1$, and let $x$ be on the interval $x \in [-1, 1]$. 
+Create an instance of the class \pythoninline{Diff}
+using $f(x) = \sin\left( 2 \pi x \right)$. Visualise the difference
+in accuracy of the three methods for computing the derivative by
+plotting the approximate derivatives in the same window as the exact
+derivative $f'(x) = 2 \pi \cos(2 \pi x)$. Let $x$ be on the interval
+$x \in [-1, 1]$, and plot with $h = 0.9, 0.6, 0.3, 0.1$ to see how the
+accuracy improves.
 
 Filename: \texttt{class\_diff.py}
 \end{Problem}
@@ -231,13 +254,16 @@ Filename: \texttt{plot\_functions.py}
 \begin{Problem} {\textbf{A class for coordinates}}
 
 \noindent
-This exercise will focus on how to implement special methods. You will implement the class \pythoninline{Coords}, which represents coordinates in three dimensions. 
+This exercise will focus on how to implement special methods. You will implement
+the class \pythoninline{Coords}, which represents coordinates in three dimensions.
 
-\emph{Hint: the class of complex numbers shown in the book is of similar nature to the class you should implement in this problem.}
+\emph{Hint: the class for complex numbers described in "A Primer on Scientific
+Programming with Python", by H.P. Langtangen, is of similar nature to the class
+you should implement in this problem.}
 
-
-
-\paragraph{a)} Create the class \pythoninline{Coords}. Start by implementing the special methods \pythoninline{__init__(self, args)} and \pythoninline{__str__(self)}.  The constructor should take three parameters, $x$, $y$ and $z$. The representation of the class should be $(x, y, z)$.
+\paragraph{a)} Create the class \pythoninline{Coords}. Start by implementing the special methods \pythoninline{__init__(self, args)} and \pythoninline{__str__(self)}.  The constructor
+should take three parameters, $x$, $y$ and $z$. The string representation of the
+class should be on the form $(x, y, z)$.
 
 The implementation should be such that the code below works.
 \begin{python}
@@ -245,41 +271,41 @@ sqrt3 = sqrt(3)
 close = Coords(1/sqrt3, 1/sqrt3, 1/sqrt3)
 far = Coords(3/sqrt3, 15/sqrt3, 21/sqrt3)
 
-print("The coordinates close are at %s" %close)
-print("The coordinates  far  are at %s" %far)
+print(close)
+print(far)
 \end{python}
 Output:
 \begin{lstlisting}
-The coordinates close are at (0.58, 0.58, 0.58)
-The coordinates  far  are at (1.73, 8.66, 12.12)
+(0.58, 0.58, 0.58)
+(1.73, 8.66, 12.12)
 \end{lstlisting}
 
 
-\paragraph{b)} Implement the special methods \pythoninline{__len__(self)} and \pythoninline{__abs__(self)}. The length of coordinates should always be 3, as the coordinates will be in three dimensions. The absolute value should yield the Euclidean norm (or the physical length in space), which is given by
+\paragraph{b)} Implement the special methods \pythoninline{__len__(self)}
+and \pythoninline{__abs__(self)}. The length of coordinates should always
+be 3, as the coordinates will be in three dimensions. The absolute value
+should yield the Euclidean norm (or the physical length in space), which
+is given by
 \begin{equation*}
     ||(x, y, z)||= \sqrt{x^2 + y^2 + z^2} .
 \end{equation*}
 
 The implementation should be such that the code below works.
 \begin{python}
-print("The class Coords represents coordinates in \
-%d dimensions" %len(close))
-
-print("\nThe distance from the centre to the point \
-close is %.2f" %abs(close))
-print("The distance from the centre to the point  \
-far  is %.2f" %abs(far))
+print(f"The class represents coordinates in {len(close)} dimensions")
+print(f"The distance from the centre to the point close is {abs(close)}")
+print(f"The distance from the centre to the point far is {abs(far)}")
 \end{python}
 Output:
 \begin{lstlisting}
 The class Coords represents coordinates in 3 dimensions
 
 The distance from the centre to the point close is 1.00
-The distance from the centre to the point  far  is 15.00
+The distance from the centre to the point far is 15.00
 \end{lstlisting}
 
 
-\paragraph{c)} Implement the special methods \pythoninline{__add__(self, other)} and \newline  \pythoninline{__sub__(self, other)}. When adding or subtracting two objects of class \pythoninline{Coords}, a new object of class \pythoninline{Coords} should be returned. 
+\paragraph{c)} Implement the special methods \pythoninline{__add__(self, other)} and \newline  \pythoninline{__sub__(self, other)}. When adding or subtracting two objects of class \pythoninline{Coords}, a new object of class \pythoninline{Coords} should be returned.
 
 The object returned when adding two coordinates should have the coordinates
 \begin{equation*}
@@ -301,20 +327,18 @@ and similarly should the method for subtracting should return an object of \pyth
 The implementation should be such that the code below works.
 \begin{python}
 further = close + far
-print("The coordinates further are at %s" %further)
+print(f"The coordinates further are at {further}")
 
 distance = abs(far - close)
-print("\nThe distance from far to close is %.2f" %distance)
+print(f"The distance from far to close is {distance}")
 
 centre = further - further
-print("\nThe coordinates at the centre are %s" %centre)
+print(f"The coordinates at the centre are {centre}")
 \end{python}
 Output:
 \begin{lstlisting}
 The coordinates further are at (2.31, 9.24, 12.70)
-
 The distance from far to close is 14.14
-
 The coordinates at the centre are (0.00, 0.00, 0.00)
 \end{lstlisting}
 

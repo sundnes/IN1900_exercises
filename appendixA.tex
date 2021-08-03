@@ -1,4 +1,6 @@
 %\section{Sequences and difference equations}
+The exercises of this chapter correspond to Appendix A in the book by Langtangen,
+and cover programming of difference equations.
 
 \begin{Problem}{\textbf{Computing Bell numbers}}
 
@@ -30,7 +32,7 @@ Filename: $\texttt{fibonacci.py}$
 \noindent We want to study the spreading of a disease. Assume that people recover at a rate such that a ratio $a$ of the people
 that are sick this week will still be sick next week. It takes two weeks from when you
 get infected until you become sick, and a person who is sick will on average infect
-$b$ people each week, who then become sick two weeks later. 
+$b$ people each week, who then become sick two weeks later.
 
 Let $x_n$ be the
 number of sick people in week $n$. The number of sick people is then given by the following difference equation
@@ -38,8 +40,8 @@ number of sick people in week $n$. The number of sick people is then given by th
 x_n = a x_{n-1} + b x_{n-2} .
 \end{equation*}
 
-\paragraph{a)} 
-Write a function \pythoninline{disease_weeks(a, b, x0, x1, N)} that calculates the number of people that are ill with a given disease (defined by values $a$ and $b$) and returns an array/list containing the number of sick people form the initial week to week $N$. (In other words, the function should return an array or a list with $x_0, x_1, ..., x_N$). 
+\paragraph{a)}
+Write a function \pythoninline{disease_weeks(a, b, x0, x1, N)} that calculates the number of people that are ill with a given disease (defined by values $a$ and $b$) and returns an array/list containing the number of sick people form the initial week to week $N$. (In other words, the function should return an array or a list with $x_0, x_1, ..., x_N$).
 
 Let  $x_0 = 100$ , $x_1 = 150$ and $a = 0.25$. Use the function calculate the number of sick
 people in an array up to week $N = 15$ for both $b = 0.5$ and $b = 0.75$. Plot both scenarios in the same plot. Remember to use labels on the curves.
@@ -47,10 +49,10 @@ people in an array up to week $N = 15$ for both $b = 0.5$ and $b = 0.75$. Plot b
 
 \paragraph{b)}
 We do not need to store all the $N + 1$ values. Since $x_n$ only depends on
-$x_{n-1}$ and $x_{n-2}$, these are the only values we need to store. Write a function \pythoninline{disease_week_N(a, b, x0, x1, N)} that does not use any lists or arrays, and returns only the number of sick people in week $N$, $x_N$. Use this function to obtain the number of sick people in week $N = 15$ for both the cases you plotted in a). Print out the results, and remember to include information about which of the two cases you are printing. Verify that the result is the same as obtained using arrays. 
+$x_{n-1}$ and $x_{n-2}$, these are the only values we need to store. Write a function \pythoninline{disease_week_N(a, b, x0, x1, N)} that does not use any lists or arrays, and returns only the number of sick people in week $N$, $x_N$. Use this function to obtain the number of sick people in week $N = 15$ for both the cases you plotted in a). Print out the results, and remember to include information about which of the two cases you are printing. Verify that the result is the same as obtained using arrays.
 
 Filename: $\texttt{disease.py}$
-\end{Problem} 
+\end{Problem}
 
 \begin{Problem} \textbf{{Finding $\pi$ with Newton's method}}
 
@@ -60,9 +62,9 @@ It is common knowledge that $\pi \approx 3.14$, but in this exercise you will us
 Newton's method can be written as a difference equation defined \begin{equation*}
     x_n = x_{n - 1} - \frac {f(x_{n-1})} {f'(x_{n-1}) } ,
 \end{equation*}
-and is used to find roots of $f(x)$, based on the function $f(x)$, the derivative of the function $f'(x)$ and an initial guess $x_0$.  
+and is used to find roots of $f(x)$, based on the function $f(x)$, the derivative of the function $f'(x)$ and an initial guess $x_0$.
 
-Consider the function $f(x) = \sin(x)$. Finding the functions derivative $f'(x)$, should be trivial. This function has infinitely many roots, which we know are located at $x = k \pi$, where $k$ is an integer. This exercise will focus on the root for $k = 1$, and use Newton's method to approximate $\pi$. For Newton's method to converge towards the correct root, the initial condition, $x_0$, needs to be set close to the value of $\pi$.  
+Consider the function $f(x) = \sin(x)$. Finding the functions derivative $f'(x)$, should be trivial. This function has infinitely many roots, which we know are located at $x = k \pi$, where $k$ is an integer. This exercise will focus on the root for $k = 1$, and use Newton's method to approximate $\pi$. For Newton's method to converge towards the correct root, the initial condition, $x_0$, needs to be set close to the value of $\pi$.
 \bigskip
 
 Set $x_0 = 3.14$ and calculate $x_1$ and $x_2$ following Newton's method. Print out $x_0$, $x_1$ and $x_2$, as well as the value of \pythoninline{numpy.pi} with 13 decimals. You should print them in a tidy way such that the values are easy to compare. If Newton's method was used correctly, your values for $\pi$ should improve!
@@ -74,8 +76,8 @@ Filename: \texttt{finding\_pi.py}
 
 \begin{Problem}{\textbf{Find difference equations for computing $\ln x$}}
 %\addcontentsline{toc}{section}{Exercise A.3: Find difference equations for computing $\ln x$  - \texttt{ln\_Taylor\_series\_diffeq.py}}
-  
-\noindent 
+
+\noindent
 The Taylor expansion of $\ln x$ is
 \begin{equation*}
 \ln x = \sum_{n = 1}^\infty (-1)^{n + 1}\frac{(x - 1)^ n}{n},
@@ -86,7 +88,7 @@ We can define the sum as
 \begin{equation*}
 \ln x \approx S(x; n) = \sum_{j = 0}^n (-1)^{j + 1}\frac{(x - 1)^ j}{j},
 \end{equation*}
-so that $S(x, n) = \sum_{j = 1}^n a_j$ and 
+so that $S(x, n) = \sum_{j = 1}^n a_j$ and
 \begin{equation*}
 a_j = -\frac{(j-1)}{j}(x - 1)a_{j-1}.
 \end{equation*}
@@ -121,7 +123,7 @@ Filename: $\texttt{ln\_Taylor\_series\_diffeq.py}$
 %\addcontentsline{toc}{section}{Exercise A.4: Lotka-Volterra two species model  - \texttt{Lotka\_Volterra.py}}
 
 \noindent We have previously studied the logistic model for poulation growth. This is a
-model showing the growth of a population in the abscence of preditors. The
+model showing the growth of a population in the abscence of predators. The
 Lotka-Volterra model describes interactions between two species in an ecosystem,
 a predator and a prey. We will in the following take the preys to be rabbits and the
 predators to be foxes. The number of rabbits and foxes in week $n$ is denoted by
@@ -146,7 +148,7 @@ Filename: \texttt{Lotka\_Volterra.py}
 \begin{Problem}
 {\textbf{Difference equations for computing arctan(x)}}
 
-\noindent 
+\noindent
 The purpose of this exercise is to implement difference equations for computing a Taylor polynomial approximation to $\arctan(x)$. For $x \in (-1, 1)$, we have
 $$
 \arctan(x) \approx S(x;n) = \sum_{j=0}^{n}(-1)^j\frac{x^{2j+1}}{2j+1}.
@@ -157,10 +159,10 @@ a_j = -x^2\frac{(2j-1)}{(2j+1)}a_{j-1}.
 $$
 We introduce $s_j=S(x;j-1)$ and $a_j$ as the two sequences to compute. We have $s_0=0$ and $a_0=x$.
 \paragraph{a)}
-Implement the system of difference equations in a function\\ \pythoninline{arctan_Taylor(x,n)}. The function shall not use any lists or arrays. (Since $a_j$ only depends on $a_{j-1}$, and $s_j$ only depends on $s_{j-1}$ and $a_{j-1}$, these are the only values that we need to store.) The function shall return $s_{n+1}$ and $|a_{n+1}|$. The latter is the first neglected term in the sum (since $s_{n+1}=\sum_{j=0}^{n}a_j$) and may act as a rough measure of the size of the error in the Taylor polynomial approximation.  
+Implement the system of difference equations in a function\\ \pythoninline{arctan_Taylor(x,n)}. The function shall not use any lists or arrays. (Since $a_j$ only depends on $a_{j-1}$, and $s_j$ only depends on $s_{j-1}$ and $a_{j-1}$, these are the only values that we need to store.) The function shall return $s_{n+1}$ and $|a_{n+1}|$. The latter is the first neglected term in the sum (since $s_{n+1}=\sum_{j=0}^{n}a_j$) and may act as a rough measure of the size of the error in the Taylor polynomial approximation.
 \bigskip
 
-The function \pythoninline{arctan_Taylor(x, n)} will give extremely inaccurate approximations to $\arctan(x)$ for $x\not\in (-1, 1)$. To find a good approximation to $\arctan(x)$ for all $x$, we can use the fact that 
+The function \pythoninline{arctan_Taylor(x, n)} will give extremely inaccurate approximations to $\arctan(x)$ for $x\not\in (-1, 1)$. To find a good approximation to $\arctan(x)$ for all $x$, we can use the fact that
 \begin{align*}
 \arctan(x) =& \frac{\pi}{2} - \arctan \left(\frac{1}{x}\right)\\
 \approx& \frac{\pi}{2} - S(x;n),

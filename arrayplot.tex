@@ -1,4 +1,6 @@
 %%%%%\section{Array computing and curve plotting}
+The topics of this chapter are array-computing and plotting. The exercises correspond to
+Chapter 6 in the book by Sundnes and Chapter 5 in the book of Langtangen.
 
 \begin{Problem}{\textbf{Fill arrays; loop version}} \label{prob51}
 %\addcontentsline{toc}{section}{Exercise 5.1: Fill arrays; loop version - \texttt{fill\_arrays\_loop.py}}
@@ -56,7 +58,7 @@ y(t) = A e^{-\gamma t}\cos\left(\sqrt{\frac{k}{m}}t\right),
 Here, $y$ is the vertical position of the rock, $k$ is the spring
 constant, and $\gamma$ is a friction coefficient representing
 air resistance. Set $k = 4$ kg s$^{-2}$ and $\gamma = 0.15$ s$^{-1}$,
-$m = 9$ kg, and $A = 0.3$ m.
+$m = 9$ kg, and $A = -0.3$ m.
 \paragraph{a)} Create arrays \pythoninline{t_array} and
 \pythoninline{y_array} of size 101, both initially filled with zeros.
 Use a \pythoninline{for} loop to fill them with time values in the range from 0 to 25 seconds, and the
@@ -259,8 +261,10 @@ Filename: \texttt{ess\_sing.py}
 \begin{equation*}
 	f(x)=\frac{\pi}{2}-\frac{4}{\pi} \sum_{n=1}^\infty \frac{\cos((2n-1)x)}{(2n-1)^2}.
 \end{equation*}
-Write a program that calculates the first $N$ terms for $N=1,2,3,4$ and plots it against
-the exact function. Let the x-axis be $[-\pi,\pi]$ with a suitable y-axis.
+Write a function \py{abs_approx(x,N)} that calculates the first $N$ terms and
+of the sum and returns $f(x)$. Use the function to compute the approximation
+for $N=1,2,3,4$ and plot it against the exact function. Let the x-axis
+be $[-\pi,\pi]$ with a suitable y-axis.
 
 Filename: \texttt{approx\_abs.py}
 \end{Problem}
@@ -274,16 +278,19 @@ plotting graphs on a set of points.
 \paragraph{a)}
 Make a function \pythoninline{plot_line(p1,p2)} that takes two points as input arguments
 and plots the line between them. The two input arguments should be lists or tuples specifying
-$x$- and $y$-coordinates, i.e. \pythoninline{p1 = (x1,y1)}. Demonstrate that the function works by plotting a vertical and a horizontal line.
+$x$- and $y$-coordinates, i.e., \pythoninline{p1 = (x1,y1)}. Demonstrate that the
+function works by plotting a vertical and a horizontal line.
 
 \paragraph{b)}
-A complete graph is a graph such that any two points has a line that connects them. Make a function that takes a list of points and plots the complete graph on those points. To verify that the
+A complete graph is a graph such that any two points has a line that connects them. Make a
+function \py{complete_graph(points)} that takes a list of points and plots the
+complete graph on those points. To verify that the
 function works, first choose the four corners of the square ($(0,0),(1,0),(0,1),(1,1)$)
 and then the points $(1,0), (\alpha,\alpha), (0,1), (-\alpha,\alpha),
 (-1,0), (-\alpha,-\alpha),(0,-1), (\alpha,-\alpha)$, with $\alpha=\sqrt{2}/2$. The resulting
 complete graphs should look like the ones in Figure \ref{fig:graphs}.
 
-Hint: Modify the \pythoninline{plot_line} function from 5.14 a) so that it only calls
+Hint: Modify the \pythoninline{plot_line} function from question a) so that it only calls
 \pythoninline{plot()} but not \pythoninline{show()}. The complete graph can then be drawn by
 looping over the points and calling \pythoninline{plot_line} for each pair, and finally calling
 \pythoninline{show()} after the loop.

@@ -1,4 +1,7 @@
 %\section{Dictionaries and strings}
+This chapter contains exercises on programming with dictionaries and strings,
+corresponding to Chapter 7 in the book by Sundnes and Chapter 6 in the book by Langtangen.
+
 
 \begin{Problem}{\textbf{A result on primes ``dictionarized''}} \label{prob61}
 
@@ -14,8 +17,8 @@ Filename: \texttt{primes\_dict.py}
 \noindent\\
 Consider the dictionary \pythoninline{elements_10} consisting of the 10 first chemical elements of the periodic table:
 \begin{python}
-elements_10 = {1: '-', 2: 'Helium', 3: 'Lithium', 
-         4: 'Beryllium', 5: 'Boron', 6: 'Carbon', 
+elements_10 = {1: '-', 2: 'Helium', 3: 'Lithium',
+         4: 'Beryllium', 5: 'Boron', 6: 'Carbon',
          7: 'Nitrogen', 8: '-',
          9: 'Fluorine', 10: 'Neon'}
 \end{python}
@@ -24,7 +27,7 @@ The chemical elements of number 1 (Hydrogen) and 8 (Oxygen) are missing. Copy \p
 \begin{python}
 dictionary[key] = 'value'
 \end{python}
-\paragraph{b)} 
+\paragraph{b)}
 Copy the following code into your script, and run the file in your terminal. Find the difference between the two dictionaries that are printed, and explain why they are different from each other.
 \begin{python}
 elements_10_copy = elements_10.copy()
@@ -39,14 +42,15 @@ print(elements_10)
 
 Filename: \texttt{chemical\_elements\_dict.py}
 \end{Problem}
-\newpage
+
+
 
 \begin{Problem}{\textbf{Representation of polynomials}} \label{prob62}
 
 \noindent Let $f(x)=\sum_{i=0}^n a_ix^i$ and $g(x)=\sum_{j=0}^mb_mx^m$ be two polynomials.
 Recall that a polynomial can be expressed as a dictionary with keys equal to the
 degree of a term, and the corresponding coefficient as value (so $3x^2+1/2$ is represented
-by the dictionary $\{2: 3, 0: 1/2\}$). 
+by the dictionary $\{2: 3, 0: 1/2\}$).
 
 You will be asked to implement three functions in this exercise. Check that each of your functions work as expected by creating two different polynomials represented as dictionaries, call your functions and print the returned values.
 
@@ -61,7 +65,7 @@ product of two polynomials.
 \emph{Hint: $fg=\sum_{k=0}^{n+m} c_kx^k$ where $c_k=\sum_{i+j=k}a_ib_j$}
 
 \paragraph{c)}
-Add a function that evaluates a polynomial dictionary at a point. 
+Add a function that evaluates a polynomial dictionary at a point.
 
 Filename: \texttt{poly\_dict.py}
 \end{Problem}
@@ -69,13 +73,18 @@ Filename: \texttt{poly\_dict.py}
 \begin{Problem} \textbf{Use string operations to create a pretty dictionary}
 
 \noindent
-The file \texttt{atm\_moon.txt} contains information about the composition of elements in the lunar atmosphere during nighttime. \cite{moon} The values are given in particles per cubic centimetre.
+The file \texttt{atm\_moon.txt}, which can be downloaded from \href{\dataurl}{the course website},
+contains information about the composition of elements in the lunar atmosphere
+during nighttime. The values are given in particles per cubic centimetre.
 
-
-Write a function that reads the file, and returns a dictionary with the name of the element as keys and particle density as value. Transform all characters to their upper case equivalent. Strip off leading and trailing whitespaces in each of the string keys. Remove all the commas that marks every three digits, and then convert these values to float numbers.
+Write a function that reads such a file, and returns a dictionary with the name of
+the elements as keys and the particle density as value. Transform all characters to
+their upper case equivalent. Strip off leading and trailing whitespaces in each of
+the string keys. Remove all the commas that mark every three digits, and then
+convert these values to float numbers.
 
 For example, considering the information \pythoninline{' Neon 20 - 40,000 '} extracted from the file,
-the value of the key \pythoninline{'NEON 20'} should look like this:
+the dictionary element with key \pythoninline{'NEON 20'} should look like this:
 \begin{python}
 'NEON 20': 40000
 \end{python}
@@ -97,8 +106,8 @@ for decreasing values of $\Delta x$. Direct the output of the program to a file 
 Filename: \texttt{plot\_round\_off\_error.py}
 \end{Problem}
 
-\newpage
-\begin{Problem}{\textbf{Saving information in a nested dictionary}}\label{prob63}
+
+\begin{Problem}{\textbf{Saving information in a nested dictionary}}\label{people_dict}
 
 \noindent The file below contains information about various people. The first column is
 the name, the second is the age, and the third is the gender.
@@ -113,26 +122,16 @@ Burton, 16, Male
 Joey, 90, Male
 \end{lstlisting}
 \paragraph{a)}
-Create a function that reads the file and returns the information in a nested
-dictionary. For example the key 'John' has the dictionary
+Write a function \py{read_person_data(filename)} that reads such a file and
+returns the information as a nested dictionary. For example the key 'John' has the dictionary
 \{'Age': 55, 'Gender': 'Male'\} as value.
-When reading the file, the name should read "John", not "John, ".
+The keys in the main dictionary should be the name without the comma, i.e. "John",
+not "John, ".
 \paragraph{b)}
-Create a function that takes as an argument a nested dictionary as above,
-a person name, and optional arguments: a
-number (age), and a string (gender) which returns the same dictionary with the new
-age and gender. Note that neither should be changed if no age or gender is given.
-\paragraph{c)}
-Extend the function with the possibility to change the name of a person. One should
-not be allowed to change a name to one that is taken (Can you think of a way
-to allow this without overwriting another person?).
-Read the file above and change the gender and name of John. Iterate the dictionary
-and print the new information in a table format.
-\begin{remark}
-The nested dictionary here is a prototype of what is known as a class, and the
-functions from b) is a prototype for what will be known as methods in that
-class.
-\end{remark}
+Write a function \py{write_person_data(data_dict, filename)}, where the first argument
+is a nested dictionary like the one created in a), and the second argument is a file name.
+The function shall write the information in the dictionary to the specified file,
+in the format outlined above.
 
 Filename: \texttt{people\_dict.py}
 \end{Problem}
@@ -155,10 +154,10 @@ returns the correct values.
 
 Filename: \texttt{word\_length.py}
 \end{Problem}
-\newpage 
+
 
 \begin{Problem}{\textbf{The Euler's polyhedron formula}}
-\noindent 
+\noindent
 \\Let V, E, and F be the number of vertices, edges and faces in any polyhedron, respectively. Then, Euler's polyhedron formula tells us that
 $$
 V-E+F=2.
@@ -191,7 +190,6 @@ cube_vertices = polyhedrons_dict['cube']['vertices']
 Filename: \texttt{polyhedron\_formula.py}
 
 \end{Problem}
-\newpage
 
 \begin{Problem}{\textbf{Compute digital roots}}
 
@@ -200,7 +198,7 @@ $5+2+8+2=17$, and doing this again gives $1+7=8$. The one digit number we get by
 doing this is called the digital root of the number.
 
 \paragraph{a)}
-Make a function that calculates the digital root of a number. 
+Make a function that calculates the digital root of a number.
 
 \emph{Hint: Convert the number to a string in order to work with it.}
 
@@ -233,5 +231,4 @@ dictionary is used. Do the following conversions:
 \end{itemize}
 
 Filename: \texttt{timezones.py}
-\end{Problem} 
-
+\end{Problem}

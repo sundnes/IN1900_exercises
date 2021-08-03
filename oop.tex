@@ -1,4 +1,7 @@
 %\section{Object oritented programming}
+The topic of this chapter is object-oriented programming (OOP), which is
+covered in Chapter 9 of the book by Sundnes and the book by Langtangen.
+
 
 \begin{Problem}{\textbf{Implement Newtons method}} \label{prob91}
 
@@ -37,23 +40,33 @@ bound in a table format. Try to run the program with starting value 0. What happ
 can you see why?
 
 Filename: \texttt{newton.py}
-\end{Problem} 
+\end{Problem}
 
 \newpage
 \begin{Problem}{\textbf{Implement Polynomials as a Class}} \label{prob92}
 
 \paragraph{a)}
-Make a class Quadratic that implements second order polynomials. An object of Quadratic should be initialised with a list containing the coefficients. Add a \pythoninline{__call__}-method that evaluates the parabola at a point \pythoninline{x}, and a \pythoninline{__repr__}-method such that you can print your polynomial.
+Make a class \pythoninline{Quadratic} that implements second order polynomials. An
+object of \pythoninline{Quadratic} should be initialised with a list containing the
+coefficients. Add a \pythoninline{__call__(self,x)} method that evaluates the
+polynomial at a point \pythoninline{x}, and a \pythoninline{__str__(self)} method
+for printing the polynomial.
 \\
-Make an object of Quadratic with coefficients $(1, 3, 2)$. Print it and evaluate it at $x=1$, $x=2$ to make sure it works.   
+Create an instance of \pythoninline{Quadratic} with coefficients $(1, 3, 2)$. Print it and
+evaluate it at $x=1$, $x=2$ to make sure it works.
 
 \paragraph{b)}
-Make a subclass Cubic of the class Quadratic that implements third order polynomials. You should make use of inheritance to extend the class Quadratic you made in the previous exercise. Implement a method \pythoninline{derivative} for Cubic. The method should return an object of type Quadratic that corresponds to the derivative.
+Make a subclass \pythoninline{Cubic} of the class \pythoninline{Quadratic} that implements third order
+polynomials. You should make use of inheritance to extend the class
+\pythoninline{Quadratic} you made in the previous exercise. Implement a method
+\pythoninline{derivative} for \pythoninline{Cubic}. The method should return an object
+of type Quadratic that corresponds to the derivative.
 \\
-Make an object of Cubic with coefficients $(1, 3, 2, 4)$. Print it and evaluate it at $x=1$, $x=2$. Also call \pythoninline{derivative} and print the result.
+Create an instance of \pythoninline{Cubic} with coefficients $(1, 3, 2, 4)$. Print it
+and evaluate it at $x=1$, $x=2$. Also call \pythoninline{derivative} and print the result.
 
 Filename: \texttt{polynomial.py}
-\end{Problem} 
+\end{Problem}
 
 \begin{Problem}{\textbf{Vectors}} \label{prob93}
 
@@ -61,11 +74,11 @@ Filename: \texttt{polynomial.py}
 
 Make a class Vector2D that implements 2D-vectors(two components). Add \pythoninline{__add__} and \pythoninline{__sub__} methods so you can add and subtract vectors. Remember that vectors add and subtract element-wise, e.i.:
 \begin{equation*}
-    (1,2) + (4,5) = (5,7) 
+    (1,2) + (4,5) = (5,7)
 \end{equation*}
 
 \paragraph{b)}
-For two vectors $\Vec{a} = (a_1, a_2)$ and $\Vec{b} = (b_1, b_2)$, the dot product is defined as 
+For two vectors $\Vec{a} = (a_1, a_2)$ and $\Vec{b} = (b_1, b_2)$, the dot product is defined as
 \begin{equation*}
     \Vec{a} \cdot \Vec{b} = a_1 b_1 + a_2 b_2
 \end{equation*}
@@ -103,23 +116,34 @@ Filename: \texttt{vector.py}
 
 \begin{Problem}{\textbf{Inheritance}} \label{prob94}
 \\
-In this exercise we will investigate how python handles inheritance by making some intuitive classes. 
+In this exercise we will investigate how python handles inheritance by making some intuitive classes.
 
 \paragraph{a)}
-Begin by making a class \pythoninline{Mammal}. Add a method \pythoninline{info()} that returns a string stating something that is common among all mammals, e.i. "I have hair on my body". Also add a method \pythoninline{identity_mammal()} that prints "I am a mammal".
+Begin by making a class \pythoninline{Mammal}. Add a
+method \pythoninline{info(self)} that returns a string stating
+something that is common to all mammals, for instance "I have hair on my body".
+Also add a method \pythoninline{identity_mammal(self)} that prints (not returns)
+"I am a mammal".
 
 \paragraph{b)}
-Make a subclass Primate of the class Mammal. Add a method \pythoninline{info()} that returns the same as \pythoninline{info()} for Mammal, in addition to something new specific for Primates. E.i. "I have a large brain". Do not include the string from Mammal by copy-pasting, but use inheritance. Also add a method
-\pythoninline{identity_primate()} equivalent to \pythoninline{identity_mammal()}.
+Make a subclass Primate of the class Mammal. Add a method \pythoninline{info(self)}
+that returns the same as \pythoninline{info(self)} for Mammal, in addition to
+something specific for Primates, for instance "I have a large brain". Use inheritance
+to include the general string from \pythoninline{Mammal}. Do not copy-paste it
+into the Primate class. Also add a method
+\pythoninline{identity_primate(self)} equivalent to \pythoninline{identity_mammal(self)}.
 
 \paragraph{c)}
-Now make two subclasses Human and Ape from Primate. Update \pythoninline{info()} in the same manner for both Human and Ape, and also add their respective identity method.
+Now make two subclasses Human and Ape from Primate. Update the \pythoninline{info(self)}
+method in the same manner for both Human and Ape, and also add their respective
+identity methos.
 
-
-Make an object John of the class Human, and an object Julius of the class Ape. Try calling \pythoninline{info()}, \pythoninline{identity_mammal()},   \pythoninline{identity_primate()},  \pythoninline{identity_human()} and \pythoninline{identity_ape()} for both John and Julius. Does it work as you expect? Some of these calls are meant to cause an error. 
+Make an instance John of the class Human, and an object Julius of the class Ape.
+Try calling \pythoninline{info()}, \pythoninline{identity_mammal()},
+\pythoninline{identity_primate()},  \pythoninline{identity_human()} and \pythoninline{identity_ape()} for both John and Julius. Does it work as you expect? Some of these calls are meant to cause an error.
 \paragraph{d)}
-Python is able to check if an object is of a particular class with the function \pythoninline{isinstance}. 
-\pythoninline{isinstance(object_name, class_name)} returns \pythoninline{True} if the object \pythoninline{object_name} is of class \pythoninline{class_name}. An example could be   
+Python is able to check if an object is of a particular class with the function \pythoninline{isinstance}.
+\pythoninline{isinstance(object_name, class_name)} returns \pythoninline{True} if the object \pythoninline{object_name} is of class \pythoninline{class_name}. An example could be
 \pythoninline{isinstance(John, Primate)}, which returns \pythoninline{True} if John is of the class Primate.
 
 

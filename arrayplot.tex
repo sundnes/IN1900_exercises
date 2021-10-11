@@ -257,12 +257,13 @@ Filename: \texttt{ess\_sing.py}
 
 \begin{Problem}{\textbf{Approximate $|x|$}}
 
-\noindent The absolute value $f(x)=|x|$ can be written as a sum
+\noindent For $x$ in $[-\pi,\pi]$ the absolute value $|x|$ can be approximated by a sum
 \begin{equation*}
-	f(x)=\frac{\pi}{2}-\frac{4}{\pi} \sum_{n=1}^\infty \frac{\cos((2n-1)x)}{(2n-1)^2}.
+	f(x,N)=\frac{\pi}{2}-\frac{4}{\pi} \sum_{k=1}^N \frac{\cos((2k-1)x)}{(2k-1)^2}.
 \end{equation*}
-Write a function \py{abs_approx(x,N)} that calculates the first $N$ terms and
-of the sum and returns $f(x)$. Use the function to compute the approximation
+As usual, the accuracy of the approximation increases with increasing $N$.
+Write a function \py{abs_approx(x,N)} that calculates the sum and
+of the sum and returns $f(x,N)$. Use the function to compute the approximation
 for $N=1,2,3,4$ and plot it against the exact function. Let the x-axis
 be $[-\pi,\pi]$ with a suitable y-axis.
 
@@ -276,8 +277,8 @@ such that each line connects two points. In this exercise we will create functio
 plotting graphs on a set of points.
 
 \paragraph{a)}
-Make a function \pythoninline{plot_line(p1,p2)} that takes two points as input arguments
-and plots the line between them. The two input arguments should be lists or tuples specifying
+Make a function \pythoninline{plot_line(p1,p2)} that takes two points as arguments
+and plots the line between them. The two arguments should be lists or tuples specifying
 $x$- and $y$-coordinates, i.e., \pythoninline{p1 = (x1,y1)}. Demonstrate that the
 function works by plotting a vertical and a horizontal line.
 
@@ -325,7 +326,7 @@ Filename: \texttt{graph2.py}
 
 \noindent Consider the program from Problem \ref{prime}. Use the \pythoninline{timeit} module and run the
 program to find the time it takes to find a factorization of an $n$ digit number. Plot the time against
-the number of digits for the numbers in the file \texttt{prime\_check.dat}.
+the number of digits for the numbers in the file \texttt{prime\_check.txt}.
 You can use the following code to time the function for different numbers:
 \begin{python}
 str1 = "f(" + str(n) + ")"

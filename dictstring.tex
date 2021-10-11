@@ -139,14 +139,15 @@ Filename: \texttt{people\_dict.py}
 \begin{Problem}{\textbf{Finding the frequency of words in a text}} \label{prob64}
 
 \paragraph{a)}
-Write a function that reads the file \emph{RandomWords.dat} and finds the frequency
+Write a function that reads the file \emph{RandomWords.txt} and finds the frequency
 of words of length $n$. Save the information in a dictionary with the length
 as keys and the number of words of that length as values.  You may assume that
 all words are separated by spaces and that only punctuation marks appear in the
 text.
 
 \emph{Hint: For your program to be compatible with words of any length, it might
-be helpful to use defaultdict imported from collections. See page 339 in the book.
+be helpful to use defaultdict imported from collections. See page 339 in
+\emph{A Primer on Scientific Programming with Python}, by H. P. Langtangen.
 Use the function dict() on such an object to convert it to an ordinary dictionary}
 \paragraph{b)}
 Write a test function that generates a file of words and checks that the function
@@ -178,9 +179,9 @@ Write a function that can read such a file, and returns a dictionary with the ty
 \begin{python}
 'cube': {'vertices': 8, 'edges': 12, 'faces': 6}
 \end{python}
-Note that you must convert the string numbers to integers, as for example $8$, not '$8$'. Be aware of the fact that the value of each polyhedron in the dictionary is again a dictionary. Print the (nested) dictionary that is returned when reading the file \texttt{polyhedrons.dat}.
+Note that you must convert the string numbers to integers, as for example $8$, not '$8$'. Be aware of the fact that the value of each polyhedron in the dictionary is again a dictionary. Print the (nested) dictionary that is returned when reading the file \texttt{polyhedrons.txt}.
 \paragraph{b)}
-Write a test function \pythoninline{test_polyhedron_formula()} that checks that Euler's polyhedron formula works for the polyhedrons given in \texttt{polyhedrons.dat}.\\
+Write a test function \pythoninline{test_polyhedron_formula()} that checks that Euler's polyhedron formula works for the polyhedrons given in \texttt{polyhedrons.txt}.\\
 \noindent
 \emph{Hint: Repeated indexing works for nested dictionaries as for nested lists. Below is an example of how to access the value of the key \pythoninline{'vertices'} inside the value of the key \pythoninline{'cube'}.}
 \begin{python}
@@ -213,7 +214,7 @@ Filename: \texttt{dig\_root.py}
 
 \begin{Problem}{\textbf{Timezone converter}}
 
-\noindent In the file \texttt{timezones.dat} you will find places and their timezone in
+\noindent In the file \texttt{timezones.txt} you will find places and their timezone in
 GMT format.
 
 \paragraph{a)}

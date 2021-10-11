@@ -1,0 +1,4 @@
+Isotope    weight [g/mol]    Natural abundance
+(16)O          15.99491         0.99759
+(17)O          16.99913         0.00037
+(18)O          17.99916         0.00204

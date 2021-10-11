@@ -185,6 +185,33 @@ Remember to label/title each plot and to include a legend with the different val
 Filename: \texttt{compare\_methods.py}
 \end{Problem}
 
+\begin{Problem}{\textbf{Solving a system of ODEs; Lotka-Volterra model}}
+
+  
+  In Chapter \ref{ch:diff_eq} we solved a system of difference equations known
+  as the Lotka-Volterra model, which describes the dynamic interactions between two
+  species. The Lotka-Volterra model is more commonly formulated as a system of ODEs,
+  which for two species $R$ and $F$ is given by
+  \begin{align*}
+  \frac{dR}{dt} &= aR - cRF, \\
+  \frac{dR}{dt} &= ecRF - bF.
+  \end{align*}
+  Here $a$ is the natural growth rate of rabbits in the absence of predation, $b$ is
+  the natural death rate of foxes in the absence of food (rabbits), $c$ is the death
+  rate of rabbits due to predation and $e$ is the efficiency of turning
+  predated rabbits into foxes.
+
+  Solve this system using one of the solvers from the \texttt{ODESolver} hierarchy,
+  up to time $T=500$ weeks. Use $a = 0.04$ weeks$^{-1}$, $b = 0.1$ weeks$^{-1}$,
+  $c = 0.005$ weeks$^{-1}$, and $e = 0.2$ (dimensionless). Use initial conditions
+  $R_0 = 100$ and $F_0 = 20$, and select a suitable time step $\Delta t$.
+
+  Plot how the number of individuals in the populations
+  vary with time.
+
+Filename: \texttt{Lotka\_Volterra\_ODE.py}
+\end{Problem}
+
 \begin{Problem}{\textbf{Solving a system of ODEs; motions of a spring}}
 
 

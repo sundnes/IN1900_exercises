@@ -1,0 +1,17 @@
+Polyhedron: cube
+vertices: 8 edges: 12 faces: 6
+
+Polyhedron: pyramid
+vertices: 5 edges: 8 faces: 5
+
+Polyhedron: tetrahedron
+vertices: 4 edges: 6 faces: 4
+
+Polyhedron: octahedron
+vertices: 6 edges: 12 faces: 8
+
+Polyhedron: rhombicuboctahedron
+vertices: 24 edges: 48 faces: 26
+
+Polyhedron: icosidodecahedron
+vertices: 30 edges: 60 faces: 32

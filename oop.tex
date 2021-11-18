@@ -105,8 +105,8 @@ There is a common vector operation that is defined for 3D vectors, but not for 2
 where $\Vec{c} = (c_1, c_2, c_3)$. The cross product is define as
 \begin{align*}
     c_1 = a_2 b_3 - a_3 b_2\\
-    c_2 = a_3 b_1 - b_1 a_3\\
-    c_3 = a_1 b_2 - b_2 a_1\\
+    c_2 = a_3 b_1 - a_1 b_3\\
+    c_3 = a_1 b_2 - a_2 b_1\\
 \end{align*}
 Implement a method \pythoninline{cross} for Vector3D only that calculates the cross product. \\
 Make two vectors $\Vec{v}=(2,0,0)$, $\Vec{w}=(0,2,0)$ from Vector3D. Print $v\times w$.

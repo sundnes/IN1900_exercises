@@ -1,6 +1,9 @@
 %\section{Programming of differential equations}
 The exercises of this chapter are about programming of solvers for ordinary differential
-equations, corresponding to Appendix E in the book by Langtangen.
+equations, corresponding to Appendix E in the book by Langtangen. The topics of the
+exercises are also covered by the lecture notes
+\emph{Solving Ordinary Differential Equations in Python}
+\footnote{See: \emph{https://sundnes.github.io/solving_odes_in_python/}}.
 
 
 \begin{Problem}{\textbf{Solve a simple ODE with function-based code}}\label{simple_ode_func}
@@ -10,10 +13,10 @@ This exercise aims to solve the ODE problem $u - 5u' = 0, u(0) = 0.1$, for $t \i
 \paragraph{a)} Identify the mathematical function $f(u,t)$ in the generic ODE form $u' = f(u,t)$.
 \paragraph{b)} Implement the $f(u,t)$ function in a Python function.
 \paragraph{c)} Use the \pythoninline{ForwardEuler} function from Section 2.1 of the
-lecture notes \emph{Solving Ordinary Differential Equations in Python} to compute a numerical solu-
-tion of the ODE problem. Use a time step $\Delta t = 5$.
+lecture notes \emph{Solving Ordinary Differential Equations in Python} to compute a
+numerical solution of the ODE problem. Use a time step $\Delta t = 5$.
 \paragraph{d)} Plot the numerical solution and the exact solution $u(t) = 0.1e^{0.2t}$.
-\paragraph{f)} Perform simulations for smaller $\Delta t$ values and demonstrate visually that the
+\paragraph{e)} Perform simulations for smaller $\Delta t$ values and demonstrate visually that the
 numerical solution approaches the exact solution.
 
 Filename: \texttt{simple\_ODE\_func.py}

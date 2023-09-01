@@ -119,14 +119,20 @@ Filename: \texttt{population\_table.py}
 \begin{Problem}{\textbf{Nested list}}\label{population_table2}
 
 \paragraph{a)} Compute two lists of $t$ and $N$ values as explained in Problem
-\ref{population_table}. Store the two lists in a new nested list \pythoninline{tN1} such that
-\pythoninline{tN1[0]} is the list containing $t$-values and \pythoninline{tN[1]} correspond to the list containing $N$-values. Write out a table
+\ref{population_table}. Store the two lists in a new nested list \pythoninline{tN1} (havinglength
+two) where the element \pythoninline{tN1[0]} is the list containing $t$-values,
+and \pythoninline{tN[1]} is the list containing the $N$-values.
+Write out a table
 with $t$ and $N$ values in two columns by looping over the data in the \pythoninline{tN1}
 list. Each $t$ and $N$ value should be written in the table as integers.
 
-\paragraph{b)} Make a nested list \pythoninline{tN2} where \pythoninline{tN2[i]}
-contains the $i$-th element of both the $t$-list and the $N$-list. Loop over the \pythoninline{tN2} list and write out the $t$ and $N$
-values in the table as integers. The ouput should look exactly as in exercise
+\paragraph{b)} Make a nested list \pythoninline{tN2} containing exactly the same data as in exercise
+\textbf{a)}, but with a different structure.  The \pythoninline{tN2} list shall
+have the same length as the original $t$- and $N$-lists,
+and each element \pythoninline{tN2[i]}
+shall be a list of lenght two, which contains the $i$-th element of both the $t$-list and the $N$-list.
+Loop over the \pythoninline{tN2} list and write out the $t$ and $N$
+values in the table as integers. The output should look exactly as in exercise
 \textbf{a)}, although the underlying structure of the lists is different.
 
 Filename: $\texttt{population\_table2.py}$
@@ -168,7 +174,7 @@ M(C2H6) =  30.069 g/mol
 You can set the molar masses of the atoms to be $M_{\mathrm{C}} = 12.011 \ \mathrm{g/mol}$ and $M_{\mathrm{H}}  = 1.0079 \ \mathrm{g/mol}$
 
 Hint: An output of a chemical formula like the one above can be constructed using a formatted string (f-string). If we have \py{n=2} and
-\py{m=2*n+2}, the first part of the output above is given by the f-string \py{f'M(C{n:d}H{6:d} = ...'}.
+\py{m=2*n+2}, the first part of the output above is given by the f-string \verb!f"M(C{n:d}H{6:d}) = ..."!.
 
 Filename: $\texttt{alkane.py}$
 \end{Problem}

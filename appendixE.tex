@@ -3,20 +3,20 @@ The exercises of this chapter are about programming of solvers for ordinary diff
 equations, corresponding to Appendix E in the book by Langtangen. The topics of the
 exercises are also covered by the lecture notes
 \emph{Solving Ordinary Differential Equations in Python}
-\footnote{See: \emph{https://sundnes.github.io/solving_odes_in_python/}}.
+\footnote{See: \emph{https://sundnes.github.io/solving\_odes\_in\_python/}}.
 
 
 \begin{Problem}{\textbf{Solve a simple ODE with function-based code}}\label{simple_ode_func}
 
 \noindent
 This exercise aims to solve the ODE problem $u - 5u' = 0, u(0) = 0.1$, for $t \in [0,20]$.
-\paragraph{a)} Identify the mathematical function $f(u,t)$ in the generic ODE form $u' = f(u,t)$.
-\paragraph{b)} Implement the $f(u,t)$ function in a Python function.
-\paragraph{c)} Use the \pythoninline{ForwardEuler} function from Section 2.1 of the
+\paragraph{a)} Identify the mathematical function $f(u,t)$ in the generic ODE form $u' = f(u,t)$, and
+implement it in a Python function.
+\paragraph{b)} Use the \pythoninline{ForwardEuler} function from Section 2.1 of the
 lecture notes \emph{Solving Ordinary Differential Equations in Python} to compute a
 numerical solution of the ODE problem. Use a time step $\Delta t = 5$.
-\paragraph{d)} Plot the numerical solution and the exact solution $u(t) = 0.1e^{0.2t}$.
-\paragraph{e)} Perform simulations for smaller $\Delta t$ values and demonstrate visually that the
+\paragraph{c)} Plot the numerical solution and the exact solution $u(t) = 0.1e^{0.2t}$.
+\paragraph{d)} Perform simulations for smaller $\Delta t$ values and demonstrate visually that the
 numerical solution approaches the exact solution.
 
 Filename: \texttt{simple\_ODE\_func.py}
@@ -133,7 +133,7 @@ Make a \pythoninline{class Cooling} containing the
 parameters $h$ and $T_s$ as data attributes. Let these parameters
 be set in the constructor. Implement the right-hand side of the
 ODE in a \pythoninline{__call__(self, T, t)} method. We will use a
-class from the \pythoninline{ODESolver} described in Section 2.4 of the
+class from the \pythoninline{ODESolver} hierarchy described in Section 2.4 of the
 lecture notes to solve the ODE.
 
 Create a stand-alone function \pythoninline{estimate_h(t1, Ts, T0, T1)} to
@@ -497,7 +497,7 @@ D'(t) = \gamma I (t).
 The system (E.2)-(E.5) is what we will call a SIRD model.
 
 \paragraph{a)}
-Make three separate functions: (i) \pythoninline{SIRD(u,t)} which defines the right hand side of the ODE system of the SIRD model. The parameters $\alpha, \beta, \gamma$ can be defined as local variables inside the function. (ii) A function \pythoninline{solve_SIRD} for solving the system of differential equations in the SIRD model by a numerical method of your choice from the \pythoninline{ODESolver}. (iii) A function \pythoninline{plot_SIRD(u,t)} for visualising $S(t)$, $I(t)$, $R(t)$ and $D(t)$ in the same plot. Make sure to use labels in the plot.
+Make three separate functions: (i) \pythoninline{SIRD(u,t)} which defines the right hand side of the ODE system of the SIRD model. The parameters $\alpha, \beta, \gamma$ can be defined as local variables inside the function. (ii) A function \pythoninline{solve_SIRD} for solving the system of differential equations in the SIRD model by a numerical method of your choice from the \pythoninline{ODESolver} class hierarchy. (iii) A function \pythoninline{plot_SIRD(u,t)} for visualising $S(t)$, $I(t)$, $R(t)$ and $D(t)$ in the same plot. Make sure to use labels in the plot.
 
 \paragraph{}
 We will use the functions from a) to study the spreading of one of the most devastating pandemics in human history, the Black Death. The Black Death, also called the Plague, was evidently spread to Norway in 1349 after a ship from England arrived in Bjørgvin (today Bergen), carrying the disease.
@@ -565,9 +565,10 @@ In the main block, create an instance of class \pythoninline{ProblemSIRD} called
 \paragraph{c)}
 Now we will create a class \pythoninline{SolverSIRD}. The class constructor should take the parameters \pythoninline{problem} (which must be an instance of class \pythoninline{ProblemSIRD}), $T$ (final time) and $\Delta t$, and store them as attributes. The constructor should also store  an attribute called \pythoninline{total_population}, which is obtained by calling the \pythoninline{get_population} method of \pythoninline{problem}.
 
-Implement a method \pythoninline{terminate} which at each time step $t$ checks that $S(t)+I(t)+R(t)+D(t)$ equals \pythoninline{total_population} within some small tolerance. Simply print an error message and return \pythoninline{True} for termination if the total population is not constant. As the \pythoninline{ODESolver} will be used to solve the ODE system, this method will be called by the \pythoninline{solve} method in \pythoninline{ODESolver} at every time step.
+Implement a method \pythoninline{terminate} which at each time step $t$ checks that $S(t)+I(t)+R(t)+D(t)$ equals \pythoninline{total_population} within some small tolerance. Simply print an error message and return \pythoninline{True} for termination if the total population is not constant. As
+the \pythoninline{ODESolver} class hierarchy will be used to solve the ODE system, this method will be called by the \pythoninline{solve} method in \pythoninline{ODESolver} at every time step.
 
-Write a method \pythoninline{solve(self, method)} that solves the SIRD system of ODEs by a method of your choice from the \pythoninline{ODESolver}. Use the following sketch for this method:
+Write a method \pythoninline{solve(self, method)} that solves the SIRD system of ODEs by a method of your choice from the \pythoninline{ODESolver} hierarchy. Use the following sketch for this method:
 
 \begin{python}
 def solve(self, method=RungeKutta4):
